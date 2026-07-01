@@ -1,0 +1,59 @@
+{% extends "admin_base.html" %}
+{% block title %}Dự án{% endblock %}
+{% block topbar_title %}Quản lý Dự án{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0 fw-bold">Danh sách dự án ({{ projects|length }})</h5>
+  <a href="{{ url_for('admin_project_add') }}" class="btn btn-primary btn-sm px-3">+ Thêm dự án</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th style="width:60px">Ảnh</th>
+          <th>Tên dự án</th>
+          <th>Danh mục</th>
+          <th>Địa điểm</th>
+          <th>Nổi bật</th>
+          <th>Ngày tạo</th>
+          <th style="width:130px"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for p in projects %}
+        <tr>
+          <td>
+            {% if p.image %}
+              <img src="{{ url_for('static', filename='uploads/' ~ p.image) }}"
+                   style="width:52px;height:40px;object-fit:cover;border-radius:6px;" alt="">
+            {% else %}
+              <div style="width:52px;height:40px;background:var(--soft);border-radius:6px;"></div>
+            {% endif %}
+          </td>
+          <td class="fw-500">{{ p.title }}</td>
+          <td><span class="chip">{{ CAT_MAP.get(p.category, p.category) }}</span></td>
+          <td class="small text-muted">{{ p.location or '—' }}</td>
+          <td>
+            {% if p.featured %}<span class="badge bg-warning text-dark">Nổi bật</span>{% else %}—{% endif %}
+          </td>
+          <td class="small text-muted">{{ p.created_at.strftime('%d/%m/%Y') if p.created_at else '—' }}</td>
+          <td>
+            <a href="{{ url_for('admin_project_edit', pid=p.id) }}" class="btn btn-outline-primary btn-sm me-1">Sửa</a>
+            <form method="post" action="{{ url_for('admin_project_delete', pid=p.id) }}" class="d-inline"
+                  onsubmit="return confirm('Xóa dự án này?')">
+              <button class="btn btn-outline-danger btn-sm">Xóa</button>
+            </form>
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="7" class="text-center text-muted py-4">Chưa có dự án nào.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

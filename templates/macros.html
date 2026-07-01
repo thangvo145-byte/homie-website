@@ -1,0 +1,44 @@
+{% macro project_card(p) %}
+<a href="{{ url_for('project_detail', pid=p.id) }}" class="text-decoration-none text-reset">
+  <div class="proj-card">
+    <div class="proj-thumb-wrap">
+      {% if p.category %}
+        <span class="cat-label">{{ CAT_MAP.get(p.category, p.category) }}</span>
+      {% endif %}
+      {% if p.image %}
+        <img class="proj-thumb" src="{{ url_for('static', filename='uploads/' ~ p.image) }}" alt="{{ p.title }}" loading="lazy">
+      {% else %}
+        <div class="proj-ph {{ 'alt' if p.material == 'go-cong-nghiep' else '' }}">{{ CAT_MAP.get(p.category, 'Mẫu nội thất') }}</div>
+      {% endif %}
+    </div>
+    <div class="proj-body">
+      <div class="mb-1">
+        {% if p.material %}<span class="chip mat">{{ MAT_MAP.get(p.material, p.material) }}</span>{% endif %}
+      </div>
+      <h3 class="h6 fw-bold mb-1">{{ p.title }}</h3>
+      <p class="small text-muted mb-0 flex-grow-1">{{ p.summary }}</p>
+      {% if p.location %}<div class="small text-muted-2 mt-2">📍 {{ p.location }}</div>{% endif %}
+    </div>
+  </div>
+</a>
+{% endmacro %}
+
+{% macro article_card(a) %}
+<a href="{{ url_for('article_detail', slug=a.slug) }}" class="text-decoration-none text-reset">
+  <div class="proj-card">
+    <div class="proj-thumb-wrap">
+      <span class="cat-label">{{ ART_CAT.get(a.category, 'Kiến thức') }}</span>
+      {% if a.cover %}
+        <img class="proj-thumb" src="{{ url_for('static', filename='uploads/' ~ a.cover) }}" alt="{{ a.title }}" loading="lazy">
+      {% else %}
+        <div class="proj-ph alt">{{ ART_CAT.get(a.category, 'Kiến thức') }}</div>
+      {% endif %}
+    </div>
+    <div class="proj-body">
+      <h3 class="h6 fw-bold mb-1 mt-1">{{ a.title }}</h3>
+      <p class="small text-muted mb-0 flex-grow-1">{{ a.excerpt }}</p>
+      <div class="small text-muted-2 mt-2">{{ a.created_at.strftime('%d/%m/%Y') if a.created_at else '' }}</div>
+    </div>
+  </div>
+</a>
+{% endmacro %}

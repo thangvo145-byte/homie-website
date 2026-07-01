@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "macros.html" import article_card %}
+{% block title %}{{ article.title }} · {{ SITE.ten }}{% endblock %}
+{% block desc %}{{ article.excerpt }}{% endblock %}
+{% block content %}
+
+<section class="py-4 bg-cream">
+  <div class="container">
+    <a href="{{ url_for('blog') }}" class="small text-decoration-none">← Về trang kiến thức</a>
+  </div>
+</section>
+
+<article class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <span class="chip mat">{{ ART_CAT.get(article.category, 'Kiến thức') }}</span>
+        <h1 class="fw-bold my-3">{{ article.title }}</h1>
+        <p class="lead text-muted">{{ article.excerpt }}</p>
+        {% if article.cover %}
+          <img class="img-fluid prose-cover w-100 my-3" src="{{ url_for('static', filename='uploads/' ~ article.cover) }}" alt="{{ article.title }}">
+        {% endif %}
+        <div class="article-body mt-4">{{ article.body | safe }}</div>
+
+        <div class="lead-card p-4 mt-5 text-center bg-cream">
+          <h3 class="h5 fw-bold">Bạn đang xây/sửa nhà và cần tư vấn cụ thể?</h3>
+          <p class="text-muted mb-3">Homie tư vấn chọn vật liệu, phối màu và báo giá miễn phí theo đúng căn nhà của bạn.</p>
+          <a href="#lien-he-form" class="btn btn-primary btn-lg">Nhận tư vấn miễn phí</a>
+        </div>
+      </div>
+    </div>
+
+    {% if related %}
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-10">
+        <h2 class="h4 fw-bold mb-4">Bài viết khác</h2>
+        <div class="row g-4">
+          {% for a in related %}<div class="col-sm-6 col-lg-4">{{ article_card(a) }}</div>{% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</article>
+
+{% endblock %}

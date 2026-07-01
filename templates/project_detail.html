@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% from "macros.html" import project_card %}
+{% block title %}{{ project.title }} · {{ SITE.ten }}{% endblock %}
+{% block content %}
+
+<section class="py-4 bg-cream">
+  <div class="container">
+    <a href="{{ url_for('gallery') }}" class="small text-decoration-none">← Về thư viện mẫu mã</a>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-7">
+        {% if project.image %}
+          <img class="img-fluid prose-cover w-100" src="{{ url_for('static', filename='uploads/' ~ project.image) }}" alt="{{ project.title }}">
+        {% else %}
+          <div class="proj-ph {{ 'alt' if project.material=='go-cong-nghiep' else '' }}" style="aspect-ratio:16/10;border-radius:16px;font-size:1.4rem">
+            {{ CAT_MAP.get(project.category,'Mẫu nội thất') }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-5">
+        <div class="mb-2">
+          {% if project.category %}<span class="chip">{{ CAT_MAP.get(project.category, project.category) }}</span>{% endif %}
+          {% if project.material %}<span class="chip mat">{{ MAT_MAP.get(project.material, project.material) }}</span>{% endif %}
+        </div>
+        <h1 class="h2 fw-bold mb-3">{{ project.title }}</h1>
+        {% if project.location %}<p class="text-muted-2">📍 {{ project.location }}</p>{% endif %}
+        <p class="lead">{{ project.summary }}</p>
+        <p>{{ project.description }}</p>
+        <a href="#lien-he-form" class="btn btn-primary btn-lg mt-2">Tôi muốn làm mẫu tương tự →</a>
+      </div>
+    </div>
+
+    {% if related %}
+    <hr class="my-5">
+    <h2 class="h4 fw-bold mb-4">Mẫu cùng loại</h2>
+    <div class="row g-4">
+      {% for p in related %}<div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

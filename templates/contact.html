@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Liên hệ · {{ SITE.ten }}{% endblock %}
+{% block content %}
+
+<section class="py-5 bg-cream">
+  <div class="container">
+    <div class="eyebrow">Liên hệ</div>
+    <h1 class="section-title mb-4">Kết nối với Homie</h1>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="why-card h-100"><div class="why-ic">📞</div>
+        <h3 class="h6 fw-bold">Hotline</h3><p class="mb-0">{{ SITE.hotline }}</p></div></div>
+      <div class="col-md-4"><div class="why-card h-100"><div class="why-ic">💬</div>
+        <h3 class="h6 fw-bold">Zalo</h3>
+        <a href="https://zalo.me/{{ SITE.zalo }}" target="_blank">{{ SITE.zalo }}</a></div></div>
+      <div class="col-md-4"><div class="why-card h-100"><div class="why-ic">📍</div>
+        <h3 class="h6 fw-bold">Địa chỉ</h3><p class="mb-0">{{ SITE.dia_chi }}</p></div></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

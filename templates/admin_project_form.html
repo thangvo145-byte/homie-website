@@ -1,0 +1,104 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block topbar_title %}{{ title }}{% endblock %}
+{% block content %}
+
+<div class="d-flex align-items-center mb-3 gap-2">
+  <a href="{{ url_for('admin_projects') }}" class="btn btn-sm btn-outline-secondary">← Quay lại</a>
+  <h5 class="mb-0 fw-bold">{{ title }}</h5>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-4">
+    <form method="post" action="{{ action }}" enctype="multipart/form-data">
+      <div class="row g-3">
+
+        <div class="col-12">
+          <label class="form-label fw-600">Tên dự án *</label>
+          <input class="form-control" name="title" required
+                 value="{{ project.title if project else '' }}"
+                 placeholder="Ví dụ: Tủ bếp chữ L nhựa rỗng - nhà chị Hương, Đông Hà">
+        </div>
+
+        <div class="col-sm-6">
+          <label class="form-label fw-600">Danh mục</label>
+          <select class="form-select" name="category">
+            <option value="">— Chọn danh mục —</option>
+            {% for k, v in CATEGORIES %}
+              <option value="{{ k }}" {{ 'selected' if project and project.category == k else '' }}>{{ v }}</option>
+            {% endfor %}
+            <option value="thiet-ke-3d" {{ 'selected' if project and project.category == 'thiet-ke-3d' else '' }}>Thiết kế 3D</option>
+          </select>
+        </div>
+
+        <div class="col-sm-6">
+          <label class="form-label fw-600">Chất liệu</label>
+          <select class="form-select" name="material">
+            <option value="">— Chọn chất liệu —</option>
+            {% for k, v in MATERIALS %}
+              <option value="{{ k }}" {{ 'selected' if project and project.material == k else '' }}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="col-sm-6">
+          <label class="form-label fw-600">Địa điểm</label>
+          <input class="form-control" name="location"
+                 value="{{ project.location if project else '' }}"
+                 placeholder="TP. Đông Hà, Triệu Phong...">
+        </div>
+
+        <div class="col-sm-6">
+          <label class="form-label fw-600">Phân khúc</label>
+          <select class="form-select" name="segment">
+            <option value="">— Chọn —</option>
+            <option value="nhom-a" {{ 'selected' if project and project.segment == 'nhom-a' else '' }}>Nhóm A (Nhựa rỗng)</option>
+            <option value="nhom-b" {{ 'selected' if project and project.segment == 'nhom-b' else '' }}>Nhóm B (Gỗ công nghiệp)</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-600">Mô tả ngắn (hiển thị trên card)</label>
+          <input class="form-control" name="summary" maxlength="300"
+                 value="{{ project.summary if project else '' }}"
+                 placeholder="1-2 câu tóm tắt điểm nổi bật">
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-600">Mô tả đầy đủ</label>
+          <textarea class="form-control" name="description" rows="5"
+                    placeholder="Chi tiết về dự án, vật liệu, kỹ thuật thi công...">{{ project.description if project else '' }}</textarea>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-600">Ảnh đại diện</label>
+          {% if project and project.image %}
+            <div class="mb-2">
+              <img src="{{ url_for('static', filename='uploads/' ~ project.image) }}"
+                   style="max-height:160px;border-radius:10px;" alt="Ảnh hiện tại">
+              <div class="small text-muted mt-1">Ảnh hiện tại: {{ project.image }} — upload ảnh mới để thay thế</div>
+            </div>
+          {% endif %}
+          <input class="form-control" type="file" name="image" accept="image/*">
+          <div class="form-text">Định dạng JPG/PNG, tối đa 16MB. Để trống nếu giữ ảnh cũ.</div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="featured" id="featured"
+                   {{ 'checked' if project and project.featured else '' }}>
+            <label class="form-check-label" for="featured">Đánh dấu <b>Nổi bật</b> (hiển thị ưu tiên trên trang chủ)</label>
+          </div>
+        </div>
+
+        <div class="col-12 d-flex gap-2 pt-2">
+          <button class="btn btn-primary px-4">💾 Lưu dự án</button>
+          <a href="{{ url_for('admin_projects') }}" class="btn btn-outline-secondary">Hủy</a>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

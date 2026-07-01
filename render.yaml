@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: homie-website
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: HOMIE_ADMIN_PASS
+        sync: false
+      - key: HOMIE_ZALO
+        value: "0902866717"
+      - key: HOMIE_HOTLINE
+        value: "0902 866 717"
+      - key: HOMIE_DIACHI
+        value: "TP. Đông Hà, Quảng Trị"

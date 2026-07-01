@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Giới thiệu · {{ SITE.ten }}{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="container">
+    <div class="col-lg-8">
+      <div class="eyebrow">Về chúng tôi</div>
+      <h1 class="mb-3">Homie — người làm nội thất địa phương bạn có thể tin</h1>
+      <p class="lead mb-0">Chúng tôi tin rằng khách hàng không mua nội thất — khách mua <b>sự yên tâm</b>:
+        yên tâm về chất lượng, về giá, về đúng hẹn dọn nhà.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <h2 class="section-title h3 mb-3">Vì sao chọn Homie?</h2>
+        <ul class="tick-list">
+          <li><b>Người địa phương {{ SITE.khu_vuc }}:</b> hiểu rõ khí hậu nồm ẩm, đã làm hàng trăm công trình thật quanh đây.</li>
+          <li><b>Đo tận nhà miễn phí:</b> tư vấn theo đúng diện tích, nhu cầu và ngân sách của bạn.</li>
+          <li><b>Cam kết bằng văn bản:</b> hợp đồng minh bạch, không phát sinh mập mờ, không sợ mua hớ.</li>
+          <li><b>Đồng hành từ bản vẽ:</b> từ thiết kế 3D tới thi công lắp đặt, bàn giao đúng hẹn.</li>
+          <li><b>Vật liệu chuẩn:</b> nhựa rỗng chống ẩm & gỗ công nghiệp An Cường — bền với khí hậu miền Trung.</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="why-card h-100">
+          <h2 class="section-title h3 mb-3">Homie phù hợp với ai?</h2>
+          <p><b>Gia đình trẻ (50–150tr):</b> muốn bền - đẹp - tiết kiệm, ưu tiên dòng nhựa rỗng chống ẩm.</p>
+          <p><b>Nhà coi trọng thẩm mỹ (150–500tr):</b> muốn sang trọng, đẳng cấp với dòng gỗ công nghiệp An Cường vân gỗ.</p>
+          <p class="mb-0">Dù bạn đang xây nhà mới, làm mới nhà cũ, hay sắm nội thất cho con ra riêng — Homie đều có giải pháp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

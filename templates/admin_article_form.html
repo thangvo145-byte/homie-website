@@ -1,0 +1,84 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block topbar_title %}{{ title }}{% endblock %}
+{% block content %}
+
+<div class="d-flex align-items-center mb-3 gap-2">
+  <a href="{{ url_for('admin_articles') }}" class="btn btn-sm btn-outline-secondary">← Quay lại</a>
+  <h5 class="mb-0 fw-bold">{{ title }}</h5>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-4">
+    <form method="post" action="{{ action }}" enctype="multipart/form-data">
+      <div class="row g-3">
+
+        <div class="col-12">
+          <label class="form-label fw-600">Tiêu đề bài viết *</label>
+          <input class="form-control" name="title" required
+                 value="{{ article.title if article else '' }}"
+                 placeholder="Ví dụ: Nhựa rỗng hay gỗ công nghiệp? Chọn sao cho đúng nhà bạn">
+        </div>
+
+        <div class="col-sm-6">
+          <label class="form-label fw-600">Slug (URL)</label>
+          <input class="form-control font-monospace" name="slug"
+                 value="{{ article.slug if article else '' }}"
+                 placeholder="de-trang-don-gian (tự tạo nếu bỏ trống)">
+          <div class="form-text">Chỉ dùng a-z, 0-9 và dấu gạch ngang. Bỏ trống sẽ tự tạo từ tiêu đề.</div>
+        </div>
+
+        <div class="col-sm-6">
+          <label class="form-label fw-600">Danh mục</label>
+          <select class="form-select" name="category">
+            {% for k, v in ART_CAT.items() %}
+              <option value="{{ k }}" {{ 'selected' if article and article.category == k else '' }}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-600">Tóm tắt (excerpt — hiển thị trên card)</label>
+          <textarea class="form-control" name="excerpt" rows="2" maxlength="400"
+                    placeholder="1-2 câu tóm tắt hấp dẫn để khách muốn đọc tiếp">{{ article.excerpt if article else '' }}</textarea>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-600">Nội dung bài viết (HTML)</label>
+          <textarea class="form-control font-monospace" name="body" rows="14"
+                    placeholder="<p>Nội dung bài viết...</p>&#10;<h3>Tiêu đề phần</h3>&#10;<ul><li>Điểm 1</li></ul>">{{ article.body if article else '' }}</textarea>
+          <div class="form-text">Hỗ trợ HTML đơn giản: &lt;p&gt;, &lt;h3&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;b&gt;, &lt;i&gt;</div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label fw-600">Ảnh bìa (cover)</label>
+          {% if article and article.cover %}
+            <div class="mb-2">
+              <img src="{{ url_for('static', filename='uploads/' ~ article.cover) }}"
+                   style="max-height:140px;border-radius:10px;" alt="Ảnh bìa hiện tại">
+              <div class="small text-muted mt-1">Ảnh hiện tại: {{ article.cover }}</div>
+            </div>
+          {% endif %}
+          <input class="form-control" type="file" name="cover" accept="image/*">
+          <div class="form-text">Tỷ lệ 4:3 hoặc 16:9. Để trống nếu giữ ảnh cũ.</div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="featured" id="featured"
+                   {{ 'checked' if article and article.featured else '' }}>
+            <label class="form-check-label" for="featured">Đánh dấu <b>Nổi bật</b> (hiển thị trên trang chủ)</label>
+          </div>
+        </div>
+
+        <div class="col-12 d-flex gap-2 pt-2">
+          <button class="btn btn-primary px-4">💾 Lưu bài viết</button>
+          <a href="{{ url_for('admin_articles') }}" class="btn btn-outline-secondary">Hủy</a>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

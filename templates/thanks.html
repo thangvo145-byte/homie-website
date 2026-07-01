@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Cảm ơn bạn · {{ SITE.ten }}{% endblock %}
+{% block leadform %}{% endblock %}
+{% block content %}
+
+<section class="py-5" style="min-height:50vh">
+  <div class="container text-center py-5">
+    <div style="font-size:3.5rem">🎉</div>
+    <h1 class="fw-bold mt-2">Cảm ơn bạn đã tin tưởng Homie!</h1>
+    <p class="lead text-muted">Homie đã nhận thông tin và sẽ liên hệ tư vấn miễn phí trong thời gian sớm nhất.</p>
+    <p>Muốn nhanh hơn? Nhắn Zalo trực tiếp cho Homie:</p>
+    <a href="https://zalo.me/{{ SITE.zalo }}" target="_blank" class="btn btn-primary btn-lg">Nhắn Zalo ngay</a>
+    <div class="mt-4"><a href="{{ url_for('gallery') }}" class="text-decoration-none">← Tiếp tục xem mẫu mã</a></div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% from "macros.html" import article_card %}
+{% block title %}Kiến thức & xu hướng · {{ SITE.ten }}{% endblock %}
+{% block content %}
+
+<section class="py-5 bg-cream">
+  <div class="container">
+    <div class="eyebrow">Chia sẻ giá trị</div>
+    <h1 class="section-title mb-3">Kiến thức & xu hướng nội thất</h1>
+    <div>
+      <a class="filter-pill {{ 'active' if not cat }}" href="{{ url_for('blog') }}">Tất cả</a>
+      {% for k, v in ART_CAT.items() %}
+        <a class="filter-pill {{ 'active' if cat==k }}" href="{{ url_for('blog', cat=k) }}">{{ v }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      {% for a in articles %}
+        <div class="col-sm-6 col-lg-4">{{ article_card(a) }}</div>
+      {% else %}
+        <div class="col-12 text-center text-muted py-5">Chưa có bài viết nào.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
