@@ -1,171 +1,182 @@
 # -*- coding: utf-8 -*-
-"""Nạp dữ liệu mẫu cho website Homie — dùng ảnh thật đã copy vào static/uploads."""
+"""Nạp dữ liệu dự án THẬT cho website Homie — ảnh từ D:\HINH ANH\THI CONG\CHUNG TRON GOI"""
 
 
 def run_seed(db, Project, Article):
     if Project.query.first() or Article.query.first():
-        print("Đã có dữ liệu, bỏ qua seed. (Xóa data/homie_web.db nếu muốn nạp lại)")
-        return
+        return  # Đã có dữ liệu, bỏ qua
 
     projects = [
-        # ---- TỦ BẾP ----
-        dict(title="Tủ bếp chữ L nhựa rỗng — nhà chị Hương, Đông Hà",
-             category="tu-bep", material="nhua-rong", segment="nhom-a",
-             location="TP. Đông Hà",
-             image="bep_01.jpg",
-             summary="Tủ bếp nhựa rỗng chống nồm ẩm, cánh phủ acrylic bóng, tay nắm âm hiện đại.",
-             description="Căn bếp chữ L tối ưu cho nhà ống. Chất liệu nhựa rỗng Picomat lõi đặc — "
-                         "không cong vênh, không mối mọt, lau chùi dễ, rất hợp khí hậu nồm ẩm miền Trung. "
-                         "Cánh phủ acrylic bóng gương chống bám dầu mỡ. Bàn đá thạch anh chống xước.",
-             featured=True),
-        dict(title="Tủ bếp chữ I gỗ công nghiệp — nhà anh Tuấn, Triệu Phong",
-             category="tu-bep", material="go-cong-nghiep", segment="nhom-b",
-             location="Triệu Phong",
-             image="bep_02.jpg",
-             summary="Tủ bếp gỗ An Cường vân sáng, tủ bếp trên kết hợp kính cường lực, sang trọng.",
-             description="Thiết kế tủ bếp chữ I tối giản hiện đại. Gỗ công nghiệp An Cường phủ Melamine "
-                         "vân sáng, tủ trên kết hợp cánh kính cường lực. Hệ thống phụ kiện ray giảm chấn Hafele.",
-             featured=True),
-        dict(title="Tủ bếp chữ U nhựa rỗng — căn hộ 75m², Đông Hà",
-             category="tu-bep", material="nhua-rong", segment="nhom-a",
-             location="TP. Đông Hà",
-             image="bep_03.jpg",
-             summary="Giải pháp bếp chữ U tối ưu diện tích cho căn hộ, màu xanh nhạt tươi mát.",
-             description="Bếp chữ U cho căn hộ 75m² — tận dụng tối đa không gian góc bếp. "
-                         "Màu xanh bạc hà phủ acrylic làm sáng không gian. Nhựa rỗng Picomat không lo mối ẩm.",
-             featured=False),
-        dict(title="Tủ bếp nhựa rỗng + đảo bếp — nhà chị Mai, Gio Linh",
-             category="tu-bep", material="nhua-rong", segment="nhom-a",
-             location="Gio Linh",
-             image="bep_04.jpg",
-             summary="Bếp mở kết hợp đảo bếp đa năng, phong cách hiện đại tối giản.",
-             description="Không gian bếp mở kết hợp đảo bếp — xu hướng phổ biến cho nhà rộng. "
-                         "Đảo bếp đa năng vừa làm quầy bar vừa là bàn ăn phụ. Nhựa rỗng bền đẹp lâu dài.",
-             featured=False),
-        dict(title="Tủ bếp gỗ An Cường vân óc chó — biệt thự Cam Lộ",
-             category="tu-bep", material="go-cong-nghiep", segment="nhom-b",
-             location="Cam Lộ",
-             image="bep_05.jpg",
-             summary="Hệ tủ bếp cao cấp vân óc chó, đá marble, phong cách luxury ấm cúng.",
-             description="Dự án biệt thự — hệ tủ bếp gỗ An Cường phủ Melamine vân óc chó sang trọng. "
-                         "Mặt đá marble tự nhiên, bồn rửa inox undermount. Phụ kiện Blum cao cấp.",
-             featured=True),
-        dict(title="Tủ bếp nhựa rỗng màu trắng kem — nhà phố Đông Hà",
-             category="tu-bep", material="nhua-rong", segment="nhom-a",
-             location="TP. Đông Hà",
-             image="bep_06.jpg",
-             summary="Bếp trắng kem sạch sẽ, sáng bóng — lựa chọn kinh điển không bao giờ lỗi mốt.",
-             description="Tủ bếp nhựa rỗng màu trắng kem acrylic bóng — phong cách tối giản hiện đại. "
-                         "Thiết kế tủ trên kiểu hộp giúp không gian gọn gàng, dễ vệ sinh.",
-             featured=False),
-
-        # ---- PHÒNG NGỦ MASTER ----
-        dict(title="Phòng ngủ master gỗ óc chó — nhà anh Hùng, Đông Hà",
-             category="giuong", material="go-cong-nghiep", segment="nhom-b",
-             location="TP. Đông Hà",
-             image="ngu_01.jpg",
-             summary="Bộ phòng ngủ master đồng bộ vân óc chó — giường, táp, tủ áo, bàn phấn.",
-             description="Trọn bộ phòng ngủ master: giường phản king-size, 2 táp đầu giường, tủ áo kịch trần "
-                         "cánh lùa, bàn trang điểm gương lớn. Gỗ An Cường vân óc chó ấm áp sang trọng.",
-             featured=True),
-        dict(title="Phòng ngủ nhựa rỗng tone be — nhà chị Linh, Triệu Phong",
-             category="giuong", material="nhua-rong", segment="nhom-a",
-             location="Triệu Phong",
-             image="ngu_02.jpg",
-             summary="Phòng ngủ nhựa rỗng tone be kem nhẹ nhàng, tối ưu chi phí, chống ẩm tốt.",
-             description="Giải pháp phòng ngủ tiết kiệm bằng nhựa rỗng — bền đẹp, không lo nồm ẩm. "
-                         "Tone màu be kem tạo cảm giác ấm áp, thư giãn. Phù hợp ngân sách 50-100tr.",
-             featured=True),
-        dict(title="Phòng ngủ Japandi gỗ tự nhiên — nhà anh Thành, Cam Lộ",
-             category="giuong", material="go-cong-nghiep", segment="nhom-b",
-             location="Cam Lộ",
-             image="ngu_03.jpg",
-             summary="Phong cách Japandi ấm cúng, gỗ tự nhiên, ánh sáng vàng ấm — thư giãn tuyệt đối.",
-             description="Phong cách Japandi kết hợp tinh tế Nhật Bản và Scandinavia — ít đồ nội thất nhưng "
-                         "mỗi món đều có chức năng và thẩm mỹ. Tông màu gỗ ấm, vải mềm, ánh sáng vàng.",
-             featured=False),
-
-        # ---- PHÒNG NGỦ CƠ BẢN ----
-        dict(title="Phòng ngủ cơ bản nhựa rỗng — nhà chị Phương, Gio Linh",
-             category="giuong", material="nhua-rong", segment="nhom-a",
-             location="Gio Linh",
-             image="ngu-cb_01.jpg",
-             summary="Combo phòng ngủ tiết kiệm: giường + tủ đầu giường + tủ áo, dưới 50tr.",
-             description="Giải pháp phòng ngủ kinh tế nhưng đầy đủ tiện nghi. Nhựa rỗng bền đẹp, "
-                         "không lo mối ẩm. Thiết kế gọn gàng phù hợp phòng nhỏ 10-15m².",
-             featured=False),
-
-        # ---- PHÒNG TRẺ EM ----
-        dict(title="Phòng bé trai — tủ + bàn học liền khối, Đông Hà",
-             category="phong-tre", material="nhua-rong", segment="nhom-a",
-             location="TP. Đông Hà",
-             image="ngu-tre_01.jpg",
-             summary="Combo tủ quần áo + bàn học + kệ sách cho bé, an toàn, màu sắc vui tươi.",
-             description="Thiết kế combo thông minh cho phòng bé: tủ quần áo, bàn học, kệ sách liền khối "
-                         "tiết kiệm diện tích. Nhựa rỗng an toàn, không mùi, cạnh bo tròn chống va đập.",
-             featured=True),
-        dict(title="Phòng bé gái — giường tầng + bàn học, Triệu Phong",
-             category="phong-tre", material="nhua-rong", segment="nhom-a",
-             location="Triệu Phong",
-             image="ngu-tre_02.jpg",
-             summary="Giường tầng tiết kiệm diện tích + bàn học riêng cho bé gái, màu hồng pastel.",
-             description="Giường tầng cho 2 bé — tiết kiệm tối đa diện tích phòng. Màu hồng pastel "
-                         "vui tươi. Cầu thang có hộc kéo lưu trữ. Nhựa rỗng an toàn, không formaldehyde.",
-             featured=False),
-
-        # ---- TỦ ÁO ----
-        dict(title="Tủ áo cánh lùa gỗ An Cường — phòng ngủ master",
-             category="tu-ao", material="go-cong-nghiep", segment="nhom-b",
-             location="Triệu Phong",
-             image="tho_01.jpg",
-             summary="Tủ áo kịch trần cánh lùa vân gỗ óc chó, tiết kiệm diện tích, sang trọng.",
-             description="Tủ áo gỗ công nghiệp An Cường phủ Melamine vân óc chó, thiết kế kịch trần "
-                         "tận dụng tối đa không gian lưu trữ. Cánh lùa ray giảm chấn êm, khoang đồ chia "
-                         "khoa học cho cả vợ chồng.",
-             featured=True),
-        dict(title="Hệ tủ áo cánh mở nhựa rỗng — nhà chị Ngân, Đông Hà",
-             category="tu-ao", material="nhua-rong", segment="nhom-a",
-             location="TP. Đông Hà",
-             image="tho_02.jpg",
-             summary="Tủ áo nhựa rỗng cánh mở rộng 3m, khoang chia khoa học, chống ẩm tốt.",
-             description="Hệ tủ áo nhựa rỗng rộng 3m — khoang treo dài, khoang gấp, ngăn kéo đủ đầy. "
-                         "Cánh mở bản lề giảm chấn. Nhựa rỗng không lo cong vênh dù thời tiết nồm ẩm.",
-             featured=True),
-        dict(title="Kệ tivi + vách trang trí phòng khách — Gio Linh",
-             category="phong-khach", material="nhua-rong", segment="nhom-a",
-             location="Gio Linh",
-             image="tho_03.jpg",
-             summary="Kệ tivi treo kết hợp vách lam sóng, gọn gàng, hiện đại.",
-             description="Phòng khách nhỏ được làm sang nhờ kệ tivi treo nhựa rỗng kết hợp vách lam sóng "
-                         "ốp nền. Đèn hắt LED tạo chiều sâu. Giải pháp tối ưu chi phí cho gia đình trẻ.",
+        # ---- TRỌN GÓI — dự án thật ----
+        dict(title="Nội thất trọn gói — Chị Trang",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_12-chi-trang_01.jpg",
+             summary="Hoàn thiện nội thất trọn gói cho gia đình chị Trang — từ tủ bếp đến phòng ngủ.",
+             description="Dự án nội thất trọn gói — Homie đồng hành từ khảo sát, thiết kế 3D đến thi công "
+                         "lắp đặt và bàn giao. Chất liệu nhựa rỗng chống nồm ẩm, phụ kiện ray giảm chấn.",
              featured=True),
 
-        # ---- THIẾT KẾ 3D ----
-        dict(title="Bản vẽ 3D tủ bếp chữ L — nhà chị Thảo, Đông Hà",
-             category="thiet-ke-3d", material="nhua-rong", segment="nhom-a",
+        dict(title="Nội thất trọn gói — A Hải Đông Hà",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
              location="TP. Đông Hà",
-             image="thiet-ke-3d_01.jpg",
-             summary="Bản vẽ 3D photoreal trước thi công — xem trước 100% trước khi chốt hợp đồng.",
-             description="Homie dựng 3D theo đúng số đo thực tế căn bếp. Khách xem và yêu cầu chỉnh sửa "
-                         "thoải mái trước khi chốt — không mất thêm phí. Render photoreal như ảnh thật.",
+             image="tc_a-hai-dong-ha_01.jpg",
+             summary="Tủ bếp + phòng ngủ đồng bộ phong cách hiện đại cho gia đình A Hải.",
+             description="Dự án thi công trọn gói tại Đông Hà. Hệ tủ bếp nhựa rỗng chữ L, phòng ngủ "
+                         "gỗ công nghiệp tone trung tính. Bàn giao đúng hẹn, dọn nhà vào ở ngay.",
              featured=True),
-        dict(title="Bản vẽ 3D phòng ngủ master — nhà anh Cường, Cam Lộ",
-             category="thiet-ke-3d", material="go-cong-nghiep", segment="nhom-b",
-             location="Cam Lộ",
-             image="thiet-ke-3d_02.jpg",
-             summary="Render 3D phòng ngủ master phong cách luxury — phối màu, vật liệu rõ ràng.",
-             description="Bản vẽ 3D phòng ngủ master thể hiện đầy đủ màu sắc, vật liệu, bố cục. "
-                         "Giúp gia chủ tự tin chốt thiết kế trước khi thi công.",
-             featured=False),
 
-        # ---- TRỌN GÓI ----
-        dict(title="Nội thất trọn gói căn nhà 2 tầng — anh Tài, Cam Lộ",
+        dict(title="Nội thất trọn gói — A Hiếu Hải Lăng",
              category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
-             location="Cam Lộ",
-             image="ngu_04.jpg",
-             summary="Trọn gói từ bếp, phòng khách tới 3 phòng ngủ, đồng bộ phong cách hiện đại.",
-             description="Dự án trọn gói: Homie đồng hành từ bản vẽ 3D tới thi công lắp đặt. Đồng bộ "
-                         "phong cách hiện đại ấm cúng cho toàn bộ căn nhà 2 tầng, bàn giao đúng hẹn dọn nhà.",
+             location="Hải Lăng",
+             image="tc_a-hieu-hai-lang_01.jpg",
+             summary="Hoàn thiện nội thất toàn bộ nhà 2 tầng tại Hải Lăng — gỗ công nghiệp An Cường.",
+             description="Dự án nhà 2 tầng tại Hải Lăng. Gỗ công nghiệp An Cường phủ Melamine vân gỗ "
+                         "sang trọng cho toàn bộ không gian bếp, phòng khách, 3 phòng ngủ.",
+             featured=True),
+
+        dict(title="Nội thất trọn gói — Anh Sang",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_anh-sang_01.jpg",
+             summary="Hệ nội thất đầy đủ phòng bếp + phòng ngủ, nhựa rỗng chống ẩm.",
+             description="Anh Sang chọn giải pháp nhựa rỗng cho toàn bộ nội thất — bền, chống nồm ẩm "
+                         "miền Trung, phù hợp ngân sách. Thiết kế tối giản, dễ dọn dẹp.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Anh Tâm",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Quảng Trị",
+             image="tc_anh-tam_01.jpg",
+             summary="Nội thất phong cách hiện đại ấm cúng — gỗ công nghiệp tone nâu vân gỗ.",
+             description="Dự án anh Tâm — phong cách hiện đại ấm cúng. Gỗ công nghiệp An Cường tone "
+                         "nâu ấm, kết hợp ánh sáng LED hắt tạo không gian ấm áp cho cả gia đình.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Anh Vinh Gio Linh",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Gio Linh",
+             image="tc_anh-vinh-gio-ling_01.jpg",
+             summary="Hoàn thiện nội thất nhà phố tại Gio Linh — tủ bếp + phòng ngủ đồng bộ.",
+             description="Dự án tại Gio Linh — nhà phố 1 tầng hoàn thiện trọn gói. Tủ bếp nhựa rỗng "
+                         "chữ L, phòng ngủ nhựa rỗng tone trắng kem gọn gàng, hiện đại.",
+             featured=True),
+
+        dict(title="Nội thất trọn gói — Chị Nga",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Quảng Trị",
+             image="tc_chii-nga_01.jpg",
+             summary="Dự án lớn đầy đủ phòng — bếp, phòng khách, 3 phòng ngủ đồng bộ phong cách.",
+             description="Chị Nga đầu tư nội thất bài bản cho căn nhà mới. Gỗ công nghiệp An Cường "
+                         "đồng màu xuyên suốt — tạo cảm giác sang trọng, thống nhất toàn nhà.",
+             featured=True),
+
+        dict(title="Nội thất trọn gói — Chị Ngọc Lan",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_chi-ngoc-lan_01.jpg",
+             summary="Nội thất nhà ống phố — tủ bếp nhựa rỗng + phòng ngủ gọn đẹp.",
+             description="Nhà ống phố chật cần tận dụng không gian tối đa. Homie thiết kế tủ bếp "
+                         "chữ I âm trần, phòng ngủ tủ áo kịch trần — dụng hết từng cm².",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Cửa Việt",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Cửa Việt",
+             image="tc_cua-viet_01.jpg",
+             summary="Nội thất nhà ở khu vực ven biển Cửa Việt — đặc biệt chú trọng chống ẩm muối.",
+             description="Khu vực ven biển Cửa Việt độ ẩm muối rất cao — nhựa rỗng là giải pháp tối ưu. "
+                         "Phụ kiện inox 304 chống gỉ toàn bộ. Bảo hành 5 năm.",
+             featured=True),
+
+        dict(title="Nội thất trọn gói — Chị Yến",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_chi-yen_01.jpg",
+             summary="Bộ nội thất ấm cúng cho gia đình nhỏ — đủ tiện nghi, hợp ngân sách.",
+             description="Gia đình chị Yến — ngân sách vừa phải nhưng vẫn muốn đầy đủ tiện nghi. "
+                         "Nhựa rỗng giúp tối ưu chi phí mà không giảm độ bền. Giao nhà đúng hẹn.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Anh Dương",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Quảng Trị",
+             image="tc_duong_01.jpg",
+             summary="Phong cách hiện đại minimalist — gỗ An Cường tone xám lạnh, line sạch.",
+             description="Anh Dương yêu thích phong cách minimalist — đường nét thẳng, màu xám lạnh "
+                         "phủ gỗ An Cường, không chi tiết thừa. Nội thất như trong tạp chí.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Anh Hoàng Chợ Cạn",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_hoang-cho-can_01.jpg",
+             summary="Nhà mới hoàn thiện nội thất từ A-Z — bếp, phòng ngủ, phòng khách.",
+             description="Anh Hoàng làm nội thất trọn gói toàn bộ nhà mới từ A-Z. Phân bổ ngân sách "
+                         "hợp lý: nhựa rỗng cho khu ẩm, gỗ cho phòng ngủ — tối ưu cả bền lẫn đẹp.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Kiệm Anh",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Quảng Trị",
+             image="tc_kiem-anh_01.jpg",
+             summary="Nội thất sang trọng đồng bộ — gỗ An Cường phủ Melamine vân gỗ óc chó.",
+             description="Dự án đầu tư bài bản — gỗ công nghiệp An Cường vân óc chó xuyên suốt toàn nhà. "
+                         "Phụ kiện Hafele nhập khẩu, ray giảm chấn êm ái.",
+             featured=True),
+
+        dict(title="Nội thất trọn gói — Anh Sáng",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_sang_01.jpg",
+             summary="Hoàn thiện nội thất nhà phố, đồng bộ tone màu trắng — sáng sủa, hiện đại.",
+             description="Tone trắng kem xuyên suốt — tạo cảm giác sáng rộng cho nhà phố. "
+                         "Nhựa rỗng cánh acrylic bóng dễ lau, bền đẹp qua năm tháng.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Anh Tĩnh",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Quảng Trị",
+             image="tc_tinh_01.jpg",
+             summary="Dự án lớn — nội thất toàn bộ căn nhà 2 tầng, phong cách hiện đại ấm cúng.",
+             description="Anh Tĩnh đầu tư nội thất toàn bộ 2 tầng. Tầng 1: bếp + phòng khách. "
+                         "Tầng 2: 3 phòng ngủ đồng bộ. Gỗ An Cường phủ Melamine vân gỗ sáng.",
+             featured=True),
+
+        dict(title="Nội thất trọn gói — Chị Vy Ái Tử",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Ái Tử, Triệu Phong",
+             image="tc_vy-ai-tu_01.jpg",
+             summary="Nhà mới tại Ái Tử — tủ bếp + phòng ngủ + kệ phòng khách hoàn chỉnh.",
+             description="Chị Vy tại Ái Tử — nhà mới hoàn thiện trọn gói. Nhựa rỗng cho bếp "
+                         "chống nồm ẩm sông Thạch Hãn, gỗ cho phòng ngủ ấm cúng.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Chị Yến Khe Sanh",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Khe Sanh, Hướng Hóa",
+             image="tc_yen-khe-sanh_01.jpg",
+             summary="Nội thất nhà vùng cao Khe Sanh — chú trọng độ bền, chắc chắn qua thời tiết.",
+             description="Dự án tại Khe Sanh — vùng khí hậu mát mẻ đặc thù. Gỗ công nghiệp An Cường "
+                         "bền đẹp, phù hợp với khí hậu miền núi Hướng Hóa.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — A Trung Đông Văn Lưu",
+             category="tron-goi", material="nhua-rong", segment="nhom-a",
+             location="Quảng Trị",
+             image="tc_a-trung-dvl_01.jpg",
+             summary="Hoàn thiện nội thất nhà ở — bếp chữ L + 2 phòng ngủ đồng bộ.",
+             description="A Trung chọn nhựa rỗng cho toàn bộ công trình — dễ vệ sinh, bền bỉ, "
+                         "hợp khí hậu miền Trung. Bàn giao đúng tiến độ cam kết.",
+             featured=False),
+
+        dict(title="Nội thất trọn gói — Anh Dũng",
+             category="tron-goi", material="go-cong-nghiep", segment="nhom-b",
+             location="Quảng Trị",
+             image="tc_anh-dung_01.jpg",
+             summary="Nội thất căn nhà mới — tone nâu ấm gỗ An Cường, hiện đại sang trọng.",
+             description="Anh Dũng hoàn thiện căn nhà mới với nội thất gỗ công nghiệp An Cường "
+                         "tone nâu ấm. Đồng bộ từ phòng bếp, phòng khách đến 2 phòng ngủ.",
              featured=True),
     ]
 
@@ -176,7 +187,7 @@ def run_seed(db, Project, Article):
         dict(slug="nhua-rong-hay-go-cong-nghiep",
              title="Nhựa rỗng hay gỗ công nghiệp? Chọn sao cho đúng nhà bạn",
              category="kien-thuc",
-             cover="bep_02.jpg",
+             cover="tc_chii-nga_01.jpg",
              excerpt="Hai chất liệu phổ biến nhất hiện nay, mỗi loại hợp một kiểu nhà và túi tiền. "
                      "Đây là cách Homie tư vấn khách chọn cho chuẩn.",
              body="""
@@ -197,10 +208,11 @@ Không có loại nào tốt hơn tuyệt đối — chỉ có loại <i>hợp v
 cho phòng khách phòng ngủ. Vừa bền vừa đẹp vừa hợp ngân sách.</p>
 """,
              featured=True),
+
         dict(slug="kinh-nghiem-chong-non-am-mien-trung",
              title="Làm nội thất ở miền Trung: 5 điều phải nhớ để khỏi cong vênh, mối mọt",
              category="kinh-nghiem",
-             cover="tho_01.jpg",
+             cover="tc_kiem-anh_01.jpg",
              excerpt="Khí hậu nồm ẩm là kẻ thù số 1 của đồ gỗ. Đây là 5 nguyên tắc giúp nội thất nhà bạn bền hàng chục năm.",
              body="""
 <p>Ở Quảng Trị nói riêng và miền Trung nói chung, độ ẩm cao và mùa nồm là nguyên nhân số 1 khiến
@@ -215,20 +227,22 @@ cho phòng khách phòng ngủ. Vừa bền vừa đẹp vừa hợp ngân sách
 <p>Homie là đơn vị <b>địa phương</b> — hiểu rõ khí hậu Quảng Trị và đã làm hàng trăm công trình thật ở đây.</p>
 """,
              featured=True),
-        dict(slug="xu-huong-noi-that-2026",
-             title="Xu hướng nội thất 2026: tối giản ấm cúng & vật liệu thân thiện",
-             category="xu-huong",
-             cover="ngu_01.jpg",
-             excerpt="Năm 2026 lên ngôi phong cách tối giản nhưng ấm, tông màu gỗ tự nhiên kết hợp xanh - kem. Cùng Homie điểm qua.",
+
+        dict(slug="tai-sao-chon-homie",
+             title="Tại sao chọn Homie? 5 điều khách hàng Quảng Trị thường nói sau khi dọn nhà",
+             category="kinh-nghiem",
+             cover="tc_tinh_01.jpg",
+             excerpt="Sau hàng trăm công trình, điều khách hay nhắc nhất không phải là đẹp hay rẻ — mà là đúng hẹn và không phát sinh.",
              body="""
-<p>Nội thất 2026 không còn chạy theo cầu kỳ. Xu hướng nổi bật:</p>
-<ul>
-<li><b>Tối giản ấm cúng (Japandi):</b> ít chi tiết, nhiều gỗ tự nhiên, cảm giác thư giãn.</li>
-<li><b>Bảng màu 60-30-10:</b> 60% màu nền trung tính, 30% màu gỗ/kem, 10% màu nhấn (xanh rêu, terracotta).</li>
-<li><b>Ánh sáng 3 lớp:</b> đèn trần + đèn hắt + đèn điểm tạo chiều sâu, ấm áp.</li>
-<li><b>Vật liệu thân thiện, chống ẩm:</b> ưu tiên bền - dễ vệ sinh thay vì chỉ đẹp bề mặt.</li>
-</ul>
-<p>Bạn đang xây hoặc sửa nhà và muốn đi theo xu hướng này? Để Homie tư vấn phối màu - chọn vật liệu miễn phí.</p>
+<p>Chúng tôi hỏi khách sau khi bàn giao: <b>"Anh/chị thích điều gì nhất ở Homie?"</b>. Đây là 5 câu trả lời hay nhất:</p>
+<ol>
+<li><b>"Đúng hẹn"</b> — cam kết ngày bàn giao, làm đúng ngày đó.</li>
+<li><b>"Không phát sinh"</b> — báo giá bao nhiêu, làm đúng bấy nhiêu. Không thêm phí lặt vặt sau.</li>
+<li><b>"Có người chịu trách nhiệm"</b> — gặp sự cố, gọi là Homie ra ngay.</li>
+<li><b>"Biết nghe"</b> — anh Thắng lắng nghe, hiểu mình muốn gì, không áp đặt.</li>
+<li><b>"Giá hợp lý, không bị chặt"</b> — bảng giá minh bạch, dân Quảng Trị hiểu Quảng Trị.</li>
+</ol>
+<p>Đó là lý do Homie tồn tại — không phải để làm đẹp nhất, mà để làm <b>đúng nhất</b> cho từng gia đình.</p>
 """,
              featured=True),
     ]
@@ -237,4 +251,4 @@ cho phòng khách phòng ngủ. Vừa bền vừa đẹp vừa hợp ngân sách
         db.session.add(Article(**a))
 
     db.session.commit()
-    print(f"Đã nạp: {len(projects)} dự án, {len(articles)} bài viết.")
+    print(f"Seed OK: {len(projects)} du an that, {len(articles)} bai viet.")

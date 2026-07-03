@@ -408,6 +408,12 @@ def seed_cmd():
 
 with app.app_context():
     db.create_all()
+    # Auto-seed: nếu DB trống thì nạp dữ liệu (chạy mỗi lần Render deploy lại)
+    try:
+        from seed import run_seed
+        run_seed(db, Project, Article)
+    except Exception as e:
+        print(f"Seed warning: {e}")
 
 
 if __name__ == "__main__":
