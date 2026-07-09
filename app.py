@@ -107,6 +107,51 @@ class Lead(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+# ----------------------------- BÁO LEAD VỀ ĐIỆN THOẠI -----------------------------
+# Khi có khách để lại SĐT -> bắn tin về Telegram của chủ (miễn phí, tức thì),
+# kèm sẵn link Zalo tới đúng khách để bấm 1 phát mở chat Zalo.
+# Bật bằng biến môi trường trên Render: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID
+import urllib.parse
+import urllib.request
+
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+
+
+def notify_new_lead(lead):
+    """Gửi thông báo lead mới về Telegram chủ (không chặn luồng nếu lỗi)."""
+    if not (TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID):
+        return
+    phone_digits = "".join(ch for ch in (lead.phone or "") if ch.isdigit())
+    lines = [
+        "🔔 <b>LEAD MỚI — Homie Website</b>",
+        f"👤 {lead.name or '(không tên)'}",
+        f"📞 <b>{lead.phone}</b>",
+    ]
+    if lead.need:
+        lines.append(f"🎯 {lead.need}")
+    if lead.budget:
+        lines.append(f"💰 {lead.budget}")
+    if lead.message:
+        lines.append(f"📝 {lead.message}")
+    lines.append(f"🌐 Nguồn: {lead.source or 'web'}")
+    lines.append(f"🕐 {lead.created_at.strftime('%d/%m/%Y %H:%M')}")
+    if phone_digits:
+        lines.append(f'👉 <a href="https://zalo.me/{phone_digits}">Mở Zalo nhắn khách ngay</a>')
+    text = "\n".join(lines)
+    try:
+        data = urllib.parse.urlencode({
+            "chat_id": TELEGRAM_CHAT_ID,
+            "text": text,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": "true",
+        }).encode()
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+        urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=8)
+    except Exception as e:
+        print(f"[notify_new_lead] warning: {e}")
+
+
 # ----------------------------- HELPERS -----------------------------
 CATEGORIES = [
     ("tu-bep", "Tủ bếp"),
@@ -259,6 +304,7 @@ def submit_lead():
     )
     db.session.add(lead)
     db.session.commit()
+    notify_new_lead(lead)      # bắn tin về Telegram chủ (nếu đã bật env)
     # Nếu là phễu "nhận sách": mở khóa quyền đọc sách + đưa sang trang đọc
     if request.form.get("magnet"):
         session["book_unlocked"] = True
