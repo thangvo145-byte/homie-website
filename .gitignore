@@ -6,3 +6,4 @@ data/*.db
 c.txt
 cookies.txt
 .claude/
+.deploy_hook

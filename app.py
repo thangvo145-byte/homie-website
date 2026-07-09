@@ -27,7 +27,23 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "homie-doi-mat-khau-nay")
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(DATA_DIR, "homie_web.db")
+
+# ---- Kết nối database: ưu tiên Postgres bền vững (Neon/Supabase) qua DATABASE_URL ----
+# Nếu có DATABASE_URL -> dùng Postgres (dữ liệu KHÔNG mất khi deploy lại).
+# Nếu không -> dùng SQLite local để chạy máy anh (data/homie_web.db).
+_db_url = os.environ.get("DATABASE_URL", "").strip()
+if _db_url:
+    # SQLAlchemy cần scheme "postgresql://" (Neon/Render hay đưa "postgres://")
+    if _db_url.startswith("postgres://"):
+        _db_url = _db_url.replace("postgres://", "postgresql://", 1)
+    # Ép SSL cho các nhà cung cấp free (Neon/Supabase) nếu chưa khai báo
+    if _db_url.startswith("postgresql://") and "sslmode=" not in _db_url:
+        _db_url += ("&" if "?" in _db_url else "?") + "sslmode=require"
+    app.config["SQLALCHEMY_DATABASE_URI"] = _db_url
+    # Giữ kết nối ổn định khi Neon "ngủ" rồi thức dậy
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True, "pool_recycle": 300}
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(DATA_DIR, "homie_web.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_DIR
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16MB / ảnh
