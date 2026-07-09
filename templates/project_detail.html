@@ -13,8 +13,22 @@
   <div class="container">
     <div class="row g-5">
       <div class="col-lg-7">
-        {% if project.image %}
-          <img class="img-fluid prose-cover w-100" src="{{ url_for('static', filename='uploads/' ~ project.image) }}" alt="{{ project.title }}">
+        {% set gallery = [] %}
+        {% if project.image %}{% set _ = gallery.append(project.image) %}{% endif %}
+        {% for im in project.images %}{% if im.filename != project.image %}{% set _ = gallery.append(im.filename) %}{% endif %}{% endfor %}
+        {% if gallery %}
+          <img id="projMain" class="img-fluid prose-cover w-100" src="{{ url_for('static', filename='uploads/' ~ gallery[0]) }}" alt="{{ project.title }}">
+          {% if gallery|length > 1 %}
+            <div class="row g-2 mt-2">
+              {% for fn in gallery %}
+              <div class="col-3">
+                <img src="{{ url_for('static', filename='uploads/' ~ fn) }}" alt=""
+                     onclick="document.getElementById('projMain').src=this.src"
+                     style="width:100%;height:72px;object-fit:cover;border-radius:8px;cursor:pointer;border:1px solid #eee;">
+              </div>
+              {% endfor %}
+            </div>
+          {% endif %}
         {% else %}
           <div class="proj-ph {{ 'alt' if project.material=='go-cong-nghiep' else '' }}" style="aspect-ratio:16/10;border-radius:16px;font-size:1.4rem">
             {{ CAT_MAP.get(project.category,'Mẫu nội thất') }}

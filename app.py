@@ -4,6 +4,7 @@ Mục tiêu: kéo khách mới để lại SĐT/Zalo (phễu đầu nguồn).
 Stack: Flask + SQLite + Jinja2 + Bootstrap 5 (giống app quản lý sản xuất).
 """
 import os
+import uuid
 from datetime import datetime
 from functools import wraps
 
@@ -62,6 +63,21 @@ class Project(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+class ProjectImage(db.Model):
+    """Ảnh phụ của 1 dự án — cho phép 1 dự án có nhiều hình (thư viện ảnh)."""
+    __tablename__ = "project_image"
+    id = db.Column(db.Integer, primary_key=True)
+    project_id = db.Column(db.Integer, db.ForeignKey("project.id"), nullable=False)
+    filename = db.Column(db.String(255), nullable=False)  # tên file trong static/uploads
+    sort_order = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    project = db.relationship("Project", backref=db.backref(
+        "images", cascade="all, delete-orphan",
+        order_by="ProjectImage.sort_order, ProjectImage.id",
+    ))
+
+
 class Article(db.Model):
     """Bài kiến thức / xu hướng."""
     __tablename__ = "article"
@@ -93,8 +109,9 @@ class Lead(db.Model):
 CATEGORIES = [
     ("tu-bep", "Tủ bếp"),
     ("tu-ao", "Tủ áo"),
-    ("giuong", "Giường ngủ"),
     ("phong-khach", "Phòng khách"),
+    ("phong-tho", "Phòng thờ"),
+    ("giuong", "Giường ngủ"),
     ("phong-tre", "Phòng trẻ em"),
     ("tron-goi", "Trọn gói cả nhà"),
 ]
@@ -256,15 +273,45 @@ ALLOWED_EXT = {"jpg", "jpeg", "png", "webp"}
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXT
 
-def save_upload(file_field):
-    """Lưu file upload, trả về tên file hoặc None."""
-    f = request.files.get(file_field)
+def _store_filestorage(f, prefix):
+    """Lưu 1 FileStorage vào thư mục uploads, trả về tên file (hoặc None)."""
     if f and f.filename and allowed_file(f.filename):
         ext = f.filename.rsplit(".", 1)[1].lower()
-        fname = f"{file_field}_{datetime.utcnow().strftime('%Y%m%d%H%M%S%f')}.{ext}"
+        # Hậu tố ngẫu nhiên để tránh trùng tên khi lưu nhiều ảnh trong cùng micro-giây
+        fname = f"{prefix}_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex[:8]}.{ext}"
         f.save(os.path.join(app.config["UPLOAD_FOLDER"], fname))
         return fname
     return None
+
+def _remove_upload_file(fname):
+    """Xóa file ảnh khỏi thư mục uploads (bỏ qua nếu không có)."""
+    if not fname:
+        return
+    try:
+        os.remove(os.path.join(app.config["UPLOAD_FOLDER"], fname))
+    except OSError:
+        pass
+
+def save_upload(file_field):
+    """Lưu 1 file upload theo tên field, trả về tên file hoặc None."""
+    return _store_filestorage(request.files.get(file_field), file_field)
+
+def save_project_images(project, file_field="images"):
+    """Lưu NHIỀU ảnh cùng lúc cho 1 dự án. Trả về số ảnh đã thêm.
+    Nếu dự án chưa có ảnh đại diện thì lấy ảnh đầu tiên làm ảnh đại diện."""
+    files = request.files.getlist(file_field)
+    start = (max((im.sort_order for im in project.images), default=0) + 1)
+    added = 0
+    for f in files:
+        fname = _store_filestorage(f, "img")
+        if not fname:
+            continue
+        db.session.add(ProjectImage(project_id=project.id, filename=fname,
+                                    sort_order=start + added))
+        if not project.image:      # chưa có ảnh đại diện -> dùng ảnh đầu
+            project.image = fname
+        added += 1
+    return added
 
 
 # ---------- CRUD dự án ----------
@@ -293,8 +340,11 @@ def admin_project_add():
         )
         db.session.add(p)
         db.session.commit()
-        flash("Đã thêm dự án thành công.", "success")
-        return redirect(url_for("admin_projects"))
+        n = save_project_images(p)      # thêm nhiều ảnh (nếu có)
+        db.session.commit()
+        extra = f" kèm {n} ảnh" if n else ""
+        flash(f"Đã thêm dự án thành công{extra}.", "success")
+        return redirect(url_for("admin_project_edit", pid=p.id))
     return render_template("admin_project_form.html", project=None,
                            action=url_for("admin_project_add"), title="Thêm dự án")
 
@@ -315,9 +365,20 @@ def admin_project_edit(pid):
         new_img = save_upload("image")
         if new_img:
             p.image = new_img
+        # Xóa các ảnh phụ được tick chọn xóa
+        del_ids = request.form.getlist("delete_image")
+        if del_ids:
+            for im in list(p.images):
+                if str(im.id) in del_ids:
+                    _remove_upload_file(im.filename)
+                    if p.image == im.filename:
+                        p.image = None
+                    db.session.delete(im)
+        # Thêm ảnh mới (nhiều ảnh cùng lúc)
+        n = save_project_images(p)
         db.session.commit()
-        flash("Đã cập nhật dự án.", "success")
-        return redirect(url_for("admin_projects"))
+        flash(f"Đã cập nhật dự án{(' + ' + str(n) + ' ảnh mới') if n else ''}.", "success")
+        return redirect(url_for("admin_project_edit", pid=pid))
     return render_template("admin_project_form.html", project=p,
                            action=url_for("admin_project_edit", pid=pid), title="Sửa dự án")
 

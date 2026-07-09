@@ -84,6 +84,33 @@
         </div>
 
         <div class="col-12">
+          <label class="form-label fw-600">📷 Thư viện ảnh dự án (thêm nhiều ảnh)</label>
+          <input class="form-control" type="file" name="images" accept="image/*" multiple>
+          <div class="form-text">Chọn <b>nhiều ảnh cùng lúc</b> (giữ Ctrl/Shift để chọn nhiều file). Mỗi dự án chứa được nhiều hình.</div>
+
+          {% if project and project.images %}
+            <div class="row g-2 mt-2">
+              {% for im in project.images %}
+              <div class="col-6 col-sm-4 col-md-3">
+                <div class="border rounded p-1 h-100 text-center">
+                  <img src="{{ url_for('static', filename='uploads/' ~ im.filename) }}"
+                       style="width:100%;height:110px;object-fit:cover;border-radius:6px;" alt="">
+                  <div class="form-check mt-1 text-start">
+                    <input class="form-check-input" type="checkbox" name="delete_image"
+                           value="{{ im.id }}" id="delimg{{ im.id }}">
+                    <label class="form-check-label small text-danger" for="delimg{{ im.id }}">Xóa ảnh này</label>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="form-text mt-1">Tick "Xóa ảnh này" rồi bấm Lưu để gỡ ảnh khỏi dự án.</div>
+          {% elif project %}
+            <div class="small text-muted mt-2">Chưa có ảnh phụ nào. Chọn file phía trên để thêm.</div>
+          {% endif %}
+        </div>
+
+        <div class="col-12">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" name="featured" id="featured"
                    {{ 'checked' if project and project.featured else '' }}>
