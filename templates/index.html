@@ -24,6 +24,80 @@
   </div>
 </section>
 
+<!-- PHỄU SÁCH TẶNG (LEAD MAGNET) — ĐẦU TRANG -->
+<section class="book-funnel py-5" style="background:linear-gradient(120deg,#0a1628 0%,#162347 58%,#0f1c3a 100%);">
+  <div class="container">
+    <div class="row align-items-center g-4 g-lg-5">
+      <!-- Cột trái: bìa sách + lời chào -->
+      <div class="col-lg-7 text-white">
+        <div class="d-flex align-items-center gap-4 flex-wrap flex-md-nowrap">
+          <div class="book-mini-cover flex-shrink-0">
+            <span class="bmc-label">Cẩm nang</span>
+            <span class="bmc-title">Làm Nhà<br>Lần Đầu</span>
+            <span class="bmc-author">Thắng · Nội thất Homie</span>
+          </div>
+          <div>
+            <div class="eyebrow" style="color:#f9c74f">Quà tặng miễn phí · 0đ</div>
+            <h2 class="section-title text-white mb-2" style="font-size:1.6rem;line-height:1.25">
+              Sách "Làm Nhà Lần Đầu" — tránh những sai lầm tốn tiền khi làm nội thất
+            </h2>
+            <p class="opacity-90 mb-3">Đúc kết từ hàng trăm công trình thật ở Quảng Trị: chọn vật liệu chống nồm ẩm,
+              kích thước chuẩn, đầu tư đúng chỗ — <b>để lại số Zalo là đọc được ngay</b>.</p>
+            <ul class="funnel-ticks small opacity-90 mb-0">
+              <li>Vật liệu bền với khí hậu miền Trung</li>
+              <li>Kích thước chuẩn từng khu vực</li>
+              <li>Tiền nên dồn vào đâu, nên bớt chỗ nào</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Cột phải: form lấy sách ngay tại đầu trang -->
+      <div class="col-lg-5">
+        <div class="funnel-form-card p-4">
+          <h3 class="h5 fw-bold mb-1 text-dark">Nhận sách ngay qua Zalo</h3>
+          <p class="text-muted small mb-3">Điền số di động — sách mở ra đọc liền. Homie không spam.</p>
+          <form method="post" action="{{ url_for('submit_lead') }}" class="row g-2">
+            <input type="hidden" name="source" value="{{ BOOK.source }}">
+            <input type="hidden" name="magnet" value="1">
+            <input type="hidden" name="need" value="Nhận sách {{ BOOK.ten }}">
+            <div class="col-12">
+              <input class="form-control form-control-lg" name="name" placeholder="Họ tên của bạn">
+            </div>
+            <div class="col-12">
+              <input class="form-control form-control-lg" name="phone" required
+                     type="tel" inputmode="numeric" pattern="(0|\+84)[0-9\s.]{8,13}" maxlength="15"
+                     title="Số di động Việt Nam, VD: 0902 866 717" placeholder="SĐT / Zalo *">
+              <small class="text-muted">SĐT di động, VD: 0902 866 717</small>
+            </div>
+            <div class="col-12 d-grid mt-1">
+              <button class="btn btn-warning btn-lg fw-bold" style="background:#f9c74f;border:none;color:#0a1628">
+                📖 Đọc sách miễn phí
+              </button>
+            </div>
+            <div class="col-12 text-center"><small class="text-muted">Thông tin của bạn được bảo mật hoàn toàn.</small></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.book-funnel .funnel-ticks{list-style:none;padding:0;margin:0}
+.book-funnel .funnel-ticks li{position:relative;padding-left:1.4rem;margin-bottom:.25rem}
+.book-funnel .funnel-ticks li::before{content:"✓";position:absolute;left:0;color:#f9c74f;font-weight:700}
+.funnel-form-card{background:#fff;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.book-mini-cover{
+  width:120px;height:160px;border-radius:6px 10px 10px 6px;
+  background:linear-gradient(155deg,#12203f 0%,#1c2c56 45%,#0d1a35 100%);
+  border-left:5px solid #f9c74f;box-shadow:0 14px 34px rgba(0,0,0,.45);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:12px;color:#fff}
+.book-mini-cover .bmc-label{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#f9c74f;margin-bottom:6px}
+.book-mini-cover .bmc-title{font-weight:800;font-size:1.05rem;line-height:1.15}
+.book-mini-cover .bmc-author{font-size:.6rem;opacity:.75;margin-top:10px}
+</style>
+
 <!-- LỢI THẾ -->
 <section class="py-4 bg-white border-bottom">
   <div class="container">
@@ -169,25 +243,6 @@
           <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
         {% endfor %}
       {% endif %}
-    </div>
-  </div>
-</section>
-
-<!-- SÁCH TẶNG (LEAD MAGNET) -->
-<section class="py-5" style="background:linear-gradient(120deg,#0a1628 0%,#162347 60%,#0f1c3a 100%);">
-  <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-8 text-white">
-        <div class="eyebrow" style="color:#f9c74f">Quà tặng miễn phí · 0đ</div>
-        <h2 class="section-title text-white mb-2">Sách "Làm Nhà Lần Đầu" — tránh sai lầm tốn tiền khi làm nội thất</h2>
-        <p class="opacity-90 mb-0">Cẩm nang đúc kết từ hàng trăm công trình thật ở Quảng Trị: chọn vật liệu,
-          chống nồm ẩm, kích thước chuẩn, đầu tư đúng chỗ. Để lại Zalo là đọc được ngay.</p>
-      </div>
-      <div class="col-lg-4 text-lg-end text-center">
-        <a href="{{ url_for('nhan_sach') }}" class="btn btn-warning btn-lg fw-bold px-4" style="background:#f9c74f;border:none;color:#0a1628">
-          📖 Nhận sách miễn phí
-        </a>
-      </div>
     </div>
   </div>
 </section>

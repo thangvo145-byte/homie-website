@@ -4,6 +4,7 @@ Mục tiêu: kéo khách mới để lại SĐT/Zalo (phễu đầu nguồn).
 Stack: Flask + SQLite + Jinja2 + Bootstrap 5 (giống app quản lý sản xuất).
 """
 import os
+import re
 import uuid
 from datetime import datetime
 from functools import wraps
@@ -116,6 +117,22 @@ import urllib.request
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+
+
+def normalize_phone(raw):
+    """Chuẩn hóa & kiểm tra SĐT di động Việt Nam.
+    Trả về số 10 chữ số hợp lệ (VD 0902866717) hoặc None nếu sai/bậy."""
+    if not raw:
+        return None
+    digits = re.sub(r"\D", "", raw)          # bỏ mọi ký tự không phải số
+    if digits.startswith("84") and len(digits) == 11:   # +84... -> 0...
+        digits = "0" + digits[2:]
+    elif len(digits) == 9 and digits[0] in "35789":      # thiếu số 0 đầu
+        digits = "0" + digits
+    # Đầu số di động VN hợp lệ: 03, 05, 07, 08, 09 + đủ 10 số
+    if re.fullmatch(r"0[35789]\d{8}", digits):
+        return digits
+    return None
 
 
 def notify_new_lead(lead):
@@ -290,9 +307,13 @@ def contact():
 
 @app.route("/lead", methods=["POST"])
 def submit_lead():
-    phone = (request.form.get("phone") or "").strip()
+    is_magnet = bool(request.form.get("magnet"))
+    phone = normalize_phone(request.form.get("phone"))
     if not phone:
-        flash("Bà chủ vui lòng để lại số điện thoại/Zalo để Homie liên hệ nhé.", "warning")
+        flash("Số điện thoại chưa đúng. Bạn nhập lại số di động (VD: 0902 866 717) để Homie gửi sách/liên hệ nhé.", "warning")
+        # Giữ đúng ngữ cảnh: phễu sách quay lại trang sách, còn lại quay về nơi vừa gửi
+        if is_magnet:
+            return redirect(url_for("nhan_sach"))
         return redirect(request.referrer or url_for("index"))
     lead = Lead(
         name=(request.form.get("name") or "").strip(),
@@ -306,7 +327,7 @@ def submit_lead():
     db.session.commit()
     notify_new_lead(lead)      # bắn tin về Telegram chủ (nếu đã bật env)
     # Nếu là phễu "nhận sách": mở khóa quyền đọc sách + đưa sang trang đọc
-    if request.form.get("magnet"):
+    if is_magnet:
         session["book_unlocked"] = True
         flash("Cảm ơn bạn! Sách đã sẵn sàng — Homie cũng sẽ nhắn Zalo tư vấn thêm cho bạn.", "success")
         return redirect(url_for("doc_sach"))
