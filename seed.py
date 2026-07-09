@@ -245,6 +245,123 @@ cho phòng khách phòng ngủ. Vừa bền vừa đẹp vừa hợp ngân sách
 <p>Đó là lý do Homie tồn tại — không phải để làm đẹp nhất, mà để làm <b>đúng nhất</b> cho từng gia đình.</p>
 """,
              featured=True),
+
+        dict(slug="6-phong-cach-noi-that-pho-bien",
+             title="6 phong cách nội thất phổ biến — chọn 'chất' nào cho ngôi nhà của bạn?",
+             category="kien-thuc",
+             cover="tc_duong_01.jpg",
+             excerpt="Hiện đại, Scandinavian, Japandi, Indochine, Wabi Sabi hay Luxury? Mỗi phong cách một cảm giác — đây là cách chọn cho hợp nhà và ngân sách.",
+             body="""
+<p>Nhiều nhà hỏi Homie "nên làm phong cách gì?". Câu trả lời đúng không bắt đầu từ tên phong cách, mà từ
+<b>cảm giác</b> bạn muốn có: thư thái, ấm cúng, hay sang trọng? Dưới đây là 6 hướng khách hay chọn nhất.</p>
+<h3>1. Hiện đại / Minimalist</h3>
+<p>Màu trung tính, khối thanh thoát, nhiều khoảng trống. Bán chạy nhất vì hợp mọi diện tích và tiết kiệm.</p>
+<h3>2. Scandinavian (Bắc Âu)</h3>
+<p>Gỗ sáng + trắng + xanh nhạt, tận dụng ánh sáng tự nhiên. Rất hợp nhà có trẻ nhỏ, chung cư.</p>
+<h3>3. Japandi (Nhật × Bắc Âu)</h3>
+<p>Gỗ sáng chủ đạo, sofa và bàn thấp, luôn ngăn nắp, cây xanh điểm xuyết. Tĩnh mà vẫn ấm.</p>
+<h3>4. Indochine (Đông Dương)</h3>
+<p>Hoài cổ sang trọng: gỗ nâu trầm + gạch bông + mây tre, hoa văn tinh tế đậm chất Việt.</p>
+<h3>5. Wabi Sabi</h3>
+<p>Vẻ đẹp mộc của chất liệu — bình dị, không hoàn hảo, tông trầm tự nhiên, ít decor.</p>
+<h3>6. Luxury / Sang trọng</h3>
+<p>Gỗ tối óc chó, đá vân, ánh sáng nhiều lớp, phụ kiện cao cấp. Đẳng cấp có chiều sâu.</p>
+<p><b>Mẹo của Homie:</b> đừng gửi thợ "thuật ngữ" — hãy gửi <b>3 ảnh</b> bạn thích. Nhìn ảnh, Homie
+tư vấn phong cách hợp nhà, hợp túi tiền và dựng 3D để bạn "thấy trước khi làm".</p>
+""",
+             featured=True),
+
+        dict(slug="kich-thuoc-chuan-noi-that",
+             title="Kích thước chuẩn tủ bếp, tủ áo, giường... (cheat-sheet nên lưu)",
+             category="kien-thuc",
+             cover="bep_01.jpg",
+             excerpt="Sai vài centimet là mỏi lưng khi nấu, đập đầu vào tủ trên, hay tủ áo treo đồ không vừa. Đây là các con số chuẩn Homie dùng để tư vấn.",
+             body="""
+<p>Nội thất đẹp mà dùng không thoải mái thì phí. Đây là những kích thước chuẩn (đơn vị cm) Homie dùng
+khi thiết kế — bạn có thể lưu lại để đối chiếu.</p>
+<h3>Bếp</h3>
+<ul>
+<li>Tủ bếp dưới cao <b>80–90</b> — khu rửa nâng cao hơn khu nấu 5–10 để đỡ mỏi lưng.</li>
+<li>Mẹo "vừa người": lấy <b>(chiều cao người ÷ 2) + 5–10</b>. Người 1m60 → mặt bàn ~85–95.</li>
+<li>Tủ bếp trên sâu <b>30–35</b> (đừng làm quá 40 — xấu và dễ đập đầu).</li>
+<li>Hở từ mặt bàn lên tủ trên <b>70–75</b>. Tam giác bếp (rửa–sơ chế–nấu) bán kính <b>dưới 360</b>.</li>
+</ul>
+<h3>Tủ áo & phòng ngủ</h3>
+<ul>
+<li>Tủ áo cao <b>200–220</b> (trẻ em 180), sâu <b>60</b>; chân tủ 10 (đừng làm 5 — yếu).</li>
+<li>Treo áo 90 · quần 110 · đầm dài 165 · đầm ngắn 120.</li>
+<li>Giường mặt nệm cao <b>45–50</b>, lối đi quanh giường tối thiểu <b>60</b>.</li>
+</ul>
+<h3>Khách & ăn</h3>
+<ul>
+<li>Sofa sâu ngồi 55–60, bàn trà cách sofa 35–45.</li>
+<li>Bàn ăn mỗi người rộng 60 × sâu 40 → bàn 4 người ~1m2–1m4.</li>
+</ul>
+<p><b>Điều Homie luôn hỏi mà nơi khác quên:</b> chiều cao người dùng chính, để chỉnh tủ bếp/bàn ±5–10cm cho vừa người.</p>
+""",
+             featured=False),
+
+        dict(slug="anh-sang-3-lop-cho-ngoi-nha",
+             title="Ánh sáng 3 lớp: bí quyết để nhà ấm cúng như khách sạn, không 'sáng trưng như bệnh viện'",
+             category="kien-thuc",
+             cover="tc_anh-tam_01.jpg",
+             excerpt="Cùng một căn phòng, ánh sáng quyết định cảm xúc. Đừng đổ toàn đèn downlight trắng — hãy chia 3 lớp.",
+             body="""
+<p>Nhiều nhà đẹp trên bản vẽ nhưng ở vào thấy "lạnh" — thủ phạm thường là ánh sáng. Homie luôn chia 3 lớp:</p>
+<ol>
+<li><b>Ánh sáng chung (ambient):</b> phủ đều cả phòng. Đừng đổ toàn downlight chiếu thẳng — ngồi sofa bị rọi vào mặt, gắt và mất cảm xúc.</li>
+<li><b>Ánh sáng tác vụ (task):</b> đèn LED dưới tủ bếp trên (đèn trần hay đổ bóng xuống mặt bàn), đèn gương, đèn đọc sách. Chi tiết nhỏ này khách rất thích.</li>
+<li><b>Ánh sáng điểm nhấn (accent):</b> hắt trần, hắt kệ, rọi tranh — tạo chiều sâu cho không gian.</li>
+</ol>
+<h3>Chọn nhiệt màu (K) cho đúng</h3>
+<p>Phòng khách/bếp nên <b>3000–4000K</b> (vàng ấm/trung tính) cho ấm cúng. Chỉ WC, tủ áo, bàn làm việc mới dùng
+trắng 4000–5000K. Tránh trắng lạnh 6500K cho phòng sinh hoạt — nhìn như bệnh viện.</p>
+<p>Cao cấp hơn thì lắp <b>dimmer</b> để chỉnh độ sáng theo giờ: tối ăn cơm sáng vừa, xem TV giảm còn ~60%, khuya dịu xuống để dễ ngủ.</p>
+""",
+             featured=False),
+
+        dict(slug="5-hang-muc-nen-dau-tu",
+             title="5 hạng mục nên đầu tư mạnh tay khi làm nhà (vì rất khó sửa về sau)",
+             category="kinh-nghiem",
+             cover="tc_kiem-anh_01.jpg",
+             excerpt="Ngân sách có hạn thì phải biết dồn tiền vào đâu. Đây là 5 chỗ 'tiền nào của nấy' — làm ẩu là ám ảnh nhiều năm.",
+             body="""
+<p>Không phải chỗ nào cũng cần đắt. Nhưng có 5 hạng mục <b>khó sửa về sau</b> nên đáng đầu tư ngay từ đầu:</p>
+<ol>
+<li><b>Sàn nhà (và nệm):</b> tiếp xúc hằng ngày, làm lại rất phiền và tốn.</li>
+<li><b>Phòng tắm:</b> chống thấm, độ dốc thoát nước, chống trơn — phụ thuộc tay nghề thợ, hỏng là đục ra làm lại.</li>
+<li><b>Hệ chiếu sáng:</b> đèn âm trần đã đi dây rồi rất khó đổi vị trí.</li>
+<li><b>Bếp:</b> mặt đá, bản lề/ray thương hiệu (Blum/Hafele), bồn–vòi–hút mùi — dùng mỗi ngày, rẻ là nhanh hỏng.</li>
+<li><b>Sơn hoàn thiện:</b> nền thẩm mỹ của cả nhà.</li>
+</ol>
+<p>Ngược lại, đồ trang trí, rèm, decor... có thể mua dần. <b>Nguyên tắc Homie tư vấn:</b> dồn tiền vào nơi khó sửa,
+tiết kiệm ở nơi dễ thay. Và ưu tiên vật liệu <b>chỉ số VOC thấp</b> (sơn/keo có chứng chỉ xanh) cho nhà có trẻ nhỏ.</p>
+""",
+             featured=False),
+
+        dict(slug="thi-cong-tron-goi-va-boq",
+             title="Thi công trọn gói: hiểu đúng để không bị 'phát sinh' giữa chừng",
+             category="kinh-nghiem",
+             cover="tc_chii-nga_01.jpg",
+             excerpt="Trọn gói giống 'gói snack' — chỉ gồm đúng những gì ghi trong hợp đồng và BOQ. Hiểu điều này, bạn sẽ không bao giờ bị bất ngờ về tiền.",
+             body="""
+<p>"Trọn gói" là từ khách rất thích, nhưng cũng dễ hiểu lầm. Homie muốn bạn hiểu đúng để yên tâm:</p>
+<h3>Trọn gói = đúng hạng mục trong hợp đồng + BOQ</h3>
+<p>BOQ là bảng bốc tách khối lượng chi tiết từng món. Trọn gói gồm <b>đúng những gì đã ký trong BOQ</b> —
+ngoài đó là phát sinh. Phát sinh chủ yếu do khách đổi vật liệu hoặc thêm chi tiết giữa chừng, và khi đó hai bên
+<b>ký phụ lục hợp đồng</b> rõ ràng, không cãi nhau về sau.</p>
+<h3>Giá trị thật của trọn gói</h3>
+<ul>
+<li>Đồng bộ — bản vẽ 3D ra đúng thực tế.</li>
+<li>Một đầu mối chịu trách nhiệm — có chuyện gọi một người.</li>
+<li>Giải phóng thời gian và năng lượng cho gia chủ.</li>
+</ul>
+<h3>Cách tự bảo vệ mình khi chọn đơn vị</h3>
+<p>Rủi ro lớn nhất là chọn sai nhà thầu (cắt xén vật tư, kéo tiến độ). Ba việc giúp bạn an tâm:
+<b>(1)</b> xem công trình thật đã làm, <b>(2)</b> yêu cầu BOQ chi tiết, <b>(3)</b> đọc kỹ hợp đồng ngay từ đầu.
+Đây cũng chính là cách Homie làm việc — minh bạch từ đầu để bạn không phải lo.</p>
+""",
+             featured=False),
     ]
 
     for a in articles:

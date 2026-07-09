@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Phong cách nội thất · {{ SITE.ten }}{% endblock %}
+{% block desc %}6 phong cách nội thất phổ biến Homie tư vấn — hiện đại, Scandinavian, Japandi, Indochine, Wabi Sabi, Luxury — kèm bảng màu gợi ý.{% endblock %}
+{% block content %}
+
+<section class="py-5 bg-cream">
+  <div class="container">
+    <div class="eyebrow">Chọn "chất" cho ngôi nhà</div>
+    <h1 class="section-title mb-2">Phong cách nội thất — bạn muốn nhà mình "cảm thấy" thế nào?</h1>
+    <p class="text-muted mb-0" style="max-width:760px">
+      Ở Homie, chúng tôi không hỏi phong cách trước. Chúng tôi hỏi: <b>"Anh/chị muốn cảm thấy gì khi ở trong không gian này?"</b>
+      — thư thái, ấm cúng, hay sang trọng — rồi mới cùng bạn gọi tên phong cách. Dưới đây là 6 hướng khách hay chọn nhất.
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      {% for s in STYLES %}
+      <div class="col-md-6 col-lg-4">
+        <div class="why-card h-100">
+          <div class="why-ic">{{ s.icon }}</div>
+          <h3 class="h5 fw-bold mt-2 mb-1">{{ s.ten }}</h3>
+          <p class="text-muted mb-2">{{ s.mo_ta }}</p>
+          <div class="small"><span class="chip mat">Bảng màu: {{ s.mau }}</span></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="mid-banner py-5 mt-5 rounded" style="background:linear-gradient(120deg,var(--wood-dark) 0%,var(--wood) 100%);">
+      <div class="container text-center text-white">
+        <h3 class="fw-bold mb-2">Chưa biết chọn phong cách nào?</h3>
+        <p class="mb-4 opacity-90">Gửi Homie 3 ảnh bạn thích — chúng tôi tư vấn phong cách hợp nhà, hợp ngân sách và dựng 3D miễn phí.</p>
+        <a href="#lien-he-form" class="btn btn-light btn-lg px-5 fw-bold" style="color:var(--wood-dark)">Nhận tư vấn phong cách →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

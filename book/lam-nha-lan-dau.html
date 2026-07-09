@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Làm Nhà Lần Đầu – Thắng Nội Thất</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#f9c74f;--gold2:#f8961e;--dark:#0d1218;--navy:#0f1f3d;
+  --cream:#faf6f0;--paper:#fff8f0;
+}
+body{
+  background:radial-gradient(ellipse at 30% 40%,#1a2744 0%,#0d1218 60%,#050a10 100%);
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;font-family:'Georgia','Times New Roman',serif;
+  overflow:hidden;user-select:none;
+}
+/* ── BOOK ── */
+.scene{position:relative;width:1000px;height:650px;perspective:2800px}
+.book{width:1000px;height:650px;position:relative;transform-style:preserve-3d;
+  filter:drop-shadow(0 50px 80px rgba(0,0,0,.8)) drop-shadow(0 0 40px rgba(249,199,79,.08))}
+.page{position:absolute;top:0;width:500px;height:650px;overflow:hidden;background:var(--cream)}
+.page.left{left:0;border-radius:6px 0 0 6px;
+  box-shadow:inset -8px 0 20px rgba(0,0,0,.12),inset -1px 0 3px rgba(0,0,0,.08)}
+.page.right{left:500px;border-radius:0 6px 6px 0;
+  box-shadow:inset 8px 0 20px rgba(0,0,0,.12),inset 1px 0 3px rgba(0,0,0,.08)}
+/* spine shadow layers */
+.spine{position:absolute;left:493px;top:0;width:14px;height:650px;z-index:15;
+  background:linear-gradient(to right,rgba(0,0,0,.35) 0%,rgba(30,40,80,.9) 30%,rgba(20,30,70,.95) 50%,rgba(30,40,80,.9) 70%,rgba(0,0,0,.35) 100%)}
+/* ── FLIP ── */
+.flip{position:absolute;top:0;width:500px;height:650px;transform-style:preserve-3d;z-index:20;pointer-events:none}
+.flip.going-next{left:500px;transform-origin:left center}
+.flip.going-prev{left:0;transform-origin:right center}
+.flip-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;overflow:hidden;background:var(--cream)}
+.flip-front{border-radius:0 6px 6px 0;box-shadow:inset 8px 0 20px rgba(0,0,0,.12)}
+.flip-back{transform:rotateY(180deg);border-radius:6px 0 0 6px;box-shadow:inset -8px 0 20px rgba(0,0,0,.12)}
+.flip.going-prev .flip-front{border-radius:6px 0 0 6px}
+.flip.going-prev .flip-back{border-radius:0 6px 6px 0}
+/* page curl shadow during flip */
+.flip.animating{filter:drop-shadow(-12px 0 20px rgba(0,0,0,.4))}
+/* ── CONTROLS ── */
+.controls{display:flex;align-items:center;gap:24px;margin-top:20px}
+.btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;
+  width:52px;height:52px;border-radius:50%;font-size:20px;cursor:pointer;
+  transition:all .25s;display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(12px);position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(249,199,79,.3),transparent 70%);opacity:0;transition:opacity .2s}
+.btn:hover::before{opacity:1}
+.btn:hover{border-color:rgba(249,199,79,.5);transform:scale(1.1);color:var(--gold)}
+.btn:disabled{opacity:.25;cursor:default;transform:none}
+.btn:disabled::before{display:none}
+.info-wrap{text-align:center}
+.progress-bar{width:220px;height:3px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden;margin-bottom:6px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.page-info{color:rgba(255,255,255,.55);font-size:12px;letter-spacing:2px}
+/* ── SOUND BTN ── */
+.sound-btn{position:fixed;top:20px;right:20px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);
+  width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;
+  display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);
+  transition:all .2s;z-index:100}
+.sound-btn:hover{background:rgba(249,199,79,.2);color:var(--gold);border-color:rgba(249,199,79,.4)}
+/* ── PAGE COMMON ── */
+.p-cover{
+  background:linear-gradient(155deg,#0a1628 0%,#162347 35%,#0f1c3a 60%,#070e1c 100%);
+  color:#fff;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:36px 32px;text-align:center;position:relative;overflow:hidden}
+.p-cover::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 30%,rgba(249,199,79,.12) 0%,transparent 65%)}
+.p-cover .series{font-size:10px;letter-spacing:4px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:16px}
+.p-cover .title{font-size:34px;font-weight:bold;line-height:1.15;color:var(--gold);
+  margin-bottom:10px;text-shadow:0 0 40px rgba(249,199,79,.4)}
+.p-cover .subtitle{font-size:14px;color:rgba(255,255,255,.75);margin-bottom:24px;font-style:italic;line-height:1.6}
+.p-cover .divider{width:50px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 20px}
+.p-cover .author-badge{
+  background:rgba(249,199,79,.12);border:1px solid rgba(249,199,79,.3);
+  border-radius:30px;padding:6px 18px;font-size:11px;color:var(--gold);
+  letter-spacing:2px;text-transform:uppercase;margin-top:auto}
+.p-cover .gift{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:2px;
+  text-transform:uppercase;margin-top:12px}
+.p-plain{padding:40px 38px 34px;position:relative;background:var(--cream)}
+.p-plain .page-num{position:absolute;bottom:16px;font-size:10px;color:#c5b89a;letter-spacing:2px}
+.p-plain .page-num.left{left:34px}.p-plain .page-num.right{right:34px}
+.p-plain h1{font-size:20px;color:#1a237e;margin-bottom:14px;line-height:1.3;
+  border-bottom:2px solid rgba(249,199,79,.4);padding-bottom:10px}
+.p-plain h2{font-size:14px;color:#1a237e;margin-bottom:8px;margin-top:16px;font-weight:bold}
+.p-plain p{font-size:12.5px;line-height:1.9;color:#3a3028;margin-bottom:9px}
+.p-plain .quote{
+  border-left:3px solid var(--gold);padding:10px 14px;
+  background:linear-gradient(135deg,rgba(249,199,79,.08),rgba(249,199,79,.02));
+  margin:12px 0;border-radius:0 6px 6px 0;
+  font-style:italic;font-size:12.5px;color:#4a3c28;line-height:1.75}
+.p-plain ul{padding-left:16px;margin-bottom:8px}
+.p-plain ul li{font-size:12px;line-height:1.85;color:#3a3028;margin-bottom:3px}
+.p-plain ol{padding-left:18px;margin-bottom:8px}
+.p-plain ol li{font-size:12px;line-height:1.85;color:#3a3028;margin-bottom:4px}
+/* Chapter opener */
+.p-chapter{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:38px 34px;text-align:center;position:relative;overflow:hidden}
+.p-chapter .ch-bg{position:absolute;inset:0;opacity:.07}
+.p-chapter .ch-num{font-size:120px;font-weight:bold;line-height:1;
+  position:absolute;bottom:-20px;right:-10px;color:rgba(255,255,255,.06)}
+.p-chapter .ch-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:10px;opacity:.6;color:#fff}
+.p-chapter .ch-title{font-size:24px;font-weight:bold;color:#fff;line-height:1.3;margin-bottom:12px}
+.p-chapter .ch-desc{font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.75;max-width:340px}
+.p-chapter svg{margin-bottom:18px}
+/* Info boxes */
+.hbox{background:linear-gradient(135deg,rgba(26,35,126,.07),rgba(26,35,126,.02));
+  border:1px solid rgba(26,35,126,.18);border-radius:8px;padding:12px 14px;margin:10px 0}
+.hbox .ht{font-size:11px;font-weight:bold;color:#1a237e;margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:.5px}
+.hbox p,.hbox li{font-size:12px;color:#3a3028;line-height:1.75}
+.wbox{background:rgba(183,28,28,.04);border:1px solid rgba(183,28,28,.18);
+  border-radius:8px;padding:11px 14px;margin:10px 0}
+.wbox .wt{font-size:11px;font-weight:bold;color:#b71c1c;margin-bottom:5px}
+.wbox p,.wbox li{font-size:12px;color:#3a3028;line-height:1.75}
+.sbox{background:rgba(27,94,32,.04);border:1px solid rgba(27,94,32,.18);
+  border-radius:8px;padding:11px 14px;margin:10px 0}
+.sbox .st{font-size:11px;font-weight:bold;color:#1b5e20;margin-bottom:5px}
+.sbox p,.sbox li{font-size:12px;color:#3a3028;line-height:1.75}
+/* Tables */
+.bt{width:100%;border-collapse:collapse;margin:8px 0;font-size:11.5px}
+.bt th{background:#1a237e;color:#fff;padding:6px 9px;text-align:left;font-weight:600}
+.bt td{padding:5px 9px;border-bottom:1px solid #e8dfd0;color:#3a3028}
+.bt tr:nth-child(even) td{background:rgba(249,199,79,.06)}
+/* Timeline */
+.tl-item{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.tl-dot{width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:bold;color:#fff;margin-top:1px}
+.tl-content h4{font-size:12.5px;color:#1a237e;margin-bottom:2px;font-weight:bold}
+.tl-content p{font-size:11.5px;color:#555;line-height:1.65}
+/* Checklist */
+.cl-item{display:flex;gap:9px;margin-bottom:7px;align-items:flex-start}
+.cl-box{width:15px;height:15px;border:2px solid #1a237e;border-radius:3px;flex-shrink:0;margin-top:2px}
+.cl-text{font-size:11.5px;color:#3a3028;line-height:1.65}
+/* Error list */
+.err-item{margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid rgba(183,28,28,.12)}
+.err-item:last-child{border-bottom:none}
+.err-num{display:inline-flex;align-items:center;justify-content:center;
+  background:#b71c1c;color:#fff;width:20px;height:20px;border-radius:50%;
+  font-size:10px;font-weight:bold;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.err-title{font-size:12.5px;font-weight:bold;color:#b71c1c}
+.err-body{font-size:11.5px;color:#555;margin-top:2px;line-height:1.6}
+.err-fix{font-size:11.5px;color:#2e7d32;margin-top:2px;line-height:1.6}
+.err-fix::before{content:"✓ "}
+/* TOC */
+.toc-item{display:flex;gap:8px;margin-bottom:9px;align-items:flex-start}
+.toc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.toc-num{font-size:9px;color:#aaa;font-weight:bold;letter-spacing:1px;margin-bottom:1px}
+.toc-title{font-size:12.5px;color:#3a3028;font-weight:bold}
+.toc-sub{font-size:11px;color:#888;line-height:1.5}
+/* CTA Page */
+.p-cta{
+  background:linear-gradient(155deg,#0a1628 0%,#162347 40%,#0f1c3a 100%);
+  color:#fff;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:36px 32px;text-align:center;position:relative;overflow:hidden}
+.p-cta::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 60%,rgba(249,199,79,.1) 0%,transparent 65%)}
+.cta-logo{width:70px;height:70px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:bold;color:#0a1628;margin-bottom:16px;
+  box-shadow:0 0 30px rgba(249,199,79,.4)}
+.cta-name{font-size:22px;font-weight:bold;color:var(--gold);margin-bottom:6px}
+.cta-tagline{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:20px;font-style:italic}
+.cta-box{
+  background:rgba(255,255,255,.07);border:1px solid rgba(249,199,79,.25);
+  border-radius:12px;padding:16px 20px;margin-bottom:16px;width:100%;text-align:left}
+.cta-box h4{font-size:12px;color:var(--gold);font-weight:bold;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:1px}
+.cta-box p{font-size:12px;color:rgba(255,255,255,.75);line-height:1.7}
+.cta-contact{display:flex;flex-direction:column;gap:6px;width:100%}
+.cta-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.8)}
+.cta-item span:first-child{font-size:16px}
+/* Responsive */
+@media(max-width:1060px){
+  .scene,.book{width:800px;height:520px}
+  .page,.flip{width:400px;height:520px}
+  .page.right,.flip.going-next{left:400px}
+  .spine{left:393px}
+}
+@media(max-width:840px){
+  .scene,.book{width:380px;height:580px}
+  .page{width:380px;height:580px}
+  .page.left{display:none}
+  .page.right{left:0;border-radius:6px}
+  .flip,.spine{display:none}
+  .p-chapter .ch-num{font-size:80px}
+}
+</style>
+</head>
+<body>
+
+<button class="sound-btn" id="soundBtn" title="Bật/tắt âm thanh" onclick="toggleSound()">🔊</button>
+
+<div class="scene">
+  <div class="book">
+    <div class="page left" id="leftPage"></div>
+    <div class="page right" id="rightPage"></div>
+    <div class="spine"></div>
+    <div class="flip" id="flipEl" style="display:none">
+      <div class="flip-face flip-front" id="flipFront"></div>
+      <div class="flip-face flip-back" id="flipBack"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn" id="prevBtn" onclick="goPage(-1)">&#9664;</button>
+  <div class="info-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
+    <div class="page-info" id="pInfo"></div>
+  </div>
+  <button class="btn" id="nextBtn" onclick="goPage(1)">&#9654;</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  SOUND ENGINE  (Web Audio API — no files needed)
+// ═══════════════════════════════════════════════
+var audioCtx = null;
+var soundOn  = true;
+
+function getAudioCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function toggleSound(){
+  soundOn = !soundOn;
+  document.getElementById('soundBtn').textContent = soundOn ? '🔊' : '🔇';
+}
+
+function playFlipSound(dir){
+  if(!soundOn) return;
+  try{
+    var ctx = getAudioCtx();
+    var t   = ctx.currentTime;
+    var dur = 0.22;
+
+    // ── White noise buffer ──
+    var bufLen = ctx.sampleRate * dur;
+    var buf    = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+    var data   = buf.getChannelData(0);
+    for(var i=0; i<bufLen; i++) data[i] = (Math.random()*2-1);
+
+    var src  = ctx.createBufferSource();
+    src.buffer = buf;
+
+    // Bandpass filter – papery swish
+    var bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.frequency.value = dir>0 ? 2800 : 2400;
+    bp.Q.value = 0.6;
+
+    // High-shelf boost for crisp edge
+    var hs = ctx.createBiquadFilter();
+    hs.type = 'highshelf';
+    hs.frequency.value = 6000;
+    hs.gain.value = 8;
+
+    // Low cut
+    var lc = ctx.createBiquadFilter();
+    lc.type = 'highpass';
+    lc.frequency.value = 400;
+
+    // Gain envelope: quick attack, gentle tail
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.38, t + 0.018);
+    gain.gain.setValueAtTime(0.38, t + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+
+    // Second mini-click at end (page landing)
+    var click = ctx.createOscillator();
+    click.type = 'sine';
+    click.frequency.value = 180;
+    var cGain = ctx.createGain();
+    cGain.gain.setValueAtTime(0, t + dur * 0.75);
+    cGain.gain.linearRampToValueAtTime(0.15, t + dur * 0.78);
+    cGain.gain.exponentialRampToValueAtTime(0.001, t + dur + 0.04);
+    click.connect(cGain);
+    cGain.connect(ctx.destination);
+    click.start(t + dur * 0.75);
+    click.stop(t + dur + 0.05);
+
+    src.connect(lc); lc.connect(bp); bp.connect(hs); hs.connect(gain);
+    gain.connect(ctx.destination);
+    src.start(t); src.stop(t + dur);
+  } catch(e){}
+}
+
+// ═══════════════════════════════════════════════
+//  PAGE CONTENT
+// ═══════════════════════════════════════════════
+var pages = [
+
+// ── 0 COVER ──
+`<div class="p-cover" style="height:100%">
+  <div class="series">Cẩm Nang Thực Chiến</div>
+  <svg width="100" height="100" viewBox="0 0 100 100" style="margin-bottom:16px">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#f9c74f"/>
+        <stop offset="100%" stop-color="#f8961e"/>
+      </linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <polygon points="50,6 92,38 92,94 8,94 8,38" fill="rgba(249,199,79,.08)" stroke="url(#g1)" stroke-width="2" filter="url(#glow)"/>
+    <polygon points="50,6 8,38 92,38" fill="rgba(249,199,79,.12)" stroke="url(#g1)" stroke-width="2"/>
+    <rect x="33" y="56" width="34" height="38" fill="rgba(249,199,79,.18)" stroke="url(#g1)" stroke-width="1.5" rx="1"/>
+    <rect x="20" y="48" width="16" height="16" fill="rgba(255,255,255,.06)" stroke="rgba(249,199,79,.5)" stroke-width="1.5"/>
+    <rect x="64" y="48" width="16" height="16" fill="rgba(255,255,255,.06)" stroke="rgba(249,199,79,.5)" stroke-width="1.5"/>
+    <rect x="43" y="68" width="14" height="26" fill="rgba(249,199,79,.3)" stroke="url(#g1)" stroke-width="1.5"/>
+    <circle cx="50" cy="50" r="3" fill="url(#g1)" opacity=".6"/>
+  </svg>
+  <div class="title">LÀM NHÀ<br>LẦN ĐẦU</div>
+  <div class="subtitle">"Không ai nói với bạn<br>những điều này..."</div>
+  <div class="divider"></div>
+  <p style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.75;max-width:300px">
+    Từ ngân sách thật, nhà thầu thật, đến những đêm thức trắng lo lắng —
+    cuốn sách này viết cho bạn, người sắp bước vào hành trình đổi đời đẹp nhất.
+  </p>
+  <div class="author-badge" style="margin-top:16px">✦ Thắng Nội Thất ✦</div>
+  <div class="gift">🎁 Quà tặng miễn phí · Chia sẻ tự do</div>
+</div>`,
+
+// ── 1 LỜI TÂM SỰ ──
+`<div class="p-plain" style="background:linear-gradient(180deg,#fffef8,var(--cream))">
+  <h1>Lời Tâm Sự Của Tác Giả</h1>
+  <div class="quote">
+    "Có những điều, chỉ khi đã làm nhà rồi — bạn mới biết mình ước gì được biết trước."
+  </div>
+  <p>Tôi đã ngồi với hàng trăm gia đình trong suốt những năm làm nội thất.
+  Có người vui — nhưng nhiều người đến gặp tôi trong trạng thái mệt mỏi,
+  tiền đã vơi, mà nhà vẫn chưa xong.</p>
+  <p>Họ không sai. Họ chỉ <strong>không được chuẩn bị</strong>.</p>
+  <p>Không ai nói với họ rằng ngân sách luôn thiếu hụt. Không ai cảnh báo về
+  những nhà thầu "biến mất". Không ai dạy cách làm việc với kiến trúc sư để
+  tránh thiết kế đẹp trên giấy nhưng bất tiện khi ở thật.</p>
+  <p>Cuốn sách này là tất cả những điều tôi muốn nói với mỗi gia đình —
+  <em>trước khi họ bắt đầu</em>. Không phải lý thuyết. Không phải quảng cáo.
+  Chỉ là sự thật, từ góc nhìn của người đã đồng hành cùng hàng trăm ngôi nhà.</p>
+  <div class="sbox">
+    <div class="st">💛 Tôi muốn bạn có một ngôi nhà không chỉ đẹp trên mạng —<br>
+    mà đẹp trong từng buổi sáng bạn thức dậy.</div>
+  </div>
+  <p style="font-size:11.5px;color:#888;margin-top:10px;font-style:italic">
+    — Thắng Nội Thất
+  </p>
+  <span class="page-num left">1</span>
+</div>`,
+
+// ── 2 MỤC LỤC ──
+`<div class="p-plain">
+  <h1>Trong Cuốn Sách Này</h1>
+  <div style="margin-top:12px">
+    <div class="toc-item"><div class="toc-dot" style="background:#e65100;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 1</div>
+      <div class="toc-title">Tâm Lý — Hành Trình Cảm Xúc</div>
+      <div class="toc-sub">Ba giai đoạn không ai kể với bạn trước</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#1b5e20;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 2</div>
+      <div class="toc-title">Ngân Sách — Sự Thật Phũ Phàng</div>
+      <div class="toc-sub">Tại sao luôn thiếu và cách tránh vỡ kế hoạch</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#4a148c;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 3</div>
+      <div class="toc-title">Thiết Kế — Gặp KTS Đúng Cách</div>
+      <div class="toc-sub">Chuẩn bị gì để không lãng phí thời gian & tiền</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#01579b;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 4</div>
+      <div class="toc-title">Nhà Thầu — Người Bạn Phải Tin</div>
+      <div class="toc-sub">Chọn đúng hay chọn sai — khác nhau cả trăm triệu</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#3e2723;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 5</div>
+      <div class="toc-title">Vật Liệu & Nội Thất — Đừng Vội</div>
+      <div class="toc-sub">Đầu tư đúng chỗ, không mua theo cảm xúc</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#b71c1c;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 6</div>
+      <div class="toc-title">10 Lỗi Kinh Điển — Đừng Để Lại</div>
+      <div class="toc-sub">Những sai lầm ai cũng mắc & cách tránh</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#1a237e;margin-top:4px"></div><div>
+      <div class="toc-num">CHƯƠNG 7</div>
+      <div class="toc-title">Timeline & Checklist Thực Tế</div>
+      <div class="toc-sub">Bao lâu là đủ? Cần làm gì ở từng bước?</div>
+    </div></div>
+    <div class="toc-item"><div class="toc-dot" style="background:#f9a825;margin-top:4px"></div><div>
+      <div class="toc-num">CUỐI SÁCH</div>
+      <div class="toc-title">Nội Thất Đúng Người — Đúng Lúc</div>
+      <div class="toc-sub">Khi nào cần một chuyên gia nội thất bên cạnh?</div>
+    </div></div>
+  </div>
+  <span class="page-num right">2</span>
+</div>`,
+
+// ── 3 CH1 OPENER ──
+`<div class="p-chapter" style="background:linear-gradient(145deg,#b83000,#e65100,#bf360c)">
+  <div class="ch-num">1</div>
+  <svg width="72" height="72" viewBox="0 0 72 72">
+    <circle cx="36" cy="28" r="18" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+    <path d="M26,20 Q36,10 46,20 Q52,29 36,35 Q20,29 26,20Z" fill="rgba(255,255,255,.2)" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/>
+    <path d="M30,39 L30,58 M42,39 L42,58" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+    <path d="M24,50 L48,50" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+    <circle cx="36" cy="30" r="4" fill="rgba(255,255,255,.85)"/>
+    <circle cx="27" cy="62" r="3" fill="rgba(249,199,79,.7)"/>
+    <circle cx="36" cy="62" r="3" fill="rgba(249,199,79,.5)"/>
+    <circle cx="45" cy="62" r="3" fill="rgba(249,199,79,.3)"/>
+  </svg>
+  <div class="ch-label">Chương Một</div>
+  <div class="ch-title">Tâm Lý —<br>Hành Trình Cảm Xúc</div>
+  <div class="ch-desc">Làm nhà không chỉ là dự án xây dựng. Đó là một trong những hành trình cảm xúc lớn nhất cuộc đời — cùng gia đình, cùng những người bạn yêu thương nhất.</div>
+</div>`,
+
+// ── 4 CH1 CONTENT ──
+`<div class="p-plain">
+  <h1 style="color:#bf360c">Ba Giai Đoạn Không Ai Nói Trước</h1>
+  <p style="font-size:12px;color:#666;margin-bottom:12px;font-style:italic">
+    Mọi gia đình làm nhà đều trải qua — chỉ khác là có biết trước hay không.
+  </p>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#f9c74f;color:#333">✦</div>
+    <div class="tl-content">
+      <h4>🌟 Giai Đoạn Hưng Phấn (Tháng 1–2)</h4>
+      <p>Mọi thứ có vẻ đơn giản và đẹp đẽ. Bạn lướt Pinterest đến 2 giờ sáng, lập bảng tính phân bổ ngân sách "hoàn hảo", tưởng tượng những buổi sáng cà phê trong ngôi nhà mới. Đây là giai đoạn nguy hiểm nhất — <strong>vì bạn chưa biết mình chưa biết gì</strong>.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#e65100">⚡</div>
+    <div class="tl-content">
+      <h4>😰 Giai Đoạn Bão Táp (Tháng 3–8)</h4>
+      <p>Chi phí thực tế vượt dự tính. Tiến độ chậm không có lý do rõ ràng. Bạn và người thân bất đồng về những thứ tưởng chừng nhỏ — màu gạch, kiểu cửa, loại đèn. Đây là lúc nhiều cặp đôi cãi nhau nhiều nhất trong đời. Biết trước điều này — sẽ bớt đau rất nhiều.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#2e7d32">🏡</div>
+    <div class="tl-content">
+      <h4>✨ Giai Đoạn Vượt Qua (Tháng 9+)</h4>
+      <p>Bạn buông bỏ dần sự hoàn hảo. Tập trung vào điều quan trọng. Và ngày cầm chìa khóa lần đầu — tim bạn sẽ đập theo cách không thể nào quên.</p>
+    </div>
+  </div>
+  <div class="quote" style="border-color:#e65100">
+    "Làm nhà không cần phải không có vấn đề — chỉ cần bạn vẫn yêu nhau khi dọn vào."
+  </div>
+  <span class="page-num left">3</span>
+</div>`,
+
+// ── 5 CH1 CONTENT 2 ──
+`<div class="p-plain">
+  <h2 style="color:#bf360c;margin-top:0">Những Điều Không Ai Kể Với Bạn</h2>
+  <div class="wbox">
+    <div class="wt">⚠️ 5 Nguồn Xung Đột Thường Gặp Nhất</div>
+    <ol style="padding-left:16px">
+      <li><strong>"Sao anh/em tự ý quyết mà không hỏi?"</strong> — thiếu quy trình ra quyết định chung</li>
+      <li><strong>Ngân sách bí mật</strong> — một người giữ tiền, một người không biết thực tế</li>
+      <li><strong>Kỳ vọng khác nhau về "chất lượng"</strong> — gỗ thật vs gỗ công nghiệp, cửa nhôm vs nhôm kính...</li>
+      <li><strong>Áp lực từ gia đình hai bên</strong> — bố mẹ có ý kiến, mà ý kiến đó lại mâu thuẫn</li>
+      <li><strong>Mệt mỏi kéo dài</strong> — khi dự án kéo dài hơn dự kiến, mọi người đều cạn kiệt</li>
+    </ol>
+  </div>
+  <div class="sbox">
+    <div class="st">✅ Bí Quyết Bảo Vệ Mối Quan Hệ</div>
+    <ul style="padding-left:14px">
+      <li><strong>Phân chia rõ ai quyết định gì</strong> — kỹ thuật, thẩm mỹ, tài chính — trước khi bắt đầu</li>
+      <li><strong>Họp gia đình 30 phút/tuần</strong> — review tiến độ, không để vấn đề tích tụ</li>
+      <li><strong>Đặt "quỹ cá nhân" nhỏ</strong> — mỗi người tự quyết 1 hạng mục không cần hỏi ai</li>
+    </ul>
+  </div>
+  <p style="font-size:12px;color:#666;font-style:italic;margin-top:10px">
+    💛 Nhiều cặp đôi nói với tôi: "Làm nhà là thử thách lớn nhất — nhưng cũng là thứ gắn bó chúng tôi nhất." Đó là sự thật.
+  </p>
+  <span class="page-num right">4</span>
+</div>`,
+
+// ── 6 CH2 OPENER ──
+`<div class="p-chapter" style="background:linear-gradient(145deg,#1b4820,#2e7d32,#1b5e20)">
+  <div class="ch-num">2</div>
+  <svg width="72" height="72" viewBox="0 0 72 72">
+    <circle cx="36" cy="36" r="26" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+    <text x="36" y="45" text-anchor="middle" fill="rgba(255,255,255,.9)" font-size="28" font-weight="bold">₫</text>
+    <path d="M50,14 Q58,22 56,32" fill="none" stroke="rgba(249,199,79,.6)" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <path d="M22,54 Q14,46 16,36" fill="none" stroke="rgba(249,199,79,.4)" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <circle cx="56" cy="12" r="5" fill="#f9c74f" opacity=".8"/>
+    <circle cx="16" cy="58" r="4" fill="#f9c74f" opacity=".4"/>
+  </svg>
+  <div class="ch-label">Chương Hai</div>
+  <div class="ch-title">Ngân Sách —<br>Sự Thật Phũ Phàng</div>
+  <div class="ch-desc">Không phải bạn tính sai. Mà là không ai dạy bạn tính đúng. Có những khoản tiền ẩn mà chỉ người trong nghề mới biết — và cuốn sách này sẽ nói thẳng.</div>
+</div>`,
+
+// ── 7 CH2 CONTENT ──
+`<div class="p-plain">
+  <h1 style="color:#1b5e20">Tại Sao Luôn Thiếu Tiền Khi Làm Nhà?</h1>
+  <p>Không phải vì bạn không biết tính. Mà vì có những khoản tiền
+  <strong>không ai liệt kê trong báo giá ban đầu</strong>.</p>
+  <div class="hbox" style="background:rgba(27,94,32,.07);border-color:rgba(27,94,32,.2)">
+    <div class="ht" style="color:#1b5e20">📐 Quy Tắc Vàng Mà Tôi Luôn Nói Với Mọi Khách</div>
+    <p style="font-size:14px;font-weight:bold;color:#1b5e20;text-align:center;margin:8px 0">
+      Ngân sách thực = Dự tính × 1.3
+    </p>
+    <p>Dự tính 800 triệu → Chuẩn bị <strong>1.04 tỷ</strong><br>
+    Dự tính 1.5 tỷ → Chuẩn bị <strong>ít nhất 2 tỷ</strong></p>
+  </div>
+  <h2 style="color:#1b5e20">💰 Những Khoản Tiền Ẩn Không Ai Nói</h2>
+  <ul>
+    <li>🏗️ <strong>Phí thiết kế kiến trúc:</strong> 3–10% tổng ngân sách — thường bị bỏ quên hoàn toàn</li>
+    <li>📋 <strong>Phí cấp phép xây dựng:</strong> Mất 1–3 tháng chờ đợi + phí biến thiên theo địa phương</li>
+    <li>⚡ <strong>Kết nối điện–nước–thoát nước:</strong> 20–80 triệu tùy vị trí, rất hay bị bỏ qua</li>
+    <li>🏘️ <strong>San lấp & gia cố nền:</strong> Nhiều lô đất cần xử lý nền tốn kém không ngờ</li>
+    <li>🔑 <strong>Tiền thuê nhà trong thời gian xây:</strong> 12–18 tháng — hàng chục triệu tích lại</li>
+    <li>🌿 <strong>Sân vườn, cổng, hàng rào:</strong> Gần như không bao giờ nằm trong hợp đồng xây thô</li>
+    <li>💡 <strong>Đèn chiếu sáng, thiết bị vệ sinh, bếp:</strong> Dễ ngốn 80–200 triệu nếu không cẩn thận</li>
+    <li>🛋️ <strong>Nội thất & rèm cửa:</strong> Khoản này luôn bị đánh giá thấp hơn thực tế</li>
+  </ul>
+  <span class="page-num left">5</span>
+</div>`,
+
+// ── 8 CH2 CONTENT 2 ──
+`<div class="p-plain">
+  <h2 style="color:#1b5e20;margin-top:0">Phân Bổ Ngân Sách Đúng Cách</h2>
+  <table class="bt">
+    <tr><th>Hạng mục</th><th>Tỉ lệ khuyến nghị</th><th>Ví dụ (1 tỷ)</th></tr>
+    <tr><td>🏗️ Phần thô (móng, cột, tường, mái)</td><td><strong>40–45%</strong></td><td>400–450tr</td></tr>
+    <tr><td>🪟 Hoàn thiện (sàn, tường, cửa)</td><td><strong>20–25%</strong></td><td>200–250tr</td></tr>
+    <tr><td>⚡ MEP (điện–nước–điều hòa)</td><td><strong>10–12%</strong></td><td>100–120tr</td></tr>
+    <tr><td>🛋️ Nội thất cơ bản</td><td><strong>12–15%</strong></td><td>120–150tr</td></tr>
+    <tr><td>🆘 <strong>Dự phòng bắt buộc</strong></td><td><strong>10%</strong></td><td><strong>100tr</strong></td></tr>
+  </table>
+  <div class="wbox" style="margin-top:10px">
+    <div class="wt">🚫 Lỗi Ngân Sách Gặp Nhiều Nhất</div>
+    <ul style="padding-left:14px">
+      <li>Không có quỹ dự phòng → phát sinh một chút là vay nóng, mất kiểm soát</li>
+      <li>Ngân sách nội thất quá thấp → phải cắt giảm ở bước cuối, nhà xây xong mà không ở được</li>
+      <li>Dùng quỹ dự phòng để "nâng cấp thêm" giữa chừng → không còn gì khi thực sự cần</li>
+    </ul>
+  </div>
+  <div class="quote" style="border-color:#1b5e20">
+    "10% dự phòng không phải để tiêu — đó là bảo hiểm tâm lý. Nếu cuối cùng dùng không hết, đó là tiền thưởng cho bạn vì đã kỷ luật."
+  </div>
+  <span class="page-num right">6</span>
+</div>`,
+
+// ── 9 CH3 OPENER ──
+`<div class="p-chapter" style="background:linear-gradient(145deg,#380e7f,#6a1b9a,#4a148c)">
+  <div class="ch-num">3</div>
+  <svg width="72" height="72" viewBox="0 0 72 72">
+    <rect x="10" y="12" width="52" height="48" rx="3" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2"/>
+    <rect x="10" y="12" width="52" height="13" rx="3" fill="rgba(255,255,255,.12)"/>
+    <line x1="20" y1="34" x2="52" y2="34" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+    <line x1="20" y1="42" x2="46" y2="42" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+    <line x1="20" y1="50" x2="40" y2="50" stroke="rgba(255,255,255,.35)" stroke-width="1.5"/>
+    <circle cx="53" cy="52" r="11" fill="rgba(249,199,79,.85)"/>
+    <line x1="49" y1="52" x2="57" y2="52" stroke="#333" stroke-width="2.5"/>
+    <line x1="53" y1="48" x2="53" y2="56" stroke="#333" stroke-width="2.5"/>
+  </svg>
+  <div class="ch-label">Chương Ba</div>
+  <div class="ch-title">Thiết Kế —<br>Gặp KTS Đúng Cách</div>
+  <div class="ch-desc">Kiến trúc sư giỏi không chỉ vẽ đẹp — họ lắng nghe cuộc sống của bạn rồi biến nó thành không gian. Nhưng bạn phải biết cách chia sẻ đúng.</div>
+</div>`,
+
+// ── 10 CH3 CONTENT ──
+`<div class="p-plain">
+  <h1 style="color:#4a148c">Chuẩn Bị Gì Trước Khi Gặp Kiến Trúc Sư?</h1>
+  <p>Đến gặp KTS với tờ giấy ghi "3 phòng ngủ, 2 wc" — bạn sẽ nhận lại bản vẽ chuẩn mực.
+  Không sai. Nhưng <strong>không phải ngôi nhà của bạn</strong>.</p>
+  <div class="hbox" style="background:rgba(74,20,140,.06);border-color:rgba(74,20,140,.2)">
+    <div class="ht" style="color:#4a148c">📋 5 Thứ Cần Chuẩn Bị Trước Buổi Gặp Đầu Tiên</div>
+    <ol style="padding-left:14px">
+      <li><strong>3 từ mô tả cảm giác bạn muốn khi bước vào nhà</strong> — ấm áp? thoáng? hiện đại? mộc mạc?</li>
+      <li><strong>20–30 ảnh tham khảo</strong> — không cần cùng phong cách; điểm chung sẽ tự lộ ra</li>
+      <li><strong>"Một ngày của gia đình tôi"</strong> — mô tả từ 6 giờ sáng đến 11 giờ đêm bạn làm gì trong nhà</li>
+      <li><strong>Danh sách điều ghét nhất ở nhà hiện tại</strong> — đây là vàng thông tin cho KTS</li>
+      <li><strong>Ngân sách thực tế, không che giấu</strong> — KTS cần biết để thiết kế phù hợp, không phải để phán xét</li>
+    </ol>
+  </div>
+  <h2 style="color:#4a148c">Bẫy Của Xu Hướng</h2>
+  <div class="wbox">
+    <div class="wt">⚠️ Trend Hôm Nay, Lỗi Thời 5 Năm Sau</div>
+    <p>Industrial từng cực hot → nay nhiều nhà thấy "nặng nề".
+    Gạch xương cá viral → đã bắt đầu nhàm. <strong>Thiết kế theo CON NGƯỜI BẠN, không theo Instagram.</strong></p>
+  </div>
+  <p style="font-size:12px;color:#666;font-style:italic">
+    💡 Câu hỏi vàng: <em>"Thiết kế này còn phù hợp với gia đình mình sau 15 năm nữa không?"</em>
+  </p>
+  <span class="page-num left">7</span>
+</div>`,
+
+// ── 11 CH4 OPENER ──
+`<div class="p-chapter" style="background:linear-gradient(145deg,#014d8a,#0277bd,#01579b)">
+  <div class="ch-num">4</div>
+  <svg width="72" height="72" viewBox="0 0 72 72">
+    <circle cx="36" cy="24" r="13" fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
+    <path d="M18,60 C18,44 54,44 54,60" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
+    <rect x="25" y="18" width="22" height="6" rx="3" fill="rgba(249,199,79,.85)"/>
+    <circle cx="36" cy="24" r="4" fill="rgba(255,255,255,.85)"/>
+    <path d="M44,54 L48,50 L56,58" fill="none" stroke="rgba(249,199,79,.7)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="50" cy="57" r="1.5" fill="rgba(249,199,79,.7)"/>
+  </svg>
+  <div class="ch-label">Chương Bốn</div>
+  <div class="ch-title">Nhà Thầu —<br>Người Bạn Phải Tin Nhất</div>
+  <div class="ch-desc">Một nhà thầu tốt là người bạn đồng hành. Một nhà thầu tệ có thể khiến bạn mất hàng trăm triệu và mất cả giấc ngủ. Đây là cách phân biệt.</div>
+</div>`,
+
+// ── 12 CH4 CONTENT ──
+`<div class="p-plain">
+  <h1 style="color:#01579b">Chọn Nhà Thầu — Quan Trọng Hơn Mọi Thứ Khác</h1>
+  <div class="sbox">
+    <div class="st" style="color:#01579b">✅ 5 Cách Tìm Nhà Thầu Đáng Tin</div>
+    <ol style="padding-left:14px">
+      <li><strong>Referral từ người thật đã làm</strong> — không gì đáng tin hơn lời kể của chủ nhà</li>
+      <li><strong>Đến xem công trình đang thi công</strong> — quan sát thái độ công nhân, sự ngăn nắp</li>
+      <li><strong>Yêu cầu xem 3 công trình đã hoàn thành</strong> và nói chuyện trực tiếp với chủ nhà cũ</li>
+      <li><strong>Thử việc với hạng mục nhỏ</strong> — nếu được, hãy test trước khi giao phó toàn bộ</li>
+      <li><strong>Công ty có văn phòng, địa chỉ rõ ràng</strong> — không chỉ số điện thoại cá nhân</li>
+    </ol>
+  </div>
+  <h2 style="color:#01579b">🚨 Dấu Hiệu Cảnh Báo Đỏ</h2>
+  <div class="wbox">
+    <div class="wt">Hãy từ chối nếu nhà thầu...</div>
+    <ul style="padding-left:14px">
+      <li>Báo giá <strong>thấp hơn thị trường trên 20%</strong> — luôn có lý do không muốn nói</li>
+      <li>Không muốn ký hợp đồng chi tiết, thích "làm miệng cho nhanh"</li>
+      <li>Yêu cầu ứng trước <strong>50–70% ngay từ đầu</strong></li>
+      <li>Không trả lời điện thoại trong giờ làm việc</li>
+      <li>Không có thợ chuyên biệt — một người "làm được tất cả"</li>
+    </ul>
+  </div>
+  <div class="quote" style="border-color:#01579b">
+    "Hợp đồng tốt không để dùng khi kiện tụng — mà để cả hai bên hiểu rõ mình đang đồng ý điều gì ngay từ ngày đầu."
+  </div>
+  <span class="page-num left">8</span>
+</div>`,
+
+// ── 13 CH5 VẬT LIỆU + NỘI THẤT ──
+`<div class="p-plain">
+  <div style="background:linear-gradient(135deg,#3e2723,#5d4037);padding:14px 16px;border-radius:8px;margin-bottom:14px;color:#fff">
+    <div style="font-size:9px;letter-spacing:2px;opacity:.7;margin-bottom:3px">CHƯƠNG NĂM</div>
+    <div style="font-size:17px;font-weight:bold;margin-bottom:4px">Vật Liệu & Nội Thất — Đừng Mua Theo Cảm Xúc</div>
+    <div style="font-size:11px;opacity:.8">Đầu tư đúng chỗ — tiết kiệm đúng lúc — ngôi nhà bền đẹp cả chục năm</div>
+  </div>
+  <h2 style="color:#3e2723">Đầu Tư Cao vs Có Thể Tiết Kiệm</h2>
+  <table class="bt">
+    <tr><th>Hạng mục</th><th>Mức độ</th><th>Lý do</th></tr>
+    <tr><td>🏗️ Móng & kết cấu chịu lực</td><td><strong style="color:#b71c1c">Đầu tư cao</strong></td><td>Không thể sửa sau</td></tr>
+    <tr><td>🪟 Cửa sổ, cách âm, chống nóng</td><td><strong style="color:#b71c1c">Đầu tư cao</strong></td><td>Ảnh hưởng cả đời sống</td></tr>
+    <tr><td>⚡ Hệ thống điện–nước âm tường</td><td><strong style="color:#b71c1c">Đầu tư cao</strong></td><td>Rất khó & tốn kém để sửa</td></tr>
+    <tr><td>🛁 Thiết bị vệ sinh & vòi</td><td><strong style="color:#e65100">Trung bình–cao</strong></td><td>Dùng hàng ngày, dễ hỏng</td></tr>
+    <tr><td>🪴 Ốp lát tường trang trí</td><td><strong style="color:#2e7d32">Có thể tiết kiệm</strong></td><td>Có thể thay đổi sau</td></tr>
+    <tr><td>🖼️ Decor, phụ kiện nhỏ</td><td><strong style="color:#2e7d32">Tiết kiệm tối đa</strong></td><td>Sẽ thay đổi liên tục</td></tr>
+  </table>
+  <div class="wbox" style="margin-top:10px">
+    <div class="wt">🛋️ Sai Lầm Nội Thất Đắt Nhất</div>
+    <p>Mua nội thất <strong>trước khi ở thử</strong>. Kích thước thực tế thường sai so với bản vẽ.
+    Ánh sáng thực tế thay đổi cách nhìn màu sắc hoàn toàn. Ở thử 2–4 tuần trước khi mua đồ lớn.</p>
+  </div>
+  <span class="page-num right">9</span>
+</div>`,
+
+// ── 14 CH6 OPENER + LỖI 1-5 ──
+`<div class="p-plain">
+  <div style="background:linear-gradient(135deg,#c62828,#b71c1c);padding:14px 16px;border-radius:8px;margin-bottom:12px;color:#fff;text-align:center">
+    <div style="font-size:9px;letter-spacing:2px;opacity:.7;margin-bottom:3px">CHƯƠNG SÁU</div>
+    <div style="font-size:17px;font-weight:bold">10 Lỗi Kinh Điển — Đừng Để Lại</div>
+    <div style="font-size:11px;opacity:.8;margin-top:3px">Những sai lầm tôi thấy lặp đi lặp lại ở hầu hết mọi nhà</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">1</span>Đặt ngân sách "vừa đủ", không có dự phòng</div>
+    <div class="err-body">Công thức của khủng hoảng tài chính. Mọi công trình đều có phát sinh.</div>
+    <div class="err-fix">Luôn dự trữ 10–15%. Không đụng vào nếu không bắt buộc.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">2</span>Chọn nhà thầu rẻ nhất trong các báo giá</div>
+    <div class="err-body">Rẻ hơn thị trường 20% luôn có lý do — chất lượng thấp, vật liệu đổi, hoặc sẽ phát sinh sau.</div>
+    <div class="err-fix">So sánh tối thiểu 3 báo giá. Chọn giá hợp lý, không phải thấp nhất.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">3</span>Thỏa thuận bằng miệng, không có hợp đồng chi tiết</div>
+    <div class="err-body">"Làm quen biết, cần gì hợp đồng" — câu nói đắt nhất trong làm nhà.</div>
+    <div class="err-fix">Hợp đồng phải có: tiến độ từng giai đoạn, điều khoản phạt chậm, thanh toán theo nghiệm thu.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">4</span>Thay đổi thiết kế sau khi đã thi công</div>
+    <div class="err-body">1 thay đổi nhỏ sau khi đã xây = tốn gấp 5–10 lần so với lúc thiết kế.</div>
+    <div class="err-fix">Chốt kỹ bản vẽ trước. Mọi thay đổi phải ký phê duyệt và tính thêm chi phí.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">5</span>Không giám sát thi công thường xuyên</div>
+    <div class="err-body">Không ai quan tâm đến công trình của bạn bằng chính bạn.</div>
+    <div class="err-fix">Ghé công trình ít nhất 2–3 lần/tuần. Chụp ảnh tiến độ hàng ngày.</div>
+  </div>
+  <span class="page-num left">10</span>
+</div>`,
+
+// ── 15 LỖI 6-10 ──
+`<div class="p-plain">
+  <h2 style="color:#b71c1c;margin-top:0">10 Lỗi Kinh Điển (tiếp theo)</h2>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">6</span>Tiết kiệm sai chỗ — điện nước âm tường</div>
+    <div class="err-body">Đây là "nội tạng" của ngôi nhà. Hỏng hóc sau này cực kỳ tốn kém để sửa.</div>
+    <div class="err-fix">Đầu tư vật liệu tốt và thợ giỏi cho phần này — không bao giờ tiết kiệm ở đây.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">7</span>Mua nội thất theo trend, không theo lối sống</div>
+    <div class="err-body">Sofa velvet trắng đẹp trên mạng — nhưng bạn có 2 con nhỏ và 1 con chó.</div>
+    <div class="err-fix">"Cái này có phù hợp với gia đình mình sống không?" — hỏi trước khi hỏi "Đẹp không?"</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">8</span>Bỏ qua ánh sáng tự nhiên khi thiết kế</div>
+    <div class="err-body">Hướng nhà, vị trí cửa sổ quyết định cảm giác của ngôi nhà suốt 20–30 năm.</div>
+    <div class="err-fix">Mô phỏng ánh sáng theo từng giờ trong ngày. Đừng chỉ nhìn bản vẽ 2D.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">9</span>Thiết kế cho hiện tại, không nghĩ đến 10 năm sau</div>
+    <div class="err-body">Nhà 2 người hôm nay có thể là nhà 4–5 người sau 5 năm. Bố mẹ già cần phòng. Con cái lớn cần không gian riêng.</div>
+    <div class="err-fix">Thiết kế linh hoạt với tư duy 15–20 năm. Phòng có thể ngăn chia sau.</div>
+  </div>
+  <div class="err-item">
+    <div class="err-title"><span class="err-num">10</span>Cầu toàn đến mức không bao giờ bắt đầu được</div>
+    <div class="err-body">Nhiều gia đình cứ lên kế hoạch mãi vì chờ mọi thứ hoàn hảo — rồi bị lạm phát vật liệu "ăn mất" ngân sách.</div>
+    <div class="err-fix">Làm nhà là hành trình, không phải sự kiện một lần. Bắt đầu đúng — cải thiện theo thời gian.</div>
+  </div>
+  <span class="page-num right">11</span>
+</div>`,
+
+// ── 16 TIMELINE ──
+`<div class="p-plain">
+  <div style="background:linear-gradient(135deg,#1a237e,#283593);padding:14px 16px;border-radius:8px;margin-bottom:12px;color:#fff;text-align:center">
+    <div style="font-size:9px;letter-spacing:2px;opacity:.7;margin-bottom:3px">CHƯƠNG BẢY</div>
+    <div style="font-size:17px;font-weight:bold">Timeline & Checklist Thực Tế</div>
+    <div style="font-size:11px;opacity:.8;margin-top:3px">Bao lâu là đủ? Khi nào nên lo?</div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#9c27b0;font-size:9px">T1–2</div>
+    <div class="tl-content"><h4>Lên ý tưởng & chọn KTS</h4><p>Thu thập ảnh tham khảo, xác định ngân sách thực tế, gặp ít nhất 3 KTS trước khi quyết định.</p></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#1a237e;font-size:9px">T2–5</div>
+    <div class="tl-content"><h4>Thiết kế & cấp phép xây dựng</h4><p>Thiết kế 1–2 tháng. Cấp phép 1–3 tháng (biến thiên nhất). Không nên bỏ qua bước này.</p></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#01579b;font-size:9px">T5–9</div>
+    <div class="tl-content"><h4>Thi công phần thô</h4><p>Móng, cột, tường, mái. Dài nhất và ít thay đổi được nhất. Giám sát thường xuyên.</p></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#00695c;font-size:9px">T9–13</div>
+    <div class="tl-content"><h4>Hoàn thiện & nội thất</h4><p>Sàn, tường, cửa, điện, nước, đèn, rèm. Hay có thay đổi nhất — cần linh hoạt ngân sách.</p></div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#f9a825;color:#333;font-size:9px">T13+</div>
+    <div class="tl-content"><h4>Dọn vào & điều chỉnh</h4><p>Ở thử rồi mua nội thất. Phát hiện các lỗi nhỏ cần sửa. Cần 1–3 tháng để "settle in".</p></div>
+  </div>
+  <div class="wbox" style="margin-top:8px">
+    <div class="wt">⏰ Khi Nào Nên Lo?</div>
+    <p>Chậm 1–2 tuần: bình thường. Chậm hơn 1 tháng không có lý do cụ thể: họp khẩn với nhà thầu ngay.</p>
+  </div>
+  <span class="page-num left">12</span>
+</div>`,
+
+// ── 17 CHECKLIST ──
+`<div class="p-plain">
+  <h1 style="color:#1a237e">Checklist Không Được Bỏ Sót</h1>
+  <h2 style="color:#1a237e;font-size:13px">📋 Trước Khi Bắt Đầu</h2>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Xác định ngân sách thực tế + 10% dự phòng bắt buộc</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Kiểm tra pháp lý lô đất (sổ đỏ, quy hoạch, tranh chấp)</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Chuẩn bị ảnh tham khảo + mô tả lối sống gia đình</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Gặp ít nhất 3 đơn vị thiết kế trước khi chọn</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Ký hợp đồng thiết kế rõ ràng (bao gồm số lần chỉnh sửa)</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Tìm hiểu thủ tục cấp phép xây dựng tại địa phương</div></div>
+  <h2 style="color:#1a237e;font-size:13px;margin-top:12px">🏗️ Khi Chọn Nhà Thầu</h2>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Thu thập tối thiểu 3 báo giá với cùng hạng mục</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Trực tiếp nói chuyện với chủ nhà mà nhà thầu đã làm</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Tham quan công trình đang thi công của họ</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Ký hợp đồng: tiến độ + điều khoản phạt + bảo hành rõ ràng</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Thanh toán theo từng nghiệm thu, không ứng trước lớn</div></div>
+  <h2 style="color:#1a237e;font-size:13px;margin-top:12px">🔨 Trong Quá Trình Thi Công</h2>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Ghé công trình 2–3 lần/tuần, chụp ảnh tiến độ</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Kiểm tra vật liệu khi nhập (đúng loại, đúng số lượng)</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Xem hệ thống điện–nước trước khi bít tường</div></div>
+  <div class="cl-item"><div class="cl-box"></div><div class="cl-text">Chạy thử toàn bộ điện–nước trước khi nghiệm thu</div></div>
+  <span class="page-num right">13</span>
+</div>`,
+
+// ── 18 CTA ──
+`<div class="p-cta" style="height:100%">
+  <div style="position:relative;z-index:1;width:100%;display:flex;flex-direction:column;align-items:center">
+    <div class="cta-logo">T</div>
+    <div class="cta-name">Thắng Nội Thất</div>
+    <div class="cta-tagline">"Ngôi nhà đẹp nhất là ngôi nhà bạn cảm thấy là chính mình"</div>
+    <div class="cta-box">
+      <h4>Bạn có biết...</h4>
+      <p>Phần lớn những rắc rối kể trong cuốn sách này <strong>có thể được ngăn ngừa hoàn toàn</strong> — nếu bạn có một người tư vấn nội thất đúng ngay từ đầu.</p>
+      <p style="margin-top:8px">Không phải để "mua thêm đồ đắt tiền" — mà để <strong>giúp bạn dùng đúng ngân sách, tránh sai lầm, và có ngôi nhà thực sự sống được</strong>.</p>
+    </div>
+    <div class="cta-box" style="margin-bottom:14px">
+      <h4>Tôi có thể giúp gì cho bạn?</h4>
+      <p>✦ Tư vấn phong cách & lên ý tưởng không gian<br>
+      ✦ Lập kế hoạch ngân sách nội thất phù hợp<br>
+      ✦ Đồng hành chọn vật liệu & nội thất<br>
+      ✦ Thiết kế 3D toàn bộ không gian sống</p>
+    </div>
+    <p style="font-size:11px;color:rgba(255,255,255,.5);font-style:italic;text-align:center">
+      Buổi tư vấn đầu tiên hoàn toàn miễn phí.<br>Chỉ cần nói chuyện — không ép buộc, không áp lực.
+    </p>
+  </div>
+</div>`,
+
+// ── 19 BACK COVER ──
+`<div class="p-cover" style="background:linear-gradient(155deg,#050d1a 0%,#0d1c38 50%,#060f1e 100%);height:100%">
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%">
+    <div style="width:1px;height:40px;background:linear-gradient(to bottom,transparent,rgba(249,199,79,.4));margin-bottom:20px"></div>
+    <svg width="60" height="60" viewBox="0 0 60 60">
+      <polygon points="30,4 56,22 56,56 4,56 4,22" fill="none" stroke="#f9c74f" stroke-width="1.5" opacity=".6"/>
+      <polygon points="30,4 4,22 56,22" fill="rgba(249,199,79,.08)"/>
+      <rect x="20" y="35" width="20" height="21" fill="rgba(249,199,79,.15)" stroke="#f9c74f" stroke-width="1.5" opacity=".7"/>
+      <circle cx="30" cy="28" r="4" fill="#f9c74f" opacity=".8"/>
+    </svg>
+    <div style="font-size:16px;font-weight:bold;color:var(--gold);margin-top:14px;margin-bottom:6px">
+      Ngôi Nhà Của Bạn Đang Chờ
+    </div>
+    <div style="width:30px;height:1px;background:var(--gold);opacity:.5;margin:10px auto"></div>
+    <p style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.9;max-width:300px;text-align:center;margin-top:10px">
+      Hành trình này sẽ mệt. Sẽ có những đêm bạn nghi ngờ quyết định của mình.
+      Nhưng ngày cầm chìa khóa lần đầu —
+      <em>tất cả sẽ đáng giá.</em>
+    </p>
+    <p style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.9;max-width:300px;text-align:center;margin-top:10px">
+      Chia sẻ cuốn sách này cho ai đang sắp bắt đầu. Đó là món quà ý nghĩa nhất bạn có thể tặng họ.
+    </p>
+    <div style="width:1px;height:30px;background:linear-gradient(to bottom,rgba(249,199,79,.3),transparent);margin:18px auto"></div>
+    <div style="font-size:11px;color:rgba(249,199,79,.6);letter-spacing:3px;text-transform:uppercase">✦ Thắng Nội Thất ✦</div>
+    <div style="font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;margin-top:8px">Tặng miễn phí · Không giữ bản quyền · Chia sẻ tự do</div>
+  </div>
+</div>`
+
+]; // end pages
+
+// ═══════════════════════════════════════════════
+//  FLIPBOOK ENGINE
+// ═══════════════════════════════════════════════
+var cur = 0;
+var total = Math.ceil(pages.length / 2);
+var animating = false;
+
+var lp = document.getElementById('leftPage');
+var rp = document.getElementById('rightPage');
+var fl = document.getElementById('flipEl');
+var ff = document.getElementById('flipFront');
+var fb = document.getElementById('flipBack');
+var pb = document.getElementById('prevBtn');
+var nb = document.getElementById('nextBtn');
+var pi = document.getElementById('pInfo');
+var pf = document.getElementById('pFill');
+
+function gp(i){ return pages[i] || '<div style="height:100%;background:var(--cream)"></div>'; }
+
+function render(s){
+  lp.innerHTML = gp(s*2);
+  rp.innerHTML = gp(s*2+1);
+  pi.textContent = 'Trang ' + (s*2+1) + ' / ' + pages.length;
+  pf.style.width = ((s+1)/total*100) + '%';
+  pb.disabled = s === 0;
+  nb.disabled = s === total - 1;
+}
+
+function goPage(dir){
+  if(animating) return;
+  var n = cur + dir;
+  if(n < 0 || n >= total) return;
+  animating = true;
+  playFlipSound(dir);
+
+  if(dir === 1){
+    fl.className = 'flip going-next animating';
+    fl.style.display = 'block';
+    fl.style.left = '500px';
+    fl.style.transform = '';
+    fl.style.transition = 'none';
+    ff.innerHTML = gp(cur*2+1);
+    fb.innerHTML = gp(n*2);
+    rp.innerHTML = gp(n*2+1);
+    requestAnimationFrame(function(){
+      fl.style.transition = 'transform 0.6s cubic-bezier(0.645,0.045,0.355,1.000)';
+      fl.style.transformOrigin = 'left center';
+      fl.style.transform = 'rotateY(-180deg)';
+    });
+  } else {
+    fl.className = 'flip going-prev animating';
+    fl.style.display = 'block';
+    fl.style.left = '0';
+    fl.style.transform = 'rotateY(-180deg)';
+    fl.style.transition = 'none';
+    ff.innerHTML = gp(cur*2);
+    fb.innerHTML = gp(n*2+1);
+    lp.innerHTML = gp(n*2);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      fl.style.transition = 'transform 0.6s cubic-bezier(0.645,0.045,0.355,1.000)';
+      fl.style.transformOrigin = 'right center';
+      fl.style.transform = 'rotateY(0deg)';
+    }); });
+  }
+
+  setTimeout(function(){
+    cur = n;
+    fl.style.display = 'none';
+    fl.className = 'flip';
+    fl.style.transform = '';
+    fl.style.transition = '';
+    render(cur);
+    animating = false;
+  }, 630);
+}
+
+// Keyboard
+document.addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') goPage(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goPage(-1);
+});
+
+// Touch swipe
+var tx = 0;
+document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; },{passive:true});
+document.addEventListener('touchend', function(e){
+  var d = e.changedTouches[0].clientX - tx;
+  if(Math.abs(d) > 50) goPage(d < 0 ? 1 : -1);
+});
+
+// Init
+render(0);
+</script>
+
+<div style="color:rgba(255,255,255,.25);font-size:10px;margin-top:14px;letter-spacing:2px;text-align:center">
+  ← → PHÍM MŨI TÊN ĐỂ LẬT TRANG &nbsp;·&nbsp; VUỐT TRÊN ĐIỆN THOẠI
+</div>
+</body>
+</html>

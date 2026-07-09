@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Nhận sách "{{ BOOK.ten }}" miễn phí · {{ SITE.ten }}{% endblock %}
+{% block desc %}Tải miễn phí cẩm nang "{{ BOOK.ten }}" — {{ BOOK.phu_de }}. Tránh sai lầm tốn tiền khi làm nội thất lần đầu.{% endblock %}
+{% block content %}
+
+<section class="py-5 bg-cream">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <!-- Bìa sách -->
+      <div class="col-lg-5 text-center">
+        <div class="book-cover-3d mx-auto">
+          <div class="series">CẨM NANG · THẮNG NỘI THẤT</div>
+          <div class="title-lg">{{ BOOK.ten }}</div>
+          <div class="divider-gold"></div>
+          <div class="sub">{{ BOOK.phu_de }}</div>
+          <div class="badge-gold">TẶNG MIỄN PHÍ</div>
+        </div>
+      </div>
+
+      <!-- Nội dung + form -->
+      <div class="col-lg-7">
+        <div class="eyebrow">Quà tặng đầu phễu · 0đ</div>
+        <h1 class="section-title mb-3">Làm nhà lần đầu — đừng để mất tiền oan vì thiếu kinh nghiệm</h1>
+        <p class="lead text-muted mb-3">
+          Cuốn cẩm nang Homie đúc kết từ hàng trăm công trình thật ở Quảng Trị.
+          Đọc trước khi làm nội thất để <b>tránh sai lầm tốn tiền</b> mà nhà nào cũng dễ mắc.
+        </p>
+        <ul class="tick-list mb-4">
+          {% for d in BOOK.diem %}<li>{{ d }}</li>{% endfor %}
+        </ul>
+
+        <div class="lead-card p-4">
+          <h2 class="h5 fw-bold mb-1">Nhận sách ngay qua Zalo</h2>
+          <p class="text-muted small mb-3">Để lại số điện thoại/Zalo — sách mở ra đọc được liền, Homie không spam.</p>
+          <form method="post" action="{{ url_for('submit_lead') }}" class="row g-2">
+            <input type="hidden" name="source" value="{{ BOOK.source }}">
+            <input type="hidden" name="magnet" value="1">
+            <input type="hidden" name="need" value="Nhận sách {{ BOOK.ten }}">
+            <div class="col-12">
+              <input class="form-control form-control-lg" name="name" placeholder="Họ tên của bạn">
+            </div>
+            <div class="col-sm-7">
+              <input class="form-control form-control-lg" name="phone" required placeholder="SĐT / Zalo *">
+            </div>
+            <div class="col-sm-5 d-grid">
+              <button class="btn btn-primary btn-lg">Nhận sách 📖</button>
+            </div>
+            <div class="col-12"><small class="text-muted">Thông tin của bạn được bảo mật hoàn toàn.</small></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.book-cover-3d{
+  width:280px;max-width:100%;aspect-ratio:3/4;border-radius:8px 14px 14px 8px;
+  background:linear-gradient(155deg,#0a1628 0%,#162347 40%,#0f1c3a 65%,#070e1c 100%);
+  color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:30px 26px;box-shadow:14px 18px 40px rgba(0,0,0,.35),inset -6px 0 14px rgba(0,0,0,.4);
+  border-left:6px solid rgba(0,0,0,.3);
+}
+.book-cover-3d .series{font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.45);margin-bottom:16px}
+.book-cover-3d .title-lg{font-size:32px;font-weight:800;line-height:1.15;color:#f9c74f;text-shadow:0 0 30px rgba(249,199,79,.35)}
+.book-cover-3d .divider-gold{width:44px;height:2px;background:linear-gradient(90deg,transparent,#f9c74f,transparent);margin:14px auto}
+.book-cover-3d .sub{font-size:13px;color:rgba(255,255,255,.75);font-style:italic;line-height:1.6}
+.book-cover-3d .badge-gold{margin-top:22px;background:rgba(249,199,79,.14);border:1px solid rgba(249,199,79,.35);
+  border-radius:30px;padding:6px 18px;font-size:11px;color:#f9c74f;letter-spacing:2px}
+</style>
+
+{% endblock %}

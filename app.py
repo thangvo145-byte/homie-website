@@ -10,7 +10,7 @@ from functools import wraps
 
 from flask import (
     Flask, render_template, request, redirect, url_for,
-    flash, session, abort, jsonify
+    flash, session, abort, jsonify, send_file
 )
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
@@ -19,6 +19,8 @@ from sqlalchemy import func
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 UPLOAD_DIR = os.path.join(BASE_DIR, "static", "uploads")
+BOOK_DIR = os.path.join(BASE_DIR, "book")
+BOOK_FILE = os.path.join(BOOK_DIR, "lam-nha-lan-dau.html")  # sách tặng (lead magnet)
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -124,12 +126,49 @@ CAT_MAP = dict(CATEGORIES)
 MAT_MAP = dict(MATERIALS)
 ART_CAT = {"kien-thuc": "Kiến thức", "xu-huong": "Xu hướng", "kinh-nghiem": "Kinh nghiệm"}
 
+# Sách tặng đầu phễu (lead magnet) — khách để lại SĐT/Zalo để nhận
+BOOK = {
+    "ten": "Làm Nhà Lần Đầu",
+    "phu_de": "Cẩm nang tránh sai lầm khi làm nội thất — Thắng Nội Thất",
+    "source": "sach-lam-nha-lan-dau",   # nhãn nguồn lead
+    "diem": [
+        "Nhựa rỗng hay gỗ công nghiệp — chọn sao cho đúng nhà & túi tiền",
+        "Bí quyết chống nồm ẩm miền Trung để đồ bền hàng chục năm",
+        "Kích thước chuẩn tủ bếp, tủ áo, giường... (cheat-sheet)",
+        "5 hạng mục nên đầu tư vì 'khó sửa về sau'",
+        "Cách đọc báo giá để không bị phát sinh giữa chừng",
+    ],
+}
+
+# Phong cách nội thất phổ biến (rút từ kho tri thức Homie — note 34)
+STYLES = [
+    dict(key="hien-dai", ten="Hiện đại / Tối giản", icon="🛋️",
+         mo_ta="Trung tính, khối thanh thoát, nhiều khoảng trống. Bán chạy nhất, hợp mọi diện tích.",
+         mau="Trắng · xám · be, điểm nhấn tối"),
+    dict(key="scandinavian", ten="Scandinavian (Bắc Âu)", icon="🌿",
+         mo_ta="Gỗ sáng + trắng + xanh nhạt, tận dụng ánh sáng tự nhiên. Hợp nhà có trẻ, chung cư.",
+         mau="Gỗ sáng · trắng · xanh nhạt"),
+    dict(key="japandi", ten="Japandi (Nhật × Bắc Âu)", icon="🍵",
+         mo_ta="Gỗ sáng chủ đạo, sofa/bàn thấp, luôn ngăn nắp, cây xanh điểm xuyết. Tĩnh và ấm.",
+         mau="Gỗ sáng · xám/be · xanh nhạt"),
+    dict(key="indochine", ten="Indochine (Đông Dương)", icon="🪟",
+         mo_ta="Hoài cổ sang trọng: gỗ nâu trầm + gạch bông + mây tre, hoa văn tinh tế.",
+         mau="Nâu trầm · trắng ngà · vàng nghệ"),
+    dict(key="wabi-sabi", ten="Wabi Sabi", icon="🪵",
+         mo_ta="Bình dị, không hoàn hảo, tông trầm tự nhiên, ít decor. Vẻ đẹp mộc của chất liệu.",
+         mau="Tông đất · trầm tự nhiên"),
+    dict(key="luxury", ten="Luxury / Sang trọng", icon="✨",
+         mo_ta="Gỗ tối óc chó, đá vân, ánh sáng nhiều lớp, phụ kiện cao cấp. Đẳng cấp có chiều sâu.",
+         mau="Óc chó · đen · ánh kim"),
+]
+
 
 # Đăng ký các bảng tra cứu tĩnh làm Jinja global để macro (import không kèm
 # context) vẫn truy cập được.
 app.jinja_env.globals.update(
     SITE=SITE, CATEGORIES=CATEGORIES, MATERIALS=MATERIALS,
     CAT_MAP=CAT_MAP, MAT_MAP=MAT_MAP, ART_CAT=ART_CAT,
+    BOOK=BOOK, STYLES=STYLES,
 )
 
 
@@ -220,6 +259,11 @@ def submit_lead():
     )
     db.session.add(lead)
     db.session.commit()
+    # Nếu là phễu "nhận sách": mở khóa quyền đọc sách + đưa sang trang đọc
+    if request.form.get("magnet"):
+        session["book_unlocked"] = True
+        flash("Cảm ơn bạn! Sách đã sẵn sàng — Homie cũng sẽ nhắn Zalo tư vấn thêm cho bạn.", "success")
+        return redirect(url_for("doc_sach"))
     flash("Cảm ơn bạn! Homie đã nhận thông tin và sẽ liên hệ tư vấn miễn phí trong thời gian sớm nhất.", "success")
     return redirect(url_for("thanks"))
 
@@ -227,6 +271,49 @@ def submit_lead():
 @app.route("/cam-on")
 def thanks():
     return render_template("thanks.html")
+
+
+# ----------------------------- PHỄU: NHẬN SÁCH (lead magnet) -----------------------------
+@app.route("/nhan-sach")
+def nhan_sach():
+    """Trang giới thiệu sách tặng — khách để lại SĐT/Zalo để nhận."""
+    return render_template("sach.html")
+
+
+@app.route("/doc-sach")
+def doc_sach():
+    """Trang đọc sách — chỉ mở sau khi khách đã để lại thông tin."""
+    if not session.get("book_unlocked"):
+        flash("Bạn vui lòng để lại số điện thoại/Zalo để nhận sách nhé.", "warning")
+        return redirect(url_for("nhan_sach"))
+    return render_template("doc_sach.html")
+
+
+@app.route("/sach-file")
+def sach_file():
+    """Trả file sách (đã kiểm soát quyền qua session)."""
+    if not session.get("book_unlocked"):
+        return redirect(url_for("nhan_sach"))
+    if not os.path.exists(BOOK_FILE):
+        abort(404)
+    return send_file(BOOK_FILE)
+
+
+@app.route("/tai-sach")
+def tai_sach():
+    """Tải sách về máy (đã kiểm soát quyền qua session)."""
+    if not session.get("book_unlocked"):
+        return redirect(url_for("nhan_sach"))
+    if not os.path.exists(BOOK_FILE):
+        abort(404)
+    return send_file(BOOK_FILE, as_attachment=True,
+                     download_name="Lam-Nha-Lan-Dau-Thang-Noi-That.html")
+
+
+@app.route("/phong-cach")
+def phong_cach():
+    """Trang giới thiệu các phong cách nội thất Homie tư vấn."""
+    return render_template("phong_cach.html")
 
 
 # ----------------------------- ADMIN (nhẹ) -----------------------------
