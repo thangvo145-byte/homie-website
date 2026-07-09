@@ -437,6 +437,38 @@ def admin_leads():
     return render_template("admin_leads.html", leads=leads)
 
 
+@app.route("/quan-tri/trang-thai")
+def admin_status():
+    """Chẩn đoán nhanh cấu hình (mở bằng ?pw=<mật khẩu admin>).
+    Không lộ token/giá trị bí mật, chỉ báo BẬT/TẮT + gửi thử Telegram nếu ?test=1."""
+    if request.args.get("pw", "") != ADMIN_PASSWORD:
+        return "Sai hoặc thiếu mật khẩu. Dùng: /quan-tri/trang-thai?pw=MAT_KHAU", 403
+    uri = app.config.get("SQLALCHEMY_DATABASE_URI", "")
+    db_kind = "Postgres (bền vững)" if uri.startswith("postgresql") else "SQLite (mất khi deploy!)"
+    lines = [
+        "== TRẠNG THÁI HOMIE WEBSITE ==",
+        f"Database: {db_kind}",
+        f"Số lead đang lưu: {Lead.query.count()}",
+        f"TELEGRAM_BOT_TOKEN: {'ĐÃ SET' if TELEGRAM_BOT_TOKEN else 'CHƯA SET !!'}",
+        f"TELEGRAM_CHAT_ID:   {'ĐÃ SET' if TELEGRAM_CHAT_ID else 'CHƯA SET !!'}",
+    ]
+    if request.args.get("test") == "1":
+        if TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID:
+            try:
+                data = urllib.parse.urlencode({
+                    "chat_id": TELEGRAM_CHAT_ID,
+                    "text": "✅ Test từ server Homie: thông báo lead đang chạy tốt!",
+                }).encode()
+                u = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+                r = urllib.request.urlopen(urllib.request.Request(u, data=data), timeout=8)
+                lines.append(f"Gửi thử Telegram: OK (HTTP {r.status}) — kiểm tra điện thoại")
+            except Exception as e:
+                lines.append(f"Gửi thử Telegram: LỖI -> {e}")
+        else:
+            lines.append("Gửi thử Telegram: bỏ qua (chưa set biến)")
+    return "<pre>" + "\n".join(lines) + "</pre>"
+
+
 # ---------- helpers upload ----------
 ALLOWED_EXT = {"jpg", "jpeg", "png", "webp"}
 
