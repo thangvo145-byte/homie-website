@@ -46,7 +46,7 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(DATA_DIR, "homie_web.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_DIR
-app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16MB / ảnh
+app.config["MAX_CONTENT_LENGTH"] = 64 * 1024 * 1024  # 64MB / lần gửi (đủ cho nhiều ảnh cùng lúc)
 
 # Thông tin liên hệ Homie - bà chủ sửa ở đây hoặc qua biến môi trường
 SITE = {
@@ -399,6 +399,13 @@ def phong_cach():
     return render_template("phong_cach.html")
 
 
+@app.errorhandler(413)
+def too_large(e):
+    """Ảnh gửi lên quá nặng — báo nhẹ nhàng, quay lại trang trước thay vì màn lỗi trơ."""
+    flash("Ảnh tải lên quá nặng (tổng vượt 64MB). Bạn giảm bớt số ảnh hoặc chụp nhẹ hơn rồi lưu lại nhé.", "warning")
+    return redirect(request.referrer or url_for("admin_projects")), 413
+
+
 # ----------------------------- ADMIN (nhẹ) -----------------------------
 @app.route("/quan-tri/dang-nhap", methods=["GET", "POST"])
 def admin_login():
@@ -603,6 +610,21 @@ def admin_articles():
     return render_template("admin_articles.html", articles=articles)
 
 
+@app.route("/quan-tri/bai-viet/lam-moi", methods=["POST"])
+@admin_required
+def admin_articles_refresh():
+    """Ghi đè nội dung 8 bài viết mẫu bằng bản viết sâu mới nhất (theo slug).
+    KHÔNG xóa dự án, KHÔNG đụng bài viết tự thêm."""
+    try:
+        from seed import run_seed
+        run_seed(db, Project, Article, force_articles=True)
+        flash("Đã làm mới nội dung 8 bài viết kiến thức (bản viết sâu).", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Không làm mới được: {e}", "danger")
+    return redirect(url_for("admin_articles"))
+
+
 @app.route("/quan-tri/bai-viet/them", methods=["GET", "POST"])
 @admin_required
 def admin_article_add():
@@ -667,6 +689,14 @@ def seed_cmd():
     from seed import run_seed
     run_seed(db, Project, Article)
     print("Đã nạp dữ liệu mẫu.")
+
+
+@app.cli.command("refresh-articles")
+def refresh_articles_cmd():
+    """flask --app app refresh-articles -> ghi đè 8 bài viết bằng bản viết sâu."""
+    from seed import run_seed
+    run_seed(db, Project, Article, force_articles=True)
+    print("Đã làm mới bài viết.")
 
 
 with app.app_context():
