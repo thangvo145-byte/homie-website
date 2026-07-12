@@ -10,14 +10,14 @@
     <div class="row justify-content-center text-center">
       <div class="col-lg-8">
         <div class="hero-badges mb-3">
-          <span>Xưởng sản xuất tại Ái Tử · Triệu Phong</span>
-          <span>Thi công trực tiếp — không qua trung gian</span>
+          <span>Xưởng sản xuất trực tiếp tại Ái Tử · Triệu Phong</span>
+          <span>Kiểm soát trọn quy trình — không qua trung gian</span>
         </div>
-        <h1 class="hero-title mb-3">Làm nhà cả đời mới một lần.<br>Homie làm để anh chị <em>ở</em>, không phải để chụp ảnh.</h1>
-        <p class="hero-sub mb-4">Nội thất bền thật với khí hậu miền Trung — không phải đẹp lúc bàn giao rồi xuống cấp sau một mùa nồm. Homie có xưởng ngay tại Ái Tử: anh chị tới tận nơi xem thợ làm, sờ tận tay vật liệu, ký cam kết bằng văn bản rồi mới thi công.</p>
+        <h1 class="hero-title mb-3">Làm nhà là chuyện cả đời.<br>Homie kiến tạo không gian để <em>an cư</em>, không chỉ để ghi hình.</h1>
+        <p class="hero-sub mb-4">Nội thất được sản xuất để bền vững thật sự với khí hậu nồm ẩm miền Trung — giữ trọn giá trị qua nhiều mùa, thay vì chỉ hoàn hảo tại thời điểm bàn giao. Sở hữu xưởng sản xuất trực tiếp tại Ái Tử, Homie kiểm soát toàn bộ chất lượng từ tấm ván An Cường đến từng đường chỉ hoàn thiện; quý khách được trực tiếp giám sát và nghiệm thu vật liệu trước khi thi công.</p>
         <div class="d-flex flex-wrap gap-3 justify-content-center">
-          <a href="#lien-he-form" class="btn btn-primary btn-lg px-5">Để lại số — tôi qua đo, tư vấn thẳng thật</a>
-          <a href="{{ url_for('gallery') }}" class="btn btn-outline-light btn-lg px-5">Xem công trình thật đã làm</a>
+          <a href="#lien-he-form" class="btn btn-primary btn-lg px-5">Đăng ký khảo sát &amp; tư vấn giải pháp</a>
+          <a href="{{ url_for('gallery') }}" class="btn btn-outline-light btn-lg px-5">Xem công trình thực tế đã bàn giao</a>
         </div>
       </div>
     </div>
@@ -34,15 +34,15 @@
           <div class="book-mini-cover flex-shrink-0">
             <span class="bmc-label">Cẩm nang</span>
             <span class="bmc-title">Làm Nhà<br>Lần Đầu</span>
-            <span class="bmc-author">Thắng · Nội thất Homie</span>
+            <span class="bmc-author">Biên soạn · Nội thất Homie</span>
           </div>
           <div>
             <div class="eyebrow" style="color:#f9c74f">Quà tặng miễn phí · 0đ</div>
             <h2 class="section-title text-white mb-2" style="font-size:1.6rem;line-height:1.25">
               Sách "Làm Nhà Lần Đầu" — tránh những sai lầm tốn tiền khi làm nội thất
             </h2>
-            <p class="opacity-90 mb-3">Đúc kết từ hàng trăm công trình thật ở Quảng Trị: chọn vật liệu chống nồm ẩm,
-              kích thước chuẩn, đầu tư đúng chỗ — <b>để lại số Zalo là đọc được ngay</b>.</p>
+            <p class="opacity-90 mb-3">Đúc kết từ hàng trăm công trình thực tế tại Quảng Trị: nguyên tắc chọn vật liệu chống nồm ẩm,
+              kích thước chuẩn công năng và cách phân bổ ngân sách hợp lý — <b>để lại số Zalo để nhận cẩm nang ngay</b>.</p>
             <ul class="funnel-ticks small opacity-90 mb-0">
               <li>Vật liệu bền với khí hậu miền Trung</li>
               <li>Kích thước chuẩn từng khu vực</li>
@@ -54,27 +54,27 @@
       <!-- Cột phải: form lấy sách ngay tại đầu trang -->
       <div class="col-lg-5">
         <div class="funnel-form-card p-4">
-          <h3 class="h5 fw-bold mb-1 text-dark">Nhận sách ngay qua Zalo</h3>
-          <p class="text-muted small mb-3">Điền số di động — sách mở ra đọc liền. Homie không spam.</p>
+          <h3 class="h5 fw-bold mb-1 text-dark">Nhận cẩm nang ngay qua Zalo</h3>
+          <p class="text-muted small mb-3">Để lại số di động — cẩm nang được gửi tới ngay. Thông tin được bảo mật tuyệt đối.</p>
           <form method="post" action="{{ url_for('submit_lead') }}" class="row g-2">
             <input type="hidden" name="source" value="{{ BOOK.source }}">
             <input type="hidden" name="magnet" value="1">
             <input type="hidden" name="need" value="Nhận sách {{ BOOK.ten }}">
             <div class="col-12">
-              <input class="form-control form-control-lg" name="name" placeholder="Họ tên của bạn">
+              <input class="form-control form-control-lg" name="name" placeholder="Họ và tên">
             </div>
             <div class="col-12">
               <input class="form-control form-control-lg" name="phone" required
                      type="tel" inputmode="numeric" pattern="(0|\+84)[0-9\s.]{8,13}" maxlength="15"
-                     title="Số di động Việt Nam, VD: 0902 866 717" placeholder="SĐT / Zalo *">
-              <small class="text-muted">SĐT di động, VD: 0902 866 717</small>
+                     title="Số di động Việt Nam, VD: 0902 866 717" placeholder="Số điện thoại / Zalo *">
+              <small class="text-muted">Số di động, VD: 0902 866 717</small>
             </div>
             <div class="col-12 d-grid mt-1">
               <button class="btn btn-warning btn-lg fw-bold" style="background:#f9c74f;border:none;color:#0a1628">
                 📖 Đọc sách miễn phí
               </button>
             </div>
-            <div class="col-12 text-center"><small class="text-muted">Thông tin của bạn được bảo mật hoàn toàn.</small></div>
+            <div class="col-12 text-center"><small class="text-muted">Thông tin được bảo mật tuyệt đối.</small></div>
           </form>
         </div>
       </div>
@@ -102,9 +102,9 @@
 <section class="py-5 bg-white border-bottom">
   <div class="container">
     <div class="text-center mb-4" style="max-width:760px;margin:0 auto">
-      <div class="eyebrow">Nói thẳng với nhau</div>
-      <h2 class="section-title mb-2">Làm nhà lần đầu, ai cũng thầm sợ mấy điều này</h2>
-      <p class="text-muted mb-0">Tôi làm nghề này đủ lâu để hiểu: người bỏ tiền ra làm nội thất không sợ tốn — họ sợ tốn tiền thật mà nhận về đồ hình thức. Đây là 5 nỗi lo tôi nghe đi nghe lại từ chính khách của mình.</p>
+      <div class="eyebrow">Thấu hiểu gia chủ</div>
+      <h2 class="section-title mb-2">Những mối bận tâm thường trực khi hoàn thiện tổ ấm</h2>
+      <p class="text-muted mb-0">Người đầu tư cho nội thất không ngại chi phí — điều họ e ngại là bỏ ra chi phí thực nhưng chỉ nhận về giá trị hình thức. Dưới đây là năm mối bận tâm phổ biến nhất mà gia chủ chia sẻ trong suốt quá trình tư vấn.</p>
     </div>
     <div class="row g-3">
       <div class="col-md-6 col-lg-4">
@@ -145,8 +145,8 @@
       <div class="col-md-6 col-lg-4">
         <div class="pain-card pain-card--soft h-100">
           <div class="pain-ic">🙂</div>
-          <h3 class="h6 fw-bold mb-1">Nếu anh chị đang lo mấy điều trên…</h3>
-          <p class="small text-muted mb-0">…thì đọc tiếp phần dưới. Đây là cách Homie làm để anh chị không phải lo — không phải lời hứa, mà là việc làm được kiểm chứng tận xưởng.</p>
+          <h3 class="h6 fw-bold mb-1">Nếu gia chủ đang bận tâm những điều trên…</h3>
+          <p class="small text-muted mb-0">…phần tiếp theo sẽ giải đáp. Đây là cách Homie vận hành để những mối lo đó không còn chỗ phát sinh — không phải lời hứa, mà là quy chuẩn được kiểm chứng trực tiếp tại xưởng.</p>
         </div>
       </div>
     </div>
@@ -157,54 +157,54 @@
 <section class="py-5 bg-cream border-bottom">
   <div class="container">
     <div class="text-center mb-4" style="max-width:760px;margin:0 auto">
-      <div class="eyebrow">Câu trả lời của Homie</div>
-      <h2 class="section-title mb-2">Không hứa suông. Đây là cách tôi làm nghề</h2>
-      <p class="text-muted mb-0">Homie có xưởng sản xuất trực tiếp tại Ái Tử — Triệu Phong. Không thuê ngoài, không qua trung gian. Nghĩa là từng đường chỉ, từng tấm ván tôi kiểm được, và anh chị cũng tới xem được.</p>
+      <div class="eyebrow">Giải pháp từ Homie</div>
+      <h2 class="section-title mb-2">Không cam kết bằng lời. Đây là quy chuẩn Homie vận hành</h2>
+      <p class="text-muted mb-0">Homie sở hữu xưởng sản xuất trực tiếp tại Ái Tử — Triệu Phong. Không thuê gia công ngoài, không qua trung gian: mỗi tấm ván, mỗi đường chỉ đều được kiểm soát theo quy chuẩn thống nhất và sẵn sàng để quý khách nghiệm thu.</p>
     </div>
     <div class="row g-4">
       <div class="col-md-6">
         <div class="sol-card h-100">
           <div class="sol-ic">📐</div>
-          <h3 class="h5 fw-bold mb-1">3D dựng theo số đo thật — thấy trước rồi mới làm</h3>
-          <p class="text-muted mb-0">Tôi đo tận nhà, dựng 3D đúng từng centimet của căn anh chị chứ không lấy mẫu chung. Anh chị chỉnh thoải mái tới khi ưng, ký xác nhận rồi tôi mới cắt ván. <b>Cái thấy trên màn hình chính là cái sẽ dọn vào ở</b> — không có chuyện một đằng một nẻo.</p>
+          <h3 class="h5 fw-bold mb-1">Bản vẽ 3D theo số đo thực tế — hình dung trước khi thi công</h3>
+          <p class="text-muted mb-0">Mỗi phương án được khảo sát và dựng 3D chính xác theo từng centimet của không gian thực tế, không áp dụng mẫu có sẵn. Quý khách điều chỉnh đến khi hoàn toàn hài lòng và xác nhận trước khi vật liệu được đưa vào sản xuất. <b>Hình ảnh trên bản vẽ chính là thành phẩm sẽ được bàn giao</b> — không có sai khác giữa thiết kế và thực tế.</p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="sol-card h-100">
           <div class="sol-ic">🪵</div>
-          <h3 class="h5 fw-bold mb-1">Sắc nét ở từng đường chỉ — mời tới xưởng kiểm</h3>
-          <p class="text-muted mb-0">Chỉ cạnh miết tay không gợn, cánh tủ cùng một khe hở, bản lề đóng êm. Đó là chuẩn tôi giao cho thợ. Không cần tin lời — anh chị cứ ghé xưởng Ái Tử xem tận mắt món đồ của mình đang được làm thế nào.</p>
+          <h3 class="h5 fw-bold mb-1">Hoàn thiện tinh xảo đến từng đường chỉ — nghiệm thu tại xưởng</h3>
+          <p class="text-muted mb-0">Chỉ cạnh dán khít, miết tay không gợn; khe cánh tủ đều tuyệt đối; bản lề giảm chấn đóng êm. Đó là quy chuẩn hoàn thiện thống nhất tại Homie. Quý khách được mời đến xưởng Ái Tử để trực tiếp kiểm tra sản phẩm của mình trong từng công đoạn thi công.</p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="sol-card h-100">
           <div class="sol-ic">🛡️</div>
-          <h3 class="h5 fw-bold mb-1">Vật liệu minh bạch — đúng chỗ nào dùng loại nấy</h3>
-          <p class="text-muted mb-0">Chân tủ bếp, tủ lavabo, khu ẩm ướt: tôi dùng <b>nhựa rỗng chống nước tuyệt đối</b> — nồm ẩm mấy cũng không phồng, không mục. Thân và cánh tủ khô ráo: dùng <b>gỗ công nghiệp An Cường</b> phủ Melamine/Laminate, đẹp và bền. Không đánh đồng "gỗ công nghiệp" để làm rẻ, cũng không vẽ vời "nhựa cao cấp" cho oai — chỗ nào cần loại nào, tôi nói thẳng.</p>
+          <h3 class="h5 fw-bold mb-1">Vật liệu đúng chuẩn, đúng vị trí — minh bạch từ lõi ván</h3>
+          <p class="text-muted mb-0">Khu vực thường xuyên tiếp xúc nước — chân tủ bếp, tủ lavabo, khu vực ẩm — sử dụng <b>nhựa Picomat chống nước tuyệt đối</b>: không ngậm nước, không cong vênh, không mối mọt dù độ ẩm cao. Thân và cánh tủ khô ráo dùng <b>gỗ công nghiệp An Cường lõi xanh chống ẩm</b>, phủ bề mặt Melamine, Laminate hoặc <b>Acrylic bóng gương cao cấp</b> tùy phong cách. Mỗi vật liệu được bố trí đúng đặc tính kỹ thuật — không đánh đồng để hạ giá thành, không thổi phồng để nâng giá.</p>
         </div>
       </div>
       <div class="col-md-6">
         <div class="sol-card h-100">
           <div class="sol-ic">🧩</div>
-          <h3 class="h5 fw-bold mb-1">Tối ưu từng góc chết — nhà chật vẫn đủ đồ</h3>
-          <p class="text-muted mb-0">Góc chữ L tủ bếp làm mâm xoay, ray kéo lấy tận trong cùng. Gầm cầu thang biến thành tủ giày, tủ kho. Đầu giường, kịch trần tủ áo — tận dụng hết chiều cao. Tôi thiết kế để anh chị <b>cất được nhiều nhất trên đúng diện tích đang có</b>, không phí một tấc.</p>
+          <h3 class="h5 fw-bold mb-1">Giải pháp tối ưu công năng — khai thác trọn vẹn từng mét vuông</h3>
+          <p class="text-muted mb-0">Góc chữ L trong tủ bếp được xử lý bằng mâm xoay và phụ kiện ray kéo tiếp cận tận cùng. Gầm cầu thang trở thành tủ giày, tủ kho. Hệ tủ áo kịch trần khai thác trọn chiều cao không gian. Mỗi thiết kế đều hướng tới <b>khả năng lưu trữ tối đa trên đúng diện tích sẵn có</b>, không lãng phí một khoảng trống.</p>
         </div>
       </div>
       <div class="col-12">
         <div class="sol-card sol-card--wide h-100">
           <div class="sol-ic">📄</div>
-          <h3 class="h5 fw-bold mb-1">Luật chơi tử tế — để anh chị an tâm, và để tôi giữ được uy tín</h3>
-          <p class="text-muted mb-0">Hợp đồng ghi rõ vật liệu, kích thước, đơn giá và <b>tiến độ từng giai đoạn</b>. Phát sinh phải có chữ ký hai bên mới tính — không có kiểu làm rồi mới báo tiền. Bảo hành bằng văn bản. Và quan trọng nhất: tôi là người Quảng Trị, xưởng ở ngay đây — hư cái gì anh chị gọi là có người tới, không mất hút.</p>
+          <h3 class="h5 fw-bold mb-1">Cam kết minh bạch bằng văn bản — nền tảng của uy tín</h3>
+          <p class="text-muted mb-0">Hợp đồng quy định rõ chủng loại vật liệu, kích thước, đơn giá và <b>tiến độ theo từng giai đoạn</b>. Mọi phát sinh chỉ được tính khi có xác nhận bằng chữ ký của cả hai bên — không có tình trạng thi công rồi mới báo chi phí. Chế độ bảo hành được cam kết bằng văn bản, với đội ngũ kỹ thuật địa phương đặt tại Quảng Trị, sẵn sàng hỗ trợ hậu mãi kịp thời khi cần.</p>
         </div>
       </div>
     </div>
 
     <!-- Cam kết nhanh -->
     <div class="row g-3 text-center mt-2">
-      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">📐</div><h3 class="h6 fw-bold mt-2 mb-1">Đo tận nhà miễn phí</h3><p class="small text-muted mb-0">Tới tận nơi, tư vấn đúng căn nhà anh chị.</p></div></div>
-      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">📄</div><h3 class="h6 fw-bold mt-2 mb-1">Cam kết bằng văn bản</h3><p class="small text-muted mb-0">Rõ ràng — không mua hớ, không phát sinh mập mờ.</p></div></div>
-      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">🏭</div><h3 class="h6 fw-bold mt-2 mb-1">Xưởng trực tiếp tại Ái Tử</h3><p class="small text-muted mb-0">Thi công tận nơi, mời tới kiểm bất cứ lúc nào.</p></div></div>
-      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">🤝</div><h3 class="h6 fw-bold mt-2 mb-1">Người địa phương</h3><p class="small text-muted mb-0">Đồng hành từ bản vẽ tới khi dọn vào ở.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">📐</div><h3 class="h6 fw-bold mt-2 mb-1">Khảo sát tận nơi miễn phí</h3><p class="small text-muted mb-0">Đo đạc thực tế, tư vấn đúng hiện trạng công trình.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">📄</div><h3 class="h6 fw-bold mt-2 mb-1">Cam kết bằng văn bản</h3><p class="small text-muted mb-0">Chi phí minh bạch — không phát sinh ngoài hợp đồng.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">🏭</div><h3 class="h6 fw-bold mt-2 mb-1">Xưởng sản xuất tại Ái Tử</h3><p class="small text-muted mb-0">Sản xuất tại chỗ, sẵn sàng đón khách nghiệm thu.</p></div></div>
+      <div class="col-6 col-lg-3"><div class="why-card h-100"><div class="why-ic mx-auto">🤝</div><h3 class="h6 fw-bold mt-2 mb-1">Đơn vị địa phương</h3><p class="small text-muted mb-0">Đồng hành trọn vẹn từ bản vẽ đến khi bàn giao.</p></div></div>
     </div>
   </div>
 </section>
@@ -228,7 +228,7 @@
       <div>
         <div class="eyebrow">Sản phẩm nổi bật</div>
         <h2 class="section-title mb-0">Tủ Bếp</h2>
-        <p class="text-muted small mt-1 mb-0">Nhựa rỗng chống ẩm · Gỗ công nghiệp An Cường · Thiết kế theo yêu cầu</p>
+        <p class="text-muted small mt-1 mb-0">Nhựa Picomat chống nước · Gỗ công nghiệp An Cường · Bề mặt Acrylic / Laminate</p>
       </div>
       <a href="{{ url_for('gallery') }}?cat=tu-bep" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
     </div>
@@ -250,9 +250,9 @@
 <!-- BANNER GIỮA TRANG -->
 <section class="mid-banner py-5" style="background:linear-gradient(120deg,var(--wood-dark) 0%,var(--wood) 100%);">
   <div class="container text-center text-white">
-    <h3 class="fw-bold mb-2">Thấy trước căn nhà của mình — rồi mới bỏ tiền</h3>
-    <p class="mb-4 opacity-90">Đừng làm nội thất kiểu "hên xui". Homie dựng 3D đúng số đo thật của căn anh chị, chỉnh tới khi ưng mới thi công. Miễn phí, không ràng buộc.</p>
-    <a href="#lien-he-form" class="btn btn-light btn-lg px-5 fw-bold" style="color:var(--wood-dark)">Đặt lịch đo & dựng 3D miễn phí</a>
+    <h3 class="fw-bold mb-2">Hình dung trọn vẹn không gian sống trước khi đầu tư</h3>
+    <p class="mb-4 opacity-90">Nội thất không nên là một quyết định may rủi. Homie dựng bản vẽ 3D theo đúng số đo thực tế của công trình, tinh chỉnh đến khi hoàn thiện trước khi thi công. Hoàn toàn miễn phí, không ràng buộc.</p>
+    <a href="#lien-he-form" class="btn btn-light btn-lg px-5 fw-bold" style="color:var(--wood-dark)">Đăng ký khảo sát &amp; dựng 3D miễn phí</a>
   </div>
 </section>
 

@@ -51,7 +51,7 @@ app.config["MAX_CONTENT_LENGTH"] = 64 * 1024 * 1024  # 64MB / lần gửi (đủ
 # Thông tin liên hệ Homie - bà chủ sửa ở đây hoặc qua biến môi trường
 SITE = {
     "ten": "Homie - Nội Thất & Xây Nhà",
-    "slogan": "Trao trọn yên tâm cho ngôi nhà của bạn",
+    "slogan": "Kiến tạo không gian sống bền vững",
     "khu_vuc": "Quảng Trị",
     "zalo": os.environ.get("HOMIE_ZALO", "0902866717"),
     "hotline": os.environ.get("HOMIE_HOTLINE", "0902 866 717"),

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{{ SITE.ten }}{% endblock %}</title>
-  <meta name="description" content="{% block desc %}Nội thất nhựa rỗng & gỗ công nghiệp tại {{ SITE.khu_vuc }}. Đo tận nhà miễn phí, cam kết bằng văn bản, đồng hành từ bản vẽ.{% endblock %}">
+  <meta name="description" content="{% block desc %}Nội thất gỗ công nghiệp An Cường, bề mặt Acrylic & nhựa Picomat chống nước tại {{ SITE.khu_vuc }}. Xưởng sản xuất trực tiếp, khảo sát tận nơi miễn phí, cam kết bằng văn bản.{% endblock %}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -14,7 +14,7 @@
 <!-- TOP BAR -->
 <div class="top-bar">
   <div class="container d-flex align-items-center justify-content-between py-1">
-    <span class="small">Nội thất Homie — Quảng Trị | Thi công trực tiếp, không qua trung gian</span>
+    <span class="small">Nội thất Homie — Quảng Trị | Xưởng sản xuất &amp; thi công trực tiếp, không qua trung gian</span>
     <a class="top-bar-phone" href="tel:0902866717">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" class="me-1">
         <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/>
@@ -82,13 +82,13 @@
         <div class="lead-card p-4 p-md-5">
           <div class="row align-items-center g-4">
             <div class="col-md-5">
-              <div class="eyebrow mb-2">Miễn phí · Không ép mua</div>
-              <h2 class="h3 fw-bold mb-2">Chưa cần chốt gì cả — cứ để lại số, tôi qua đo đã</h2>
-              <p class="text-muted mb-3">Anh chị để lại số điện thoại/Zalo, tôi gọi lại, hẹn qua đo tận nhà và
-                tư vấn <b>thẳng thật</b>: món nào nên làm, món nào chưa cần, tiền nên dồn vào đâu.
-                <b>Không mất phí, không ép mua</b> — hợp thì làm, không hợp cũng có thêm người bạn rành nghề.</p>
+              <div class="eyebrow mb-2">Miễn phí · Không ràng buộc</div>
+              <h2 class="h3 fw-bold mb-2">Bắt đầu bằng một buổi khảo sát — trước khi quyết định</h2>
+              <p class="text-muted mb-3">Quý khách để lại số điện thoại/Zalo, đội ngũ Homie sẽ liên hệ, hẹn lịch khảo sát tận nơi và
+                tư vấn <b>khách quan</b>: hạng mục nào nên ưu tiên, hạng mục nào chưa cần thiết, ngân sách nên phân bổ ra sao.
+                <b>Hoàn toàn miễn phí, không ràng buộc</b> — một cơ sở vững vàng để đưa ra quyết định đúng đắn.</p>
               <ul class="tick-list small mb-3">
-                <li>Đo tận nhà miễn phí</li>
+                <li>Khảo sát tận nơi miễn phí</li>
                 <li>Cam kết bằng văn bản</li>
                 <li>Đồng hành từ bản vẽ 3D</li>
               </ul>
@@ -106,24 +106,24 @@
               <form method="post" action="{{ url_for('submit_lead') }}" class="row g-2">
                 <input type="hidden" name="source" value="{{ request.path }}">
                 <div class="col-12">
-                  <input class="form-control form-control-lg" name="name" placeholder="Họ tên của bạn">
+                  <input class="form-control form-control-lg" name="name" placeholder="Họ và tên">
                 </div>
                 <div class="col-sm-6">
-                  <input class="form-control form-control-lg" name="phone" required type="tel" inputmode="numeric" pattern="(0|\+84)[0-9\s.]{8,13}" maxlength="15" title="Số di động Việt Nam, VD: 0902 866 717" placeholder="SĐT / Zalo *">
+                  <input class="form-control form-control-lg" name="phone" required type="tel" inputmode="numeric" pattern="(0|\+84)[0-9\s.]{8,13}" maxlength="15" title="Số di động Việt Nam, VD: 0902 866 717" placeholder="Số điện thoại / Zalo *">
                 </div>
                 <div class="col-sm-6">
                   <select class="form-select form-select-lg" name="need">
-                    <option value="">Bạn cần làm gì?</option>
+                    <option value="">Hạng mục cần tư vấn</option>
                     {% for k, v in CATEGORIES %}<option value="{{ v }}">{{ v }}</option>{% endfor %}
                   </select>
                 </div>
                 <div class="col-12">
-                  <textarea class="form-control" name="message" rows="2" placeholder="Ghi chú thêm (diện tích, ngân sách dự kiến...)"></textarea>
+                  <textarea class="form-control" name="message" rows="2" placeholder="Thông tin thêm (diện tích, ngân sách dự kiến...)"></textarea>
                 </div>
                 <div class="col-12 d-grid">
                   <button class="btn btn-primary btn-lg">Gửi yêu cầu tư vấn</button>
                 </div>
-                <div class="col-12 text-center"><small class="text-muted">Thông tin của bạn được bảo mật hoàn toàn.</small></div>
+                <div class="col-12 text-center"><small class="text-muted">Thông tin được bảo mật tuyệt đối.</small></div>
               </form>
             </div>
           </div>
