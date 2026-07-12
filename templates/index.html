@@ -2,22 +2,34 @@
 {% from "macros.html" import project_card, article_card %}
 {% block content %}
 
-<!-- HERO BANNER FULL WIDTH -->
-<section class="hero-banner">
-  <div class="hero-overlay"></div>
-  <img src="{{ url_for('static', filename='uploads/bep_01.jpg') }}" alt="Nội thất Homie Quảng Trị" class="hero-bg-img">
-  <div class="hero-content container">
-    <div class="row justify-content-center text-center">
-      <div class="col-lg-8">
-        <div class="hero-badges mb-3">
-          <span>Xưởng sản xuất trực tiếp tại Ái Tử · Triệu Phong</span>
-          <span>Kiểm soát trọn quy trình — không qua trung gian</span>
+<!-- HERO SECTION: TRỰC QUAN & ĐẲNG CẤP -->
+<section class="hero-premium">
+  <div class="hero-container">
+    <!-- Khối nội dung giá trị -->
+    <div class="hero-content-col">
+      <span class="company-badge">Nội Thất Homie — Kiến Tạo Không Gian Sống Thực Tế</span>
+      <h1>Tuyệt Tác Nội Thất Bản Địa<br>Tối Ưu Công Năng &amp; Thích Ứng Khí Hậu</h1>
+      <p>Không dừng lại ở những bản vẽ 3D hào nhoáng, Homie mang đến giải pháp thiết kế tổng thể và thi công sắc nét. Sản phẩm được sản xuất trực tiếp tại xưởng Ái Tử, cá nhân hóa toàn diện theo nhân trắc học và bền vững tuyệt đối trước khí hậu khắc nghiệt của miền Trung.</p>
+      <div class="hero-actions">
+        <a href="#lien-he-form" class="hero-btn-primary">Khảo Sát &amp; Đo Đạc Hiện Trạng Miễn Phí</a>
+        <a href="{{ url_for('gallery') }}" class="hero-btn-secondary">Khám Phá Thư Viện Công Trình Thực Tế</a>
+      </div>
+    </div>
+
+    <!-- Khối trưng bày hình ảnh dự án (Project Grid Showcase) -->
+    <div class="hero-visual-grid">
+      <div class="grid-item large">
+        <img src="{{ url_for('static', filename='uploads/tc_kiem-anh_01.jpg') }}" alt="Không gian phòng khách hiện đại — gỗ An Cường vân óc chó" loading="eager">
+        <div class="img-caption">Dự án trọn gói — tone gỗ ấm hiện đại</div>
+      </div>
+      <div class="grid-item-sub">
+        <div class="grid-item small">
+          <img src="{{ url_for('static', filename='uploads/bep_01.jpg') }}" alt="Tủ bếp Acrylic phối Laminate cao cấp" loading="lazy">
+          <div class="img-caption">Hệ bếp chống nước tuyệt đối</div>
         </div>
-        <h1 class="hero-title mb-3">Làm nhà là chuyện cả đời.<br>Homie kiến tạo không gian để <em>an cư</em>, không chỉ để ghi hình.</h1>
-        <p class="hero-sub mb-4">Nội thất được sản xuất để bền vững thật sự với khí hậu nồm ẩm miền Trung — giữ trọn giá trị qua nhiều mùa, thay vì chỉ hoàn hảo tại thời điểm bàn giao. Sở hữu xưởng sản xuất trực tiếp tại Ái Tử, Homie kiểm soát toàn bộ chất lượng từ tấm ván An Cường đến từng đường chỉ hoàn thiện; quý khách được trực tiếp giám sát và nghiệm thu vật liệu trước khi thi công.</p>
-        <div class="d-flex flex-wrap gap-3 justify-content-center">
-          <a href="#lien-he-form" class="btn btn-primary btn-lg px-5">Đăng ký khảo sát &amp; tư vấn giải pháp</a>
-          <a href="{{ url_for('gallery') }}" class="btn btn-outline-light btn-lg px-5">Xem công trình thực tế đã bàn giao</a>
+        <div class="grid-item small">
+          <img src="{{ url_for('static', filename='uploads/tc_tinh_01.jpg') }}" alt="Phòng ngủ Master ấm cúng" loading="lazy">
+          <div class="img-caption">Phòng ngủ Master — Warm Modern</div>
         </div>
       </div>
     </div>
