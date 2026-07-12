@@ -36,7 +36,122 @@
   </div>
 </section>
 
-<!-- PHỄU SÁCH TẶNG (LEAD MAGNET) — ĐẦU TRANG -->
+<!-- ============ CÔNG TRÌNH THỰC TẾ (đưa lên ngay sau hero) ============ -->
+
+<!-- SECTION: TỦ BẾP -->
+<section class="cat-section py-5 bg-cream">
+  <div class="container">
+    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="eyebrow">Sản phẩm nổi bật</div>
+        <h2 class="section-title mb-0">Tủ Bếp</h2>
+        <p class="text-muted small mt-1 mb-0">Nhựa Picomat chống nước · Gỗ công nghiệp An Cường · Bề mặt Acrylic / Laminate</p>
+      </div>
+      <a href="{{ url_for('gallery') }}?cat=tu-bep" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
+    </div>
+    <div class="row g-3">
+      {% set bep_projects = projects | selectattr('category', 'equalto', 'tu-bep') | list %}
+      {% if bep_projects %}
+        {% for p in bep_projects[:3] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% else %}
+        {% for p in projects[:3] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- BANNER GIỮA TRANG -->
+<section class="mid-banner py-5" style="background:linear-gradient(120deg,var(--wood-dark) 0%,var(--wood) 100%);">
+  <div class="container text-center text-white">
+    <h3 class="fw-bold mb-2">Hình dung trọn vẹn không gian sống trước khi đầu tư</h3>
+    <p class="mb-4 opacity-90">Nội thất không nên là một quyết định may rủi. Homie dựng bản vẽ 3D theo đúng số đo thực tế của công trình, tinh chỉnh đến khi hoàn thiện trước khi thi công. Hoàn toàn miễn phí, không ràng buộc.</p>
+    <a href="#lien-he-form" class="btn btn-light btn-lg px-5 fw-bold" style="color:var(--wood-dark)">Đăng ký khảo sát &amp; dựng 3D miễn phí</a>
+  </div>
+</section>
+
+<!-- SECTION: PHÒNG NGỦ -->
+<section class="cat-section py-5">
+  <div class="container">
+    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="eyebrow">Phòng nghỉ ngơi</div>
+        <h2 class="section-title mb-0">Phòng Ngủ</h2>
+        <p class="text-muted small mt-1 mb-0">Master bedroom · Phòng cơ bản · Phòng trẻ em</p>
+      </div>
+      <a href="{{ url_for('gallery') }}?cat=giuong" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
+    </div>
+    <div class="row g-3">
+      {% set ngu_projects = projects | selectattr('category', 'equalto', 'giuong') | list %}
+      {% if ngu_projects %}
+        {% for p in ngu_projects[:3] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% else %}
+        {% for p in projects[1:4] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: TỦ ÁO & TỦ TRANG TRÍ -->
+<section class="cat-section py-5 bg-cream">
+  <div class="container">
+    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="eyebrow">Lưu trữ & Trưng bày</div>
+        <h2 class="section-title mb-0">Tủ Áo · Tủ Trang Trí</h2>
+        <p class="text-muted small mt-1 mb-0">Kịch trần · Cánh lùa · Cánh mở · Thiết kế theo không gian</p>
+      </div>
+      <a href="{{ url_for('gallery') }}?cat=tu-ao" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
+    </div>
+    <div class="row g-3">
+      {% set tho_projects = projects | selectattr('category', 'equalto', 'tu-ao') | list %}
+      {% if tho_projects %}
+        {% for p in tho_projects[:3] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% else %}
+        {% for p in projects[2:5] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: THIẾT KẾ 3D -->
+<section class="cat-section py-5">
+  <div class="container">
+    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="eyebrow">Trước khi thi công</div>
+        <h2 class="section-title mb-0">Bản Vẽ 3D</h2>
+        <p class="text-muted small mt-1 mb-0">Dựng 3D theo số đo thực tế · Chỉnh sửa thoải mái trước khi chốt</p>
+      </div>
+      <a href="{{ url_for('gallery') }}?cat=thiet-ke-3d" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
+    </div>
+    <div class="row g-3">
+      {% set td3_projects = projects | selectattr('category', 'equalto', 'thiet-ke-3d') | list %}
+      {% if td3_projects %}
+        {% for p in td3_projects[:3] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% else %}
+        {% for p in projects[3:6] %}
+          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- PHỄU SÁCH TẶNG (LEAD MAGNET) -->
 <section class="book-funnel py-5" style="background:linear-gradient(120deg,#0a1628 0%,#162347 58%,#0f1c3a 100%);">
   <div class="container">
     <div class="row align-items-center g-4 g-lg-5">
@@ -232,119 +347,6 @@
 .sol-card .sol-ic{font-size:1.9rem;line-height:1;margin-bottom:.5rem}
 .sol-card--wide{background:linear-gradient(120deg,#fbf6ec 0%,#fff 100%);border-color:#e9dcc4}
 </style>
-
-<!-- SECTION: TỦ BẾP -->
-<section class="cat-section py-5 bg-cream">
-  <div class="container">
-    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
-      <div>
-        <div class="eyebrow">Sản phẩm nổi bật</div>
-        <h2 class="section-title mb-0">Tủ Bếp</h2>
-        <p class="text-muted small mt-1 mb-0">Nhựa Picomat chống nước · Gỗ công nghiệp An Cường · Bề mặt Acrylic / Laminate</p>
-      </div>
-      <a href="{{ url_for('gallery') }}?cat=tu-bep" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
-    </div>
-    <div class="row g-3">
-      {% set bep_projects = projects | selectattr('category', 'equalto', 'tu-bep') | list %}
-      {% if bep_projects %}
-        {% for p in bep_projects[:3] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% else %}
-        {% for p in projects[:3] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-<!-- BANNER GIỮA TRANG -->
-<section class="mid-banner py-5" style="background:linear-gradient(120deg,var(--wood-dark) 0%,var(--wood) 100%);">
-  <div class="container text-center text-white">
-    <h3 class="fw-bold mb-2">Hình dung trọn vẹn không gian sống trước khi đầu tư</h3>
-    <p class="mb-4 opacity-90">Nội thất không nên là một quyết định may rủi. Homie dựng bản vẽ 3D theo đúng số đo thực tế của công trình, tinh chỉnh đến khi hoàn thiện trước khi thi công. Hoàn toàn miễn phí, không ràng buộc.</p>
-    <a href="#lien-he-form" class="btn btn-light btn-lg px-5 fw-bold" style="color:var(--wood-dark)">Đăng ký khảo sát &amp; dựng 3D miễn phí</a>
-  </div>
-</section>
-
-<!-- SECTION: PHÒNG NGỦ -->
-<section class="cat-section py-5">
-  <div class="container">
-    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
-      <div>
-        <div class="eyebrow">Phòng nghỉ ngơi</div>
-        <h2 class="section-title mb-0">Phòng Ngủ</h2>
-        <p class="text-muted small mt-1 mb-0">Master bedroom · Phòng cơ bản · Phòng trẻ em</p>
-      </div>
-      <a href="{{ url_for('gallery') }}?cat=giuong" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
-    </div>
-    <div class="row g-3">
-      {% set ngu_projects = projects | selectattr('category', 'equalto', 'giuong') | list %}
-      {% if ngu_projects %}
-        {% for p in ngu_projects[:3] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% else %}
-        {% for p in projects[1:4] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-<!-- SECTION: TỦ ÁO & TỦ TRANG TRÍ -->
-<section class="cat-section py-5 bg-cream">
-  <div class="container">
-    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
-      <div>
-        <div class="eyebrow">Lưu trữ & Trưng bày</div>
-        <h2 class="section-title mb-0">Tủ Áo · Tủ Trang Trí</h2>
-        <p class="text-muted small mt-1 mb-0">Kịch trần · Cánh lùa · Cánh mở · Thiết kế theo không gian</p>
-      </div>
-      <a href="{{ url_for('gallery') }}?cat=tu-ao" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
-    </div>
-    <div class="row g-3">
-      {% set tho_projects = projects | selectattr('category', 'equalto', 'tu-ao') | list %}
-      {% if tho_projects %}
-        {% for p in tho_projects[:3] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% else %}
-        {% for p in projects[2:5] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-<!-- SECTION: THIẾT KẾ 3D -->
-<section class="cat-section py-5">
-  <div class="container">
-    <div class="cat-header d-flex justify-content-between align-items-end mb-4">
-      <div>
-        <div class="eyebrow">Trước khi thi công</div>
-        <h2 class="section-title mb-0">Bản Vẽ 3D</h2>
-        <p class="text-muted small mt-1 mb-0">Dựng 3D theo số đo thực tế · Chỉnh sửa thoải mái trước khi chốt</p>
-      </div>
-      <a href="{{ url_for('gallery') }}?cat=thiet-ke-3d" class="btn btn-outline-primary btn-sm">Xem tất cả →</a>
-    </div>
-    <div class="row g-3">
-      {% set td3_projects = projects | selectattr('category', 'equalto', 'thiet-ke-3d') | list %}
-      {% if td3_projects %}
-        {% for p in td3_projects[:3] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% else %}
-        {% for p in projects[3:6] %}
-          <div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>
-        {% endfor %}
-      {% endif %}
-    </div>
-  </div>
-</section>
 
 <!-- KIẾN THỨC -->
 <section class="py-5 bg-cream">
