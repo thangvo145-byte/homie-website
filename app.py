@@ -699,14 +699,54 @@ def refresh_articles_cmd():
     print("Đã làm mới bài viết.")
 
 
+def link_existing_gallery_images():
+    """Tự động nối các ảnh phụ đã có sẵn trong static/uploads vào từng dự án
+    (theo quy ước tên file '<prefix>_01.jpg', '<prefix>_02.jpg', ...).
+    Chỉ THÊM ProjectImage còn thiếu, không xóa/không đổi gì đã có -> an toàn,
+    chạy lại bao nhiêu lần cũng không nhân đôi. Tự chạy mỗi lần app khởi động
+    (kể cả sau khi Render deploy lại) để ảnh không bị "thiếu" dù DB có bị tạo mới."""
+    import re as _re
+    try:
+        existing_files = set(os.listdir(UPLOAD_DIR))
+    except OSError:
+        return
+    added_total = 0
+    for p in Project.query.all():
+        if not p.image:
+            continue
+        m = _re.match(r"^(.*)_(\d+)\.(\w+)$", p.image)
+        if not m:
+            continue
+        prefix, _num, ext = m.groups()
+        already = {im.filename for im in p.images} | {p.image}
+        siblings = sorted(
+            f for f in existing_files
+            if _re.match(rf"^{_re.escape(prefix)}_\d+\.{_re.escape(ext)}$", f)
+            and f not in already
+        )
+        for i, fname in enumerate(siblings, start=1):
+            db.session.add(ProjectImage(project_id=p.id, filename=fname, sort_order=i))
+            added_total += 1
+    if added_total:
+        db.session.commit()
+        print(f"[link_existing_gallery_images] linked {added_total} extra photos.")
+
+
 with app.app_context():
     db.create_all()
     # Auto-seed: nếu DB trống thì nạp dữ liệu (chạy mỗi lần Render deploy lại)
     try:
-        from seed import run_seed
+        from seed import run_seed, add_additional_articles
         run_seed(db, Project, Article)
+        n_new = add_additional_articles(db, Article)
+        if n_new:
+            print(f"[add_additional_articles] added {n_new} new articles.")
     except Exception as e:
         print(f"Seed warning: {e}")
+    try:
+        link_existing_gallery_images()
+    except Exception as e:
+        print(f"Link gallery images warning: {e}")
 
 
 if __name__ == "__main__":

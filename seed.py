@@ -522,3 +522,93 @@ lại chính là thứ giữ cho hai bên còn nhìn mặt nhau vui vẻ vào ng
     db.session.commit()
     print(f"Seed OK: {len(projects)} du an that, {len(articles)} bai viet"
           f"{' (force refresh)' if force_articles else ''}.")
+
+
+def additional_articles():
+    """Bài viết THÊM MỚI (không nằm trong bộ seed gốc) — chèn bổ sung mỗi lần khởi động
+    nếu slug chưa tồn tại, KHÔNG đụng dữ liệu cũ. Dùng cho các bài viết sâu bổ sung sau này."""
+    return [
+        dict(slug="mui-tu-moi-co-doc-hai-khong",
+             title="Mùi nồng trong tủ mới: khi nào là bình thường, khi nào là dấu hiệu cần lo",
+             category="kien-thuc",
+             cover="tc_kiem-anh_01.jpg",
+             excerpt="Tủ mới về nhà, mở cửa ra là mùi hắc xộc lên, đóng cửa lại vẫn ngửi thấy sau nhiều tuần. Nhiều người tặc lưỡi 'đồ mới mà, ít bữa hết' — nhưng không phải mùi nào cũng tự hết, và không phải mùi nào cũng vô hại.",
+             body="""
+<p>Mùi nồng khi mở một chiếc tủ mới là chuyện gần như ai cũng gặp, nhưng rất ít người phân biệt được
+đâu là mùi bình thường của vật liệu mới, đâu là dấu hiệu đáng lo. Sự khác biệt nằm ở một chữ viết tắt
+ít ai để ý khi ký hợp đồng: <b>formaldehyde</b> — loại keo kết dính dùng để ép ván gỗ công nghiệp
+(MDF, HDF, ván dăm) thành tấm.</p>
+
+<h3>Mùi ở đâu ra, và vì sao có loại hết nhanh có loại không</h3>
+<p>Ván gỗ công nghiệp được ép từ dăm gỗ/sợi gỗ và keo formaldehyde ở áp suất cao. Lượng keo dư thừa
+sẽ thoát dần ra không khí theo thời gian — đó chính là mùi hắc bạn ngửi thấy. Vấn đề là tốc độ và
+lượng thoát ra phụ thuộc hoàn toàn vào <b>cấp độ ván</b> mà xưởng dùng. Ván đạt chuẩn E1 (tiêu chuẩn
+phổ biến ở đồ nội thất tử tế) có lượng phát thải formaldehyde ở mức an toàn theo khuyến cáo, mùi sẽ
+nhạt dần trong khoảng 1-2 tuần. Ván kém chất lượng hơn (thường không công bố rõ cấp độ, giá rẻ bất
+thường) có thể phát thải kéo dài hàng tháng, mùi nồng không giảm mà đôi khi khiến người ở gần — đặc
+biệt trẻ nhỏ, người có bệnh hô hấp — cay mắt, khó chịu đường thở.</p>
+
+<h3>Cách kiểm tra đơn giản trước khi nhận hàng</h3>
+<p>Yêu cầu bên thi công cho xem <b>tem/nhãn cấp độ ván</b> (E1, E2 hoặc CARB P2) ngay trên tấm ván
+lúc còn nguyên kiện, đừng đợi đóng thành tủ mới hỏi. Một xưởng làm ăn đàng hoàng luôn sẵn sàng cho xem
+— nếu bên thi công lảng tránh hoặc nói "ván nào chẳng như nhau", đó là tín hiệu cần cẩn trọng. Với tủ
+đã đóng xong, một cách kiểm tra nhanh: mở cửa tủ để 10 phút trong phòng kín rồi ngửi ở khoảng cách gần
+— nếu mùi hắc đến mức cay mắt chảy nước mắt thay vì chỉ là mùi gỗ/keo nhẹ, nên yêu cầu xưởng giải trình
+về loại ván đã dùng.</p>
+
+<h3>Vì sao nhựa rỗng gần như không có vấn đề này</h3>
+<p>Đây cũng là lý do cốt lõi khiến nhiều gia đình có trẻ nhỏ hoặc người lớn tuổi ở Quảng Trị chuyển sang
+chọn <b>nhựa rỗng</b> cho khu vực bếp và phòng ngủ: vật liệu này không dùng keo formaldehyde để ép,
+nên gần như không phát thải mùi hắc, đồng thời chống ẩm tuyệt đối — giải quyết cùng lúc hai nỗi lo lớn
+nhất của khí hậu miền Trung (xem thêm bài "chống ẩm mốc"). Đánh đổi là vân gỗ nhựa không "thật" bằng
+gỗ công nghiệp phủ melamine cao cấp, nên nhiều nhà chọn cách kết hợp: nhựa rỗng cho tủ bếp/tủ giường
+ngủ (nơi ẩm và cần an toàn nhất), gỗ công nghiệp đạt chuẩn E1 cho khu vực phòng khách/phòng làm việc.</p>
+""",
+             featured=False),
+
+        dict(slug="hop-dong-45-ngay-thuc-te-90-ngay",
+             title="Hợp đồng ghi 45 ngày, thực tế kéo dài gấp đôi: vì sao tiến độ thi công nội thất hay trễ",
+             category="kinh-nghiem",
+             cover="tc_anh-dung_01.jpg",
+             excerpt="Gần như nhà nào làm nội thất trọn gói cũng từng nghe câu 'tuần sau xong' lặp lại vài lần. Phần lớn không phải do đơn vị thi công cố tình trễ hẹn, mà do một chuỗi phụ thuộc ít ai lường trước lúc ký hợp đồng.",
+             body="""
+<p>Một hợp đồng thi công nội thất trọn gói thường ghi con số rất cụ thể — 30, 45, 60 ngày — khiến gia
+chủ đinh ninh đó là ngày dọn vào ở. Thực tế, đa số dự án trễ không phải vì thợ làm chậm, mà vì tiến độ
+nội thất phụ thuộc dây chuyền vào rất nhiều khâu nằm ngoài tầm kiểm soát của cả hai bên.</p>
+
+<h3>Ba điểm nghẽn lặp lại nhiều nhất</h3>
+<p>Thứ nhất là <b>đo đạc trễ so với xây thô</b>: nội thất chỉ đóng chính xác được sau khi tường đã tô
+trát xong và khô hẳn (thường cần thêm 2-3 tuần sau khi thợ xây bàn giao), nếu đo sớm hơn để "chạy kịp
+tiến độ" thì sai số kích thước là điều gần như chắc chắn xảy ra sau đó. Thứ hai là <b>đặt hàng phụ
+kiện nhập khẩu</b> — ray giảm chấn, bản lề, tay nắm cao cấp thường phải đặt theo lô, thời gian về hàng
+6-15 ngày là bình thường, và nếu đúng dịp lễ/Tết có thể kéo dài gấp đôi. Thứ ba là <b>khâu duyệt mẫu
+qua lại</b>: mỗi lần gia chủ đổi ý về màu sắc hay kiểu tay nắm sau khi xưởng đã lên phôi, thời gian làm
+lại cộng dồn nhưng ít khi được tính vào mốc ban đầu.</p>
+
+<h3>Cách một hợp đồng tử tế nên ghi để tránh hiểu lầm</h3>
+<p>Thay vì một mốc ngày duy nhất, hợp đồng đáng tin nên tách rõ từng giai đoạn có điều kiện đi kèm: "hoàn
+thiện đóng trong 30 ngày làm việc <i>kể từ ngày đo đạc chính thức sau xây thô</i>", và ghi riêng thời
+gian chờ phụ kiện nhập khẩu nếu khách chọn loại phải đặt hàng. Khi thấy hợp đồng ghi rõ kiểu này thay vì
+một câu chung chung "hoàn thành trong 45 ngày", đó là dấu hiệu bên thi công đã làm đủ dự án để biết
+đường nào hay trễ và chủ động rào trước — chứ không phải hứa cho đẹp lúc ký.</p>
+
+<h3>Việc gia chủ có thể chủ động để không bị động chờ</h3>
+<p>Chốt mẫu tay nắm, bản lề, màu sắc <b>trước khi</b> xây thô hoàn thiện, thay vì để tới lúc đo đạc mới
+chọn — đây là bước rút ngắn được nhiều ngày nhất mà gia chủ hoàn toàn tự quyết định được, không phụ
+thuộc ai. Đồng thời nên hỏi thẳng đơn vị thi công: "phụ kiện nào trong nhà tôi phải đặt hàng, thời gian
+về dự kiến bao lâu" — hỏi trước một câu này thường tránh được cả tuần bị động chờ mà không ai báo trước.</p>
+""",
+             featured=False),
+    ]
+
+
+def add_additional_articles(db, Article):
+    """Chèn các bài trong additional_articles() nếu slug CHƯA có — an toàn, chạy lại không nhân đôi."""
+    added = 0
+    for a in additional_articles():
+        if not Article.query.filter_by(slug=a["slug"]).first():
+            db.session.add(Article(**a))
+            added += 1
+    if added:
+        db.session.commit()
+    return added
