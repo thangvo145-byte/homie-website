@@ -737,7 +737,9 @@ with app.app_context():
     # Auto-seed: nếu DB trống thì nạp dữ liệu (chạy mỗi lần Render deploy lại)
     try:
         from seed import run_seed, add_additional_articles
-        run_seed(db, Project, Article)
+        # force_articles=True: KHÔNG đụng dự án, chỉ tự đồng bộ nội dung 8 bài viết gốc theo
+        # slug về đúng bản mới nhất trong seed.py mỗi lần deploy (để sửa bài không cần đăng nhập).
+        run_seed(db, Project, Article, force_articles=True)
         n_new = add_additional_articles(db, Article)
         if n_new:
             print(f"[add_additional_articles] added {n_new} new articles.")

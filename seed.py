@@ -216,6 +216,16 @@ sát nền — nơi hơi nước quẩn quanh cả ngày.</p>
 thì không có gì để trương nở. Bạn có ngâm nó, nó cũng chỉ ướt rồi khô, hình dạng không đổi. Đổi lại,
 nhựa mềm hơn gỗ, bắt vít không "ăn" chắc bằng, và bề mặt vân không thật và ấm bằng gỗ khi sờ tay.</p>
 
+<h3>Hai chiếc tủ bếp cùng tuổi, cách nhau một quyết định nhỏ</h3>
+<p>Có hai căn bếp làm cùng thời điểm, cùng một khu dân cư, cách nhau chỉ vài trăm mét. Nhà thứ nhất
+chọn thùng gỗ công nghiệp toàn bộ vì "gỗ nhìn sang hơn". Nhà thứ hai nghe theo tư vấn, chọn thùng nhựa
+cho khoang dưới bồn rửa, còn lại vẫn để gỗ như bình thường. Hai năm sau, nhà thứ nhất phải gọi thợ đến
+đục bỏ nguyên khoang dưới bồn — chân tủ phồng to gấp rưỡi, cửa tủ không đóng khít, mùi ẩm mốc bốc
+lên mỗi khi mở ra. Nhà thứ hai, cũng khoang đó, sau năm năm vẫn phẳng lì như ngày đầu, chỉ hơi bạc màu
+vì cọ rửa nhiều. Chênh lệch không nằm ở tay nghề thợ hay giá tiền tổng thể — nó nằm đúng ở một quyết
+định nhỏ tại một khoang tủ duy nhất, cái khoang mà lúc chọn đồ, cả hai gia đình đều nghĩ "chắc không sao
+đâu".</p>
+
 <p>Vậy nên cách chọn khôn ngoan không phải chọn một loại cho cả nhà, mà là <b>đặt đúng vật liệu vào
 đúng chỗ nó phải chịu đựng</b>. Chỗ nào tiếp xúc nước trực tiếp và thường xuyên — thùng tủ bếp,
 đặc biệt khoang dưới chậu rửa, tủ dưới lavabo phòng tắm, chân tủ kịch sàn — để nhựa. Chỗ khô ráo mà
@@ -259,6 +269,15 @@ vào. Cái cạnh phía trong, phía dưới, phía sau — chỗ khách không 
 chớm gỉ, rồi kẹt, rồi kêu. Chi tiết này nhỏ nhưng là thứ bạn chạm tay vào mỗi ngày, và hỏng nó thì
 khó chịu hơn nhiều so với một vết xước trên mặt tủ.</p>
 
+<h3>Cái lưng tủ không ai nhìn, cho đến ngày phải nhìn</h3>
+<p>Một gia đình ở Đông Hà từng kể lại: nhà họ không hề dột, không hề bị nước tạt vào, vậy mà sau đúng
+một mùa nồm đầu tiên, kéo chiếc tủ áo ra khỏi tường để quét dọn thì phát hiện cả mảng lưng tủ đã mốc
+đen, meo lún phún như rêu. Mặt trước tủ, thứ họ nhìn thấy mỗi ngày, vẫn sáng bóng như mới mua. Cái
+mốc đó đã âm thầm phát triển suốt nhiều tháng ở phần họ không bao giờ ngó tới, chỉ vì tủ được kê sát
+tường theo đúng ý muốn "cho gọn, cho kín". Sau lần đó, họ yêu cầu thợ chừa lại khe hở phía sau và kê
+chân tủ cao thêm khi làm phòng ngủ còn lại — và mùa nồm năm sau, mảng tường ấy không còn xuất hiện
+vệt mốc nào nữa.</p>
+
 <p>Cuối cùng, có một sự thật ít người nói: cùng một tấm ván, cùng một bộ phụ kiện, thợ này làm bền
 mười năm, thợ kia hai năm đã lung lay. Phần lớn tuổi thọ của đồ gỗ nằm ở tay người ráp nó, ở chỗ họ
 có chịu bịt kín từng cái khe, chừa từng cái khe thở hay không — chứ không chỉ ở cái tem vật liệu dán
@@ -300,6 +319,14 @@ lại được.</p>
 căn bếp đã dùng ba năm mà cánh vẫn khít, chân tủ chưa phồng, bản lề chưa xệ — đó mới là bằng chứng
 về cách người ta làm phần khuất, phần bạn không kiểm tra được lúc nhận nhà.</p>
 
+<h3>Chênh nhau 30 triệu trên giấy, chênh nhau gấp đôi ngoài thực tế</h3>
+<p>Một cặp vợ chồng trẻ từng cầm hai bảng báo giá, một bên 180 triệu, một bên 210 triệu cho cùng diện
+tích. Họ chọn bên rẻ hơn để dành tiền mua sắm đồ điện tử. Sáu tháng sau khi ở, họ phải chi thêm gần 40
+triệu: đổi lại bộ ray tủ bếp vì loại cũ kêu cót két và rơi hộc chỉ sau vài tháng dùng, xử lý một đoạn dây
+điện đấu nối ẩu bị chập, và làm lại mặt đá bếp vì loại ban đầu ố vàng loang lổ chỉ sau nửa năm nấu nướng.
+Cộng dồn, số tiền họ "tiết kiệm" được lúc ký hợp đồng chưa bằng một nửa số tiền họ phải bỏ thêm sau đó
+— chưa kể những ngày phải xin nghỉ làm ở nhà chờ thợ tới sửa.</p>
+
 <p>Chọn nhà thầu, xét cho cùng, là chọn người sẽ thay bạn quyết định hàng trăm chi tiết nhỏ mà bạn
 không có mặt để giám sát. Một bảng báo giá dám ghi rõ mọi dòng là một lời cam kết rằng những chi tiết
 đó sẽ được làm đúng như đã ghi. Đọc báo giá theo cách này, bạn sẽ thôi hỏi "bên nào rẻ nhất" và bắt đầu
@@ -335,6 +362,15 @@ với điều kiện thật của phần lớn nhà Việt.</p>
 tới đâu, sáng hay tối, rộng hay hẹp, trần cao hay thấp. Một căn nhiều nắng, trần cao thì gần như phong
 cách nào cũng "gánh" được, tha hồ chọn theo gu. Một căn thiếu sáng thì nên tránh màu trầm và đồ nặng
 khối, ưu tiên gỗ sáng, màu nhạt, đồ chân thoáng để nhường lại ánh sáng cho không gian.</p>
+
+<h3>Bức ảnh đẹp mang từ nhà người khác về</h3>
+<p>Một khách hàng từng mang đến một bức ảnh phòng khách Indochine rất ưng ý — gỗ nâu trầm, đèn lồng,
+màu rượu vang — và muốn làm y hệt cho căn nhà ống của mình, vốn chỉ có một cửa sổ nhỏ phía trước. Làm
+xong đúng như ảnh, chị vào ở được vài tuần thì chủ động xin đổi: căn phòng lúc nào cũng như chiều tối dù
+đang giữa trưa, ngồi lâu thấy ngột. Sau đó phải sơn lại tường sáng màu hơn và đổi bớt đồ gỗ trầm sang gỗ
+sáng ở khu vực gần cửa sổ, chi phí sửa gần bằng một phần ba tiền làm nội thất ban đầu. Câu chuyện của
+chị là ví dụ rõ nhất cho việc bê nguyên một bức ảnh đẹp từ một căn nhà xa lạ về nhà mình, mà không hỏi
+căn nhà mình có đủ ánh sáng để "gánh" nó hay không.</p>
 
 <p>Còn về cảm giác bạn muốn — thư thái, ấm cúng hay sang trọng — thì có một mẹo đơn giản hơn mọi
 thuật ngữ: đừng gửi cho người thiết kế những cái tên phong cách, hãy gửi vài bức ảnh nhà thật mà bạn
@@ -372,6 +408,16 @@ nâng bồn lên đỡ phải cúi. Còn tủ bếp trên thì treo cách mặt 
 không chạm cửa; thanh treo áo dài cần khoảng 90cm chiều cao, treo đầm dài cần tới 150–165cm. Giường
 mặt nệm cao <b>45–50cm</b> là vừa tầm ngồi dậy; lối đi quanh giường chừa tối thiểu 60cm để không phải
 lách. Bàn ăn tính mỗi người khoảng 60cm chiều ngang, nên bàn bốn người rơi vào tầm 1m2–1m4.</p>
+
+<h3>Một chiếc bàn bếp cao đúng số nhưng sai người</h3>
+<p>Một gia đình từng làm bếp theo đúng số "chuẩn" 86cm mà thợ tư vấn, không hỏi thêm gì. Người vợ cao
+1m52 là người nấu chính. Sau vài tháng, chị bắt đầu kêu mỏi vai mỗi tối, phải kê thêm một tấm ghế nhỏ
+đứng lên khi thái rau cho đỡ với. Người chồng cao 1m78 thì lại thấy bàn hơi thấp, cúi người khi rửa bát.
+Cả hai đều chịu đựng trong im lặng một thời gian dài vì nghĩ "chắc bàn bếp nào cũng vậy". Đến khi làm
+lại bếp cho căn nhà thứ hai, họ yêu cầu đo tay theo đúng chiều cao chị vợ — người nấu chính — hạ xuống
+còn 82cm, có thêm khay trượt điều chỉnh ở khu chồng hay đứng rửa. Câu chuyện của họ cho thấy con số
+trong sách chỉ đúng cho một "người trung bình" không có thật ngoài đời — còn căn bếp thật thì luôn phải
+đo theo người thật sẽ đứng ở đó mỗi ngày.</p>
 
 <p>Nhưng con số nào cũng chỉ là điểm khởi đầu. Điều quan trọng hơn tất cả là câu hỏi mà nhiều nơi
 quên hỏi: <b>ai là người dùng chính, cao bao nhiêu, thuận tay nào, có ai lớn tuổi hay trẻ nhỏ trong nhà
@@ -411,6 +457,15 @@ nhìn cho rõ mà để tạo những mảng sáng tối, cho căn phòng có ch
 ánh vàng ấm hoặc trung tính khoảng <b>3000–4000K</b> — đó là sắc sáng khiến da người hồng hào, gỗ ấm
 lên, bữa cơm ngon mắt. Ánh trắng lạnh chỉ nên để dành cho chỗ cần soi kỹ như bàn làm việc, gương
 trang điểm, tủ áo.</p>
+
+<h3>Từ "phòng khám" thành phòng khách, chỉ nhờ tắt bớt một nửa số đèn</h3>
+<p>Một gia chủ từng lắp đến mười hai bóng downlight trắng cho phòng khách 20 mét vuông, bật hết lên vì
+sợ "thiếu sáng thì tối". Khách đến chơi ai cũng khen nhà sáng sủa, nhưng chính người trong nhà lại rất ít
+khi ngồi ở phòng khách buổi tối — cả nhà kéo nhau vào phòng bếp nhỏ hơn vì "ở đó thấy ấm hơn". Sau khi
+được tư vấn, họ tắt bớt một nửa số đèn trần, chỉ giữ lại vòng ngoài, thêm một cây đèn cây góc sofa và một
+dải đèn hắt sau kệ tivi với ánh vàng 3000K. Không tốn thêm tiền mua đồ mới, chỉ đổi cách bật đèn và thêm
+hai điểm sáng nhỏ, cả nhà bắt đầu quay lại ngồi phòng khách mỗi tối. Đèn không đổi nhiều, nhưng cảm giác
+về căn phòng đổi hẳn.</p>
 
 <p>Và nếu làm được một việc thôi để nâng hẳn chất lượng sống, thì đó là lắp bộ điều chỉnh độ sáng
 (dimmer) cho phòng khách và phòng ngủ. Cùng một bộ đèn, ban ngày vặn sáng để sinh hoạt, tối ăn cơm
@@ -456,6 +511,15 @@ lúc nào sơn lại, dán lại cũng được.</p>
 <p><b>Sàn nhà.</b> Thứ cả nhà giẫm lên mỗi ngày, và thay nó nghĩa là khiêng hết đồ đạc ra ngoài. Làm tốt
 một lần để yên tâm nhiều năm.</p>
 
+<h3>Vài triệu tiết kiệm hôm nay, ba chục triệu trả giá hai năm sau</h3>
+<p>Một nhà ở gần biển từng quyết định cắt hạng mục chống thấm ban công để dồn tiền mua bộ sofa ưng ý
+hơn, nghĩ "ban công có mái che, chắc không sao". Hai mùa mưa sau, trần phòng khách tầng dưới bắt đầu
+loang một vệt ố vàng ngày càng lớn, sơn bong từng mảng. Thợ đến kiểm tra thì phát hiện nước đã thấm
+qua lớp gạch ban công từ lâu, ngấm dần xuống dầm bê tông. Để sửa dứt điểm, phải đục bỏ toàn bộ gạch
+ban công, chống thấm lại từ đầu, rồi sơn sửa lại cả trần phòng khách — tốn hơn 30 triệu và mất gần hai
+tuần nhà cửa ngổn ngang, gấp nhiều lần số tiền vài triệu họ tiết kiệm được lúc đầu. Cái bộ sofa vẫn còn
+đó, nhưng giờ đặt dưới một cái trần loang lổ đang chờ sơn lại.</p>
+
 <p>Có một điều nên cộng thêm vào danh sách này, đặc biệt với nhà có trẻ nhỏ hoặc người nhạy cảm: ưu
 tiên sơn và keo có chỉ số phát thải thấp (thường ghi VOC thấp, có chứng chỉ xanh). Cái này không nhìn
 thấy, không khoe được, nhưng là thứ cả nhà hít thở mỗi ngày trong nhiều năm — đúng kiểu đầu tư
@@ -497,6 +561,15 @@ phát sinh, đúng không? Vậy có việc gì anh dự là sẽ cần mà chư
 món — thì cách làm sạch sẽ là hai bên ký một phụ lục ghi rõ thêm gì, thêm bao nhiêu tiền, ngay tại thời
 điểm đó, chứ không phải gộp hết vào cuối rồi tính một cục. Phát sinh không xấu; phát sinh không được
 thống nhất trước mới xấu.</p>
+
+<h3>Khoản phát sinh không ai viết ra: dọn đồ cũ đi đâu</h3>
+<p>Một gia đình chuẩn bị thay toàn bộ nội thất phòng khách và bếp, ký hợp đồng trọn gói với tâm thế "xong
+là xong". Đến ngày thợ tới tháo dỡ, họ mới ngớ người khi được hỏi: "Bộ bàn ghế và tủ bếp cũ anh chị định
+để đâu, bên em tháo ra rồi chở đi luôn hay để lại?". Không ai từng nghĩ đến việc đồ cũ phải có người chở
+đi, và khoản vận chuyển - xử lý đồ cũ đó không nằm trong bảng giá vì chưa từng được hỏi tới lúc ký. Cuối
+cùng họ phải trả thêm một khoản tiền nhỏ ngoài dự kiến, không lớn, nhưng đủ khó chịu vì nó đến vào đúng
+lúc mọi thứ đang ngổn ngang nhất. Nếu câu hỏi ấy được đặt ra từ buổi ký hợp đồng, có lẽ họ đã chẳng bận
+tâm gì đến khoản tiền nhỏ đó.</p>
 
 <p>Nói cho cùng, giá trị thật của một đơn vị làm trọn gói không nằm ở chỗ họ hứa "bao trọn không thêm
 đồng nào" — lời hứa đó thường là dấu hiệu của một bảng giá mập mờ. Nó nằm ở chỗ họ dám ghi rõ ranh
@@ -556,6 +629,15 @@ lúc còn nguyên kiện, đừng đợi đóng thành tủ mới hỏi. Một x
 — nếu mùi hắc đến mức cay mắt chảy nước mắt thay vì chỉ là mùi gỗ/keo nhẹ, nên yêu cầu xưởng giải trình
 về loại ván đã dùng.</p>
 
+<h3>Ba tuần mở cửa sổ cả ngày vì một chiếc tủ bếp</h3>
+<p>Một gia đình có con nhỏ mới đóng xong tủ bếp thì phát hiện mùi hắc nồng đến mức bé con ho húng
+hắng mỗi khi vào bếp. Họ liên hệ lại xưởng thì được trả lời "bình thường, đồ mới mà, vài bữa hết". Ba
+tuần trôi qua, mùi vẫn không giảm, cả nhà phải mở cửa sổ suốt ngày kể cả lúc trời lạnh và mua thêm hai
+cái quạt thông gió chỉ để ở được. Sau khi yêu cầu xem lại chứng từ vật liệu, mới phát hiện xưởng đã dùng
+loại ván không rõ nguồn gốc, không có tem cấp độ, thay vì loại E1 đã thoả thuận ban đầu bằng miệng.
+Xưởng buộc phải tháo lại toàn bộ phần thùng tủ, đổi sang ván đúng loại — một việc lẽ ra không cần xảy ra
+nếu ngay từ đầu có yêu cầu xem tem ván bằng giấy trắng mực đen trước khi đóng.</p>
+
 <h3>Vì sao nhựa rỗng gần như không có vấn đề này</h3>
 <p>Đây cũng là lý do cốt lõi khiến nhiều gia đình có trẻ nhỏ hoặc người lớn tuổi ở Quảng Trị chuyển sang
 chọn <b>nhựa rỗng</b> cho khu vực bếp và phòng ngủ: vật liệu này không dùng keo formaldehyde để ép,
@@ -591,6 +673,15 @@ thiện đóng trong 30 ngày làm việc <i>kể từ ngày đo đạc chính t
 gian chờ phụ kiện nhập khẩu nếu khách chọn loại phải đặt hàng. Khi thấy hợp đồng ghi rõ kiểu này thay vì
 một câu chung chung "hoàn thành trong 45 ngày", đó là dấu hiệu bên thi công đã làm đủ dự án để biết
 đường nào hay trễ và chủ động rào trước — chứ không phải hứa cho đẹp lúc ký.</p>
+
+<h3>Ngày dọn nhà bị dời hai lần vì một chiếc bản lề</h3>
+<p>Một gia đình đã báo họ hàng, đặt xe tải, xin nghỉ làm để dọn về nhà mới đúng ngày ghi trong hợp đồng
+— tròn 45 ngày kể từ lúc ký. Đến hẹn, tủ bếp và tủ áo đã đóng xong, chỉ thiếu đúng một lô bản lề giảm
+chấn nhập khẩu vẫn đang "trên đường về cảng". Ngày dọn nhà phải dời sang tuần sau, rồi dời thêm một
+lần nữa vì lô hàng bị chậm ở khâu hải quan. Gia đình phải xin nghỉ làm thêm hai lần, hoàn vé xe tải hai
+lần, trong khi đơn vị thi công cũng không cố ý trễ hẹn — họ chỉ đơn giản là chưa từng nói trước rằng loại
+bản lề khách chọn không phải hàng có sẵn tại kho. Về sau, khi rút kinh nghiệm cho dự án tiếp theo, họ đã
+chủ động hỏi thẳng câu "món nào phải đặt hàng" trước khi ký, và tránh được đúng tình huống cũ.</p>
 
 <h3>Việc gia chủ có thể chủ động để không bị động chờ</h3>
 <p>Chốt mẫu tay nắm, bản lề, màu sắc <b>trước khi</b> xây thô hoàn thiện, thay vì để tới lúc đo đạc mới
