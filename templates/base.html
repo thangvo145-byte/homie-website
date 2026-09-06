@@ -82,6 +82,9 @@
         <div class="lead-card p-4 p-md-5">
           <div class="row align-items-center g-4">
             <div class="col-md-5">
+              {% if request.args.get('ten') %}
+              <div class="alert alert-light border py-2 px-3 small mb-3">Bạn đang quan tâm mẫu: <b>{{ request.args.get('ten') }}</b></div>
+              {% endif %}
               <div class="eyebrow mb-2">Miễn phí · Không ràng buộc</div>
               <h2 class="h3 fw-bold mb-2">Bắt đầu bằng một buổi khảo sát — trước khi quyết định</h2>
               <p class="text-muted mb-3">Quý khách để lại số điện thoại/Zalo, đội ngũ Homie sẽ liên hệ, hẹn lịch khảo sát tận nơi và
@@ -104,7 +107,7 @@
             </div>
             <div class="col-md-7">
               <form method="post" action="{{ url_for('submit_lead') }}" class="row g-2">
-                <input type="hidden" name="source" value="{{ request.path }}">
+                <input type="hidden" name="source" value="{{ request.full_path.rstrip('?') }}">
                 <div class="col-12">
                   <input class="form-control form-control-lg" name="name" placeholder="Họ và tên">
                 </div>
@@ -118,7 +121,7 @@
                   </select>
                 </div>
                 <div class="col-12">
-                  <textarea class="form-control" name="message" rows="2" placeholder="Thông tin thêm (diện tích, ngân sách dự kiến...)"></textarea>
+                  <textarea class="form-control" name="message" rows="2" placeholder="Thông tin thêm (diện tích, ngân sách dự kiến...)">{{ 'Tôi quan tâm mẫu: ' ~ request.args.get('ten') if request.args.get('ten') else '' }}</textarea>
                 </div>
                 <div class="col-12 d-grid">
                   <button class="btn btn-primary btn-lg">Gửi yêu cầu tư vấn</button>

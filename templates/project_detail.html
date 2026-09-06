@@ -38,10 +38,20 @@
       {% if gallery|length > 1 %}
       <div class="proj-thumbs">
         {% for fn in gallery %}
-        <img src="{{ url_for('static', filename='uploads/' ~ fn) }}" alt="Ảnh {{ loop.index }}"
-             class="proj-thumb-item {{ 'active' if loop.first }}" data-idx="{{ loop.index0 }}"
-             onclick="projGoto({{ loop.index0 }})">
+          {% if loop.index0 < 4 %}
+          <div class="proj-thumb-wrap-item"
+               onclick="{{ 'projOpenLightbox()' if (loop.index0 == 3 and gallery|length > 4) else ('projGoto(' ~ loop.index0 ~ ')') }}">
+            <img src="{{ url_for('static', filename='uploads/' ~ fn) }}" alt="Ảnh {{ loop.index }}"
+                 class="proj-thumb-item {{ 'active' if loop.first }}" data-idx="{{ loop.index0 }}">
+            {% if loop.index0 == 3 and gallery|length > 4 %}
+            <span class="proj-thumb-more">+{{ gallery|length - 4 }} ảnh</span>
+            {% endif %}
+          </div>
+          {% endif %}
         {% endfor %}
+        {% if gallery|length > 4 %}
+        <button type="button" class="proj-thumb-viewall" onclick="projOpenLightbox()">Xem tất cả {{ gallery|length }} ảnh →</button>
+        {% endif %}
       </div>
       {% endif %}
     </div>
@@ -84,7 +94,7 @@
     <div class="proj-cta text-center mt-4">
       <p class="fw-bold fs-4 mb-1">Ưng mẫu này?</p>
       <p class="mb-3">Để lại số điện thoại — Homie tư vấn mẫu tương tự, báo giá theo đúng phong cách bạn thích</p>
-      <a href="#lien-he-form" class="btn btn-primary btn-lg px-5">Nhận tư vấn mẫu tương tự →</a>
+      <a href="{{ url_for('contact') }}?mau={{ project.id }}&ten={{ project.title|urlencode }}" class="btn btn-primary btn-lg px-5">Nhận tư vấn mẫu tương tự →</a>
     </div>
   </div>
 </section>
