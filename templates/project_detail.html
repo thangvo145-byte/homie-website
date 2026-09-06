@@ -18,6 +18,15 @@
     {% if gallery %}
     <div class="proj-gallery">
       <div class="proj-gallery-main" onclick="projOpenLightbox()">
+        {% if gallery|length > 1 %}
+        <div class="proj-progress">
+          {% for fn in gallery %}<span class="proj-progress-bar" data-idx="{{ loop.index0 }}"><i></i></span>{% endfor %}
+        </div>
+        {% endif %}
+        <div class="proj-title-overlay">
+          <h2>{{ project.title }}</h2>
+          {% if project.location %}<span>📍 {{ project.location }}</span>{% endif %}
+        </div>
         <img id="projMain" src="{{ url_for('static', filename='uploads/' ~ gallery[0]) }}" alt="{{ project.title }}">
         {% if gallery|length > 1 %}
         <button type="button" class="proj-nav prev" onclick="event.stopPropagation();projMove(-1)" aria-label="Ảnh trước">‹</button>
@@ -55,10 +64,26 @@
       {% if project.location %}<p class="text-muted-2 mb-3">📍 {{ project.location }}</p>{% endif %}
       <p class="lead">{{ project.summary }}</p>
       <p>{{ project.description }}</p>
+
+      <div class="row g-3 proj-trust">
+        <div class="col-6 col-md-3 text-center">
+          <div class="proj-trust-ic">🏭</div><div class="proj-trust-txt">Xưởng sản xuất trực tiếp</div>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+          <div class="proj-trust-ic">📐</div><div class="proj-trust-txt">Đo đạc & tư vấn miễn phí</div>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+          <div class="proj-trust-ic">📄</div><div class="proj-trust-txt">Cam kết bằng văn bản</div>
+        </div>
+        <div class="col-6 col-md-3 text-center">
+          <div class="proj-trust-ic">🎨</div><div class="proj-trust-txt">Làm theo đúng mẫu đã chọn</div>
+        </div>
+      </div>
     </div>
 
     <div class="proj-cta text-center mt-4">
-      <p class="fw-semibold fs-5 mb-3">Ưng mẫu này? Để lại số điện thoại, Homie tư vấn mẫu tương tự cho bạn</p>
+      <p class="fw-bold fs-4 mb-1">Ưng mẫu này?</p>
+      <p class="mb-3">Để lại số điện thoại — Homie tư vấn mẫu tương tự, báo giá theo đúng phong cách bạn thích</p>
       <a href="#lien-he-form" class="btn btn-primary btn-lg px-5">Nhận tư vấn mẫu tương tự →</a>
     </div>
   </div>
@@ -88,6 +113,24 @@
 (function(){
   var projImages = [{% for fn in gallery %}"{{ url_for('static', filename='uploads/' ~ fn) }}"{{ "," if not loop.last }}{% endfor %}];
   var idx = 0;
+  var AUTOPLAY_MS = 4200;
+  var autoTimer = null;
+  var autoPaused = false;
+  var mainEl = document.querySelector('.proj-gallery-main');
+
+  function updateBars(){
+    document.querySelectorAll('.proj-progress-bar').forEach(function(b){
+      var i = +b.dataset.idx;
+      b.classList.remove('active','done');
+      if(i < idx) b.classList.add('done');
+      if(i === idx){ void b.offsetWidth; b.classList.add('active'); }
+    });
+  }
+  function scheduleAuto(){
+    clearTimeout(autoTimer);
+    if(autoPaused || projImages.length < 2) return;
+    autoTimer = setTimeout(function(){ window.projMove(1); }, AUTOPLAY_MS);
+  }
   function render(){
     document.getElementById('projMain').src = projImages[idx];
     var c = document.getElementById('projCounter');
@@ -95,6 +138,8 @@
     document.querySelectorAll('.proj-thumb-item').forEach(function(t){
       t.classList.toggle('active', +t.dataset.idx === idx);
     });
+    updateBars();
+    scheduleAuto();
     var lb = document.getElementById('projLightbox');
     if(lb.classList.contains('open')){
       document.getElementById('projLightboxImg').src = projImages[idx];
@@ -104,6 +149,7 @@
   window.projGoto = function(i){ idx = (i + projImages.length) % projImages.length; render(); };
   window.projMove = function(d){ window.projGoto(idx + d); };
   window.projOpenLightbox = function(){
+    autoPaused = true; clearTimeout(autoTimer);
     document.getElementById('projLightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
     render();
@@ -111,7 +157,14 @@
   window.projCloseLightbox = function(){
     document.getElementById('projLightbox').classList.remove('open');
     document.body.style.overflow = '';
+    autoPaused = false;
+    render();
   };
+  if(mainEl){
+    mainEl.addEventListener('mouseenter', function(){ autoPaused = true; clearTimeout(autoTimer); });
+    mainEl.addEventListener('mouseleave', function(){ autoPaused = false; render(); });
+  }
+  if(projImages.length > 1) render();
   window.projLightboxClick = function(e){
     if(e.target.id === 'projLightbox') window.projCloseLightbox();
   };
