@@ -3,59 +3,136 @@
 {% block title %}{{ project.title }} · {{ SITE.ten }}{% endblock %}
 {% block content %}
 
-<section class="py-4 bg-cream">
+{% set gallery = [] %}
+{% if project.image %}{% set _ = gallery.append(project.image) %}{% endif %}
+{% for im in project.images %}{% if im.filename != project.image %}{% set _ = gallery.append(im.filename) %}{% endif %}{% endfor %}
+
+<section class="py-3 bg-cream">
   <div class="container">
     <a href="{{ url_for('gallery') }}" class="small text-decoration-none">← Về thư viện mẫu mã</a>
   </div>
 </section>
 
-<section class="py-5">
-  <div class="container">
-    <div class="row g-5">
-      <div class="col-lg-7">
-        {% set gallery = [] %}
-        {% if project.image %}{% set _ = gallery.append(project.image) %}{% endif %}
-        {% for im in project.images %}{% if im.filename != project.image %}{% set _ = gallery.append(im.filename) %}{% endif %}{% endfor %}
-        {% if gallery %}
-          <img id="projMain" class="img-fluid prose-cover w-100" src="{{ url_for('static', filename='uploads/' ~ gallery[0]) }}" alt="{{ project.title }}">
-          {% if gallery|length > 1 %}
-            <div class="row g-2 mt-2">
-              {% for fn in gallery %}
-              <div class="col-3">
-                <img src="{{ url_for('static', filename='uploads/' ~ fn) }}" alt=""
-                     onclick="document.getElementById('projMain').src=this.src"
-                     style="width:100%;height:72px;object-fit:cover;border-radius:8px;cursor:pointer;border:1px solid #eee;">
-              </div>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% else %}
-          <div class="proj-ph {{ 'alt' if project.material=='go-cong-nghiep' else '' }}" style="aspect-ratio:16/10;border-radius:16px;font-size:1.4rem">
-            {{ CAT_MAP.get(project.category,'Mẫu nội thất') }}
-          </div>
+<section class="py-3">
+  <div class="container-fluid px-lg-5">
+    {% if gallery %}
+    <div class="proj-gallery">
+      <div class="proj-gallery-main" onclick="projOpenLightbox()">
+        <img id="projMain" src="{{ url_for('static', filename='uploads/' ~ gallery[0]) }}" alt="{{ project.title }}">
+        {% if gallery|length > 1 %}
+        <button type="button" class="proj-nav prev" onclick="event.stopPropagation();projMove(-1)" aria-label="Ảnh trước">‹</button>
+        <button type="button" class="proj-nav next" onclick="event.stopPropagation();projMove(1)" aria-label="Ảnh sau">›</button>
+        <span class="proj-counter"><span id="projCounter">1</span>/{{ gallery|length }}</span>
         {% endif %}
+        <span class="proj-expand">⤢ Xem toàn màn hình</span>
       </div>
-      <div class="col-lg-5">
-        <div class="mb-2">
-          {% if project.category %}<span class="chip">{{ CAT_MAP.get(project.category, project.category) }}</span>{% endif %}
-          {% if project.material %}<span class="chip mat">{{ MAT_MAP.get(project.material, project.material) }}</span>{% endif %}
-        </div>
-        <h1 class="h2 fw-bold mb-3">{{ project.title }}</h1>
-        {% if project.location %}<p class="text-muted-2">📍 {{ project.location }}</p>{% endif %}
-        <p class="lead">{{ project.summary }}</p>
-        <p>{{ project.description }}</p>
-        <a href="#lien-he-form" class="btn btn-primary btn-lg mt-2">Nhận tư vấn mẫu tương tự →</a>
+      {% if gallery|length > 1 %}
+      <div class="proj-thumbs">
+        {% for fn in gallery %}
+        <img src="{{ url_for('static', filename='uploads/' ~ fn) }}" alt="Ảnh {{ loop.index }}"
+             class="proj-thumb-item {{ 'active' if loop.first }}" data-idx="{{ loop.index0 }}"
+             onclick="projGoto({{ loop.index0 }})">
+        {% endfor %}
       </div>
+      {% endif %}
     </div>
-
-    {% if related %}
-    <hr class="my-5">
-    <h2 class="h4 fw-bold mb-4">Mẫu cùng loại</h2>
-    <div class="row g-4">
-      {% for p in related %}<div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>{% endfor %}
-    </div>
+    {% else %}
+      <div class="proj-ph {{ 'alt' if project.material=='go-cong-nghiep' else '' }}" style="aspect-ratio:21/9;border-radius:16px;font-size:1.4rem">
+        {{ CAT_MAP.get(project.category,'Mẫu nội thất') }}
+      </div>
     {% endif %}
   </div>
 </section>
+
+<section class="py-4">
+  <div class="container">
+    <div class="proj-info mx-auto">
+      <div class="mb-2">
+        {% if project.category %}<span class="chip">{{ CAT_MAP.get(project.category, project.category) }}</span>{% endif %}
+        {% if project.material %}<span class="chip mat">{{ MAT_MAP.get(project.material, project.material) }}</span>{% endif %}
+      </div>
+      <h1 class="h2 fw-bold mb-2">{{ project.title }}</h1>
+      {% if project.location %}<p class="text-muted-2 mb-3">📍 {{ project.location }}</p>{% endif %}
+      <p class="lead">{{ project.summary }}</p>
+      <p>{{ project.description }}</p>
+    </div>
+
+    <div class="proj-cta text-center mt-4">
+      <p class="fw-semibold fs-5 mb-3">Ưng mẫu này? Để lại số điện thoại, Homie tư vấn mẫu tương tự cho bạn</p>
+      <a href="#lien-he-form" class="btn btn-primary btn-lg px-5">Nhận tư vấn mẫu tương tự →</a>
+    </div>
+  </div>
+</section>
+
+{% if related %}
+<section class="py-5 bg-cream">
+  <div class="container">
+    <h2 class="h4 fw-bold mb-4">Mẫu cùng loại — lướt thêm để chọn mẫu ưng ý</h2>
+    <div class="row g-4">
+      {% for p in related %}<div class="col-sm-6 col-lg-4">{{ project_card(p) }}</div>{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if gallery %}
+<div id="projLightbox" class="proj-lightbox" onclick="projLightboxClick(event)">
+  <button type="button" class="proj-lightbox-close" onclick="projCloseLightbox()" aria-label="Đóng">✕</button>
+  <button type="button" class="proj-lightbox-nav prev" onclick="event.stopPropagation();projMove(-1)" aria-label="Ảnh trước">‹</button>
+  <img id="projLightboxImg" src="" alt="{{ project.title }}">
+  <button type="button" class="proj-lightbox-nav next" onclick="event.stopPropagation();projMove(1)" aria-label="Ảnh sau">›</button>
+  <span class="proj-lightbox-counter"><span id="projLightboxCounter">1</span>/{{ gallery|length }}</span>
+</div>
+
+<script>
+(function(){
+  var projImages = [{% for fn in gallery %}"{{ url_for('static', filename='uploads/' ~ fn) }}"{{ "," if not loop.last }}{% endfor %}];
+  var idx = 0;
+  function render(){
+    document.getElementById('projMain').src = projImages[idx];
+    var c = document.getElementById('projCounter');
+    if(c) c.textContent = idx + 1;
+    document.querySelectorAll('.proj-thumb-item').forEach(function(t){
+      t.classList.toggle('active', +t.dataset.idx === idx);
+    });
+    var lb = document.getElementById('projLightbox');
+    if(lb.classList.contains('open')){
+      document.getElementById('projLightboxImg').src = projImages[idx];
+      document.getElementById('projLightboxCounter').textContent = idx + 1;
+    }
+  }
+  window.projGoto = function(i){ idx = (i + projImages.length) % projImages.length; render(); };
+  window.projMove = function(d){ window.projGoto(idx + d); };
+  window.projOpenLightbox = function(){
+    document.getElementById('projLightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    render();
+  };
+  window.projCloseLightbox = function(){
+    document.getElementById('projLightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  window.projLightboxClick = function(e){
+    if(e.target.id === 'projLightbox') window.projCloseLightbox();
+  };
+  document.addEventListener('keydown', function(e){
+    if(!document.getElementById('projLightbox').classList.contains('open')) return;
+    if(e.key === 'ArrowLeft') window.projMove(-1);
+    if(e.key === 'ArrowRight') window.projMove(1);
+    if(e.key === 'Escape') window.projCloseLightbox();
+  });
+  var touchX = null;
+  var lbImg = document.getElementById('projLightboxImg');
+  lbImg.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; });
+  lbImg.addEventListener('touchend', function(e){
+    if(touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if(dx > 40) window.projMove(-1);
+    else if(dx < -40) window.projMove(1);
+    touchX = null;
+  });
+})();
+</script>
+{% endif %}
 
 {% endblock %}
