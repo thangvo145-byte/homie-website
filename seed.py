@@ -216,6 +216,23 @@ sát nền — nơi hơi nước quẩn quanh cả ngày.</p>
 thì không có gì để trương nở. Bạn có ngâm nó, nó cũng chỉ ướt rồi khô, hình dạng không đổi. Đổi lại,
 nhựa mềm hơn gỗ, bắt vít không "ăn" chắc bằng, và bề mặt vân không thật và ấm bằng gỗ khi sờ tay.</p>
 
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Tiêu chí</th><th>Nhựa (picomat/PVC foam)</th><th>Gỗ công nghiệp (MDF/HDF)</th></tr></thead>
+<tbody>
+<tr><td>Chịu nước ở mép, cạnh</td><td>Ngâm nước vẫn không trương nở</td><td>Trương nở vĩnh viễn nếu nước ngấm vào lõi</td></tr>
+<tr><td>Độ cứng, bắt vít</td><td>Mềm hơn, vít kém chắc hơn</td><td>Cứng, bắt vít chắc tay</td></tr>
+<tr><td>Vân và cảm giác khi sờ</td><td>Vân không thật, hơi lạnh tay</td><td>Vân thật, ấm tay hơn</td></tr>
+<tr><td>Nên dùng ở đâu</td><td>Thùng tủ bếp, khoang dưới chậu rửa, tủ lavabo</td><td>Cánh tủ, kệ tivi, tủ áo, giường</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_chii-nga_02.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie thi công tủ bếp">
+<figcaption class="figure-caption text-muted">Một công trình Homie đã bàn giao — nguyên tắc chọn vật liệu đúng chỗ áp dụng ngay từ khâu đóng thùng tủ.</figcaption>
+</figure>
+
 <h3>Hai chiếc tủ bếp cùng tuổi, cách nhau một quyết định nhỏ</h3>
 <p>Có hai căn bếp làm cùng thời điểm, cùng một khu dân cư, cách nhau chỉ vài trăm mét. Nhà thứ nhất
 chọn thùng gỗ công nghiệp toàn bộ vì "gỗ nhìn sang hơn". Nhà thứ hai nghe theo tư vấn, chọn thùng nhựa
@@ -269,6 +286,22 @@ vào. Cái cạnh phía trong, phía dưới, phía sau — chỗ khách không 
 chớm gỉ, rồi kẹt, rồi kêu. Chi tiết này nhỏ nhưng là thứ bạn chạm tay vào mỗi ngày, và hỏng nó thì
 khó chịu hơn nhiều so với một vết xước trên mặt tủ.</p>
 
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Cách chống ẩm</th><th>Vì sao cần</th></tr></thead>
+<tbody>
+<tr><td>Chừa khe hở sau lưng và dưới chân tủ (1-2cm)</td><td>Không khí lùa qua, hơi nước không đọng lại một chỗ</td></tr>
+<tr><td>Dán kín cả cạnh khuất (trong, dưới, sau)</td><td>Đây chính là chỗ ẩm tấn công đầu tiên, không phải mặt ngoài</td></tr>
+<tr><td>Dùng phụ kiện kim loại không gỉ</td><td>Thép rẻ tiền gặp ẩm sẽ gỉ, kẹt, kêu — hỏng thứ chạm tay mỗi ngày</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_kiem-anh_02.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie chống ẩm mốc">
+<figcaption class="figure-caption text-muted">Tủ kê chân cao, chừa khe hở sau lưng — chi tiết nhỏ quyết định tuổi thọ ở khí hậu nồm ẩm miền Trung.</figcaption>
+</figure>
+
 <h3>Cái lưng tủ không ai nhìn, cho đến ngày phải nhìn</h3>
 <p>Một gia đình ở Đông Hà từng kể lại: nhà họ không hề dột, không hề bị nước tạt vào, vậy mà sau đúng
 một mùa nồm đầu tiên, kéo chiếc tủ áo ra khỏi tường để quét dọn thì phát hiện cả mảng lưng tủ đã mốc
@@ -319,6 +352,22 @@ lại được.</p>
 căn bếp đã dùng ba năm mà cánh vẫn khít, chân tủ chưa phồng, bản lề chưa xệ — đó mới là bằng chứng
 về cách người ta làm phần khuất, phần bạn không kiểm tra được lúc nhận nhà.</p>
 
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Câu hỏi nên đặt ra</th><th>Vì sao làm lộ sự thật</th></tr></thead>
+<tbody>
+<tr><td>Xin bảng bóc tách chi tiết (BOQ)</td><td>Đơn vị làm thật luôn đưa được; ai ngại tách chi tiết thường có chỗ đã rút</td></tr>
+<tr><td>Cái gì KHÔNG nằm trong giá này?</td><td>Khiến "phát sinh" hết đường xuất hiện bất ngờ giữa chừng</td></tr>
+<tr><td>Xin xem công trình đã bàn giao vài năm</td><td>Ảnh render luôn đẹp; công trình thật sau 3 năm mới lộ chất lượng phần khuất</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_tinh_02.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie đã bàn giao">
+<figcaption class="figure-caption text-muted">Công trình Homie đã bàn giao — minh chứng bằng công trình thật thay vì chỉ ảnh render.</figcaption>
+</figure>
+
 <h3>Chênh nhau 30 triệu trên giấy, chênh nhau gấp đôi ngoài thực tế</h3>
 <p>Một cặp vợ chồng trẻ từng cầm hai bảng báo giá, một bên 180 triệu, một bên 210 triệu cho cùng diện
 tích. Họ chọn bên rẻ hơn để dành tiền mua sắm đồ điện tử. Sáu tháng sau khi ở, họ phải chi thêm gần 40
@@ -356,6 +405,21 @@ màu ấy vào một căn nhà ống hẹp, thiếu sáng, bạn sẽ có một 
 thiếu nắng. Màu sáng phản xạ ánh sáng đi khắp phòng, làm căn nhà nhỏ nở ra và sáng lên. Đây là lý do
 chúng hợp với chung cư và nhà phố hơn hẳn. Không phải vì chúng "hiện đại hơn", mà vì chúng ăn khớp
 với điều kiện thật của phần lớn nhà Việt.</p>
+
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Phong cách</th><th>Bảng màu</th><th>Hợp với nhà</th></tr></thead>
+<tbody>
+<tr><td>Indochine, Luxury</td><td>Gỗ trầm, màu tối, nhiều chi tiết</td><td>Nhà rộng, trần cao, cửa lớn đón nhiều nắng</td></tr>
+<tr><td>Scandinavian, Japandi</td><td>Gỗ sáng, màu nhạt, tối giản</td><td>Chung cư, nhà phố hẹp, thiếu sáng</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_duong_02.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie phối ánh sáng và phong cách">
+<figcaption class="figure-caption text-muted">Phong cách thật sự hợp nhà hay không phụ thuộc ánh sáng và diện tích, không phải cái tên gọi.</figcaption>
+</figure>
 
 <h3>Cách chọn ngược lại: đi từ nhà bạn ra, không đi từ ảnh vào</h3>
 <p>Trước khi nghĩ đến tên phong cách, hãy đứng giữa căn phòng vào buổi trưa và nhìn xem nắng vào
@@ -409,6 +473,26 @@ không chạm cửa; thanh treo áo dài cần khoảng 90cm chiều cao, treo �
 mặt nệm cao <b>45–50cm</b> là vừa tầm ngồi dậy; lối đi quanh giường chừa tối thiểu 60cm để không phải
 lách. Bàn ăn tính mỗi người khoảng 60cm chiều ngang, nên bàn bốn người rơi vào tầm 1m2–1m4.</p>
 
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Hạng mục</th><th>Kích thước chuẩn</th><th>Ghi chú</th></tr></thead>
+<tbody>
+<tr><td>Mặt bàn bếp</td><td>80–90cm</td><td>Đúng = chiều cao người nấu chính ÷ 2 + 5-10cm</td></tr>
+<tr><td>Tủ bếp trên (cách mặt bàn)</td><td>70–75cm</td><td>Sâu 30–35cm, không cụng đầu, không che tầm với</td></tr>
+<tr><td>Tủ áo</td><td>Cao 200–220cm, sâu 60cm</td><td>Đủ treo vai áo không chạm cửa</td></tr>
+<tr><td>Thanh treo áo dài / đầm</td><td>Cao ~90cm / 150–165cm</td><td>Tính theo loại áo treo</td></tr>
+<tr><td>Mặt nệm giường</td><td>45–50cm</td><td>Vừa tầm ngồi dậy</td></tr>
+<tr><td>Lối đi quanh giường</td><td>Tối thiểu 60cm</td><td>Không phải lách người</td></tr>
+<tr><td>Bàn ăn</td><td>~60cm/người</td><td>Bàn 4 người: 1m2–1m4</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/bep_02.jpg" class="figure-img img-fluid rounded w-100" alt="Căn bếp Homie đo đạc theo người dùng chính">
+<figcaption class="figure-caption text-muted">Con số chuẩn chỉ là điểm khởi đầu — bếp thật phải đo theo người sẽ đứng ở đó mỗi ngày.</figcaption>
+</figure>
+
 <h3>Một chiếc bàn bếp cao đúng số nhưng sai người</h3>
 <p>Một gia đình từng làm bếp theo đúng số "chuẩn" 86cm mà thợ tư vấn, không hỏi thêm gì. Người vợ cao
 1m52 là người nấu chính. Sau vài tháng, chị bắt đầu kêu mỏi vai mỗi tối, phải kê thêm một tấm ghế nhỏ
@@ -457,6 +541,22 @@ nhìn cho rõ mà để tạo những mảng sáng tối, cho căn phòng có ch
 ánh vàng ấm hoặc trung tính khoảng <b>3000–4000K</b> — đó là sắc sáng khiến da người hồng hào, gỗ ấm
 lên, bữa cơm ngon mắt. Ánh trắng lạnh chỉ nên để dành cho chỗ cần soi kỹ như bàn làm việc, gương
 trang điểm, tủ áo.</p>
+
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Lớp ánh sáng</th><th>Vị trí lắp</th><th>Mục đích</th></tr></thead>
+<tbody>
+<tr><td>Lớp nền</td><td>Phủ đều cả phòng, mức vừa phải</td><td>Đủ đi lại, sinh hoạt</td></tr>
+<tr><td>Lớp làm việc</td><td>Dưới tủ bếp trên, soi gương, đầu giường</td><td>Rọi thẳng vào chỗ tay cần, không bị che bóng</td></tr>
+<tr><td>Lớp điểm nhấn</td><td>Hắt trần, hắt kệ, rọi tranh</td><td>Tạo mảng sáng tối, chiều sâu, nơi để mắt nghỉ</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_anh-tam_02.jpg" class="figure-img img-fluid rounded w-100" alt="Ánh sáng 3 lớp trong công trình Homie">
+<figcaption class="figure-caption text-muted">Ánh sáng chia lớp thay vì rải đều — yếu tố quyết định cảm giác ấm hay lạnh của một căn phòng.</figcaption>
+</figure>
 
 <h3>Từ "phòng khám" thành phòng khách, chỉ nhờ tắt bớt một nửa số đèn</h3>
 <p>Một gia chủ từng lắp đến mười hai bóng downlight trắng cho phòng khách 20 mét vuông, bật hết lên vì
@@ -511,6 +611,23 @@ lúc nào sơn lại, dán lại cũng được.</p>
 <p><b>Sàn nhà.</b> Thứ cả nhà giẫm lên mỗi ngày, và thay nó nghĩa là khiêng hết đồ đạc ra ngoài. Làm tốt
 một lần để yên tâm nhiều năm.</p>
 
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Nên đầu tư mạnh ngay từ đầu</th><th>Có thể tiết kiệm, nâng cấp sau</th></tr></thead>
+<tbody>
+<tr><td>Chống thấm phòng tắm, ban công</td><td>Rèm, đèn trang trí, thảm, decor</td></tr>
+<tr><td>Hệ điện, vị trí ổ cắm/đèn</td><td>Nội thất rời (sofa, bàn trà...)</td></tr>
+<tr><td>Phần khuất của bếp, tủ (thùng, bản lề, ray)</td><td>Cánh tủ, màu sơn bề mặt</td></tr>
+<tr><td>Sàn nhà</td><td>Vật dụng trang trí theo mùa</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_kiem-anh_03.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie đầu tư đúng hạng mục khó sửa">
+<figcaption class="figure-caption text-muted">Dồn tiền vào phần khó sửa, tiết kiệm ở phần dễ thay — cách chia ngân sách bền hơn theo thời gian.</figcaption>
+</figure>
+
 <h3>Vài triệu tiết kiệm hôm nay, ba chục triệu trả giá hai năm sau</h3>
 <p>Một nhà ở gần biển từng quyết định cắt hạng mục chống thấm ban công để dồn tiền mua bộ sofa ưng ý
 hơn, nghĩ "ban công có mái che, chắc không sao". Hai mùa mưa sau, trần phòng khách tầng dưới bắt đầu
@@ -556,6 +673,23 @@ bạn. Càng liệt kê rõ từng món, từng vật liệu, từng số lượ
 hiện. Trước khi ký, nên hỏi thẳng một câu rất đáng giá: <b>"Những gì không nằm trong bảng này thì là
 phát sinh, đúng không? Vậy có việc gì anh dự là sẽ cần mà chưa ghi vào đây không?"</b> Một người làm
 đàng hoàng sẽ ngồi rà cùng bạn và chỉ ra trước, thay vì để dành đó rồi báo sau.</p>
+
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Thường bị hiểu lầm là "đã gồm"</th><th>Thực ra chỉ tính nếu có ghi trong BOQ</th></tr></thead>
+<tbody>
+<tr><td>Tháo dỡ, chở bỏ đồ cũ</td><td>Phải hỏi rõ trước khi ký</td></tr>
+<tr><td>Đấu nối lại điện nước</td><td>Phải hỏi rõ trước khi ký</td></tr>
+<tr><td>Xử lý tường ẩm mốc lộ ra khi tháo tủ cũ</td><td>Phải hỏi rõ trước khi ký</td></tr>
+<tr><td>Vận chuyển, nâng hạ đồ lên tầng cao</td><td>Phải hỏi rõ trước khi ký</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_chii-nga_04.jpg" class="figure-img img-fluid rounded w-100" alt="Hợp đồng trọn gói minh bạch tại công trình Homie">
+<figcaption class="figure-caption text-muted">BOQ ghi càng rõ từng dòng, phát sinh bất ngờ càng ít chỗ len vào.</figcaption>
+</figure>
 
 <p>Và khi giữa chừng thật sự cần thay đổi — bạn đổi ý muốn dùng vật liệu tốt hơn, hay muốn thêm một
 món — thì cách làm sạch sẽ là hai bên ký một phụ lục ghi rõ thêm gì, thêm bao nhiêu tiền, ngay tại thời
@@ -621,6 +755,17 @@ nhạt dần trong khoảng 1-2 tuần. Ván kém chất lượng hơn (thườn
 thường) có thể phát thải kéo dài hàng tháng, mùi nồng không giảm mà đôi khi khiến người ở gần — đặc
 biệt trẻ nhỏ, người có bệnh hô hấp — cay mắt, khó chịu đường thở.</p>
 
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Tiêu chí</th><th>Ván đạt chuẩn E1</th><th>Ván không rõ nguồn gốc</th></tr></thead>
+<tbody>
+<tr><td>Mùi hắc</td><td>Nhạt dần trong 1-2 tuần</td><td>Kéo dài hàng tháng, không giảm</td></tr>
+<tr><td>Tem/nhãn cấp độ</td><td>Có, sẵn sàng cho xem</td><td>Thường không có hoặc lảng tránh</td></tr>
+<tr><td>Ảnh hưởng sức khỏe</td><td>Ở mức an toàn theo khuyến cáo</td><td>Có thể cay mắt, khó thở với trẻ nhỏ</td></tr>
+</tbody>
+</table>
+</div>
+
 <h3>Cách kiểm tra đơn giản trước khi nhận hàng</h3>
 <p>Yêu cầu bên thi công cho xem <b>tem/nhãn cấp độ ván</b> (E1, E2 hoặc CARB P2) ngay trên tấm ván
 lúc còn nguyên kiện, đừng đợi đóng thành tủ mới hỏi. Một xưởng làm ăn đàng hoàng luôn sẵn sàng cho xem
@@ -645,6 +790,11 @@ nên gần như không phát thải mùi hắc, đồng thời chống ẩm tuy�
 nhất của khí hậu miền Trung (xem thêm bài "chống ẩm mốc"). Đánh đổi là vân gỗ nhựa không "thật" bằng
 gỗ công nghiệp phủ melamine cao cấp, nên nhiều nhà chọn cách kết hợp: nhựa rỗng cho tủ bếp/tủ giường
 ngủ (nơi ẩm và cần an toàn nhất), gỗ công nghiệp đạt chuẩn E1 cho khu vực phòng khách/phòng làm việc.</p>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_kiem-anh_04.jpg" class="figure-img img-fluid rounded w-100" alt="Tủ bếp nhựa rỗng không mùi tại công trình Homie">
+<figcaption class="figure-caption text-muted">Tủ bếp dùng nhựa rỗng — không keo formaldehyde, gần như không phát sinh mùi hắc sau khi đóng xong.</figcaption>
+</figure>
 """,
              featured=False),
 
@@ -666,6 +816,22 @@ kiện nhập khẩu</b> — ray giảm chấn, bản lề, tay nắm cao cấp 
 6-15 ngày là bình thường, và nếu đúng dịp lễ/Tết có thể kéo dài gấp đôi. Thứ ba là <b>khâu duyệt mẫu
 qua lại</b>: mỗi lần gia chủ đổi ý về màu sắc hay kiểu tay nắm sau khi xưởng đã lên phôi, thời gian làm
 lại cộng dồn nhưng ít khi được tính vào mốc ban đầu.</p>
+
+<div class="table-responsive my-4">
+<table class="table table-bordered align-middle">
+<thead class="table-light"><tr><th>Điểm nghẽn</th><th>Thời gian phát sinh thêm thường gặp</th></tr></thead>
+<tbody>
+<tr><td>Đo đạc trễ so với xây thô</td><td>Thêm 2-3 tuần chờ tường khô sau tô trát</td></tr>
+<tr><td>Đặt hàng phụ kiện nhập khẩu</td><td>6-15 ngày, gấp đôi nếu đúng dịp lễ/Tết</td></tr>
+<tr><td>Duyệt mẫu qua lại nhiều lần</td><td>Cộng dồn theo số lần đổi ý sau khi đã lên phôi</td></tr>
+</tbody>
+</table>
+</div>
+
+<figure class="figure my-4 w-100">
+<img src="/static/uploads/tc_anh-dung_02.jpg" class="figure-img img-fluid rounded w-100" alt="Tiến độ thi công thực tế tại công trình Homie">
+<figcaption class="figure-caption text-muted">Hợp đồng ghi rõ mốc theo từng giai đoạn thay vì một ngày chung chung sẽ tránh được phần lớn bất ngờ về tiến độ.</figcaption>
+</figure>
 
 <h3>Cách một hợp đồng tử tế nên ghi để tránh hiểu lầm</h3>
 <p>Thay vì một mốc ngày duy nhất, hợp đồng đáng tin nên tách rõ từng giai đoạn có điều kiện đi kèm: "hoàn
