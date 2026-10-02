@@ -447,7 +447,7 @@ chung không bao giờ nói hết được.</p>
         dict(slug="kich-thuoc-chuan-noi-that",
              title="Vài centimet sai lệch và mười năm mỏi lưng: những con số làm nên căn bếp dễ chịu",
              category="kien-thuc",
-             cover="bep_01.jpg",
+             cover="tc_cua-viet_01.jpg",
              excerpt="Một chiếc tủ bếp đẹp mà cao sai năm phân sẽ hành hạ cái lưng bạn mỗi bữa cơm, suốt nhiều năm. Đây là lý do đằng sau những con số chuẩn — và câu hỏi mà người làm giỏi luôn hỏi trước khi cắt tấm ván đầu tiên.",
              body="""
 <p>Có một kiểu hối tiếc rất lặng lẽ khi làm nhà: mọi thứ đều đẹp, khách tới ai cũng khen, mà người ở
@@ -489,7 +489,7 @@ lách. Bàn ăn tính mỗi người khoảng 60cm chiều ngang, nên bàn bố
 </div>
 
 <figure class="figure my-4 w-100">
-<img src="/static/uploads/bep_02.jpg" class="figure-img img-fluid rounded w-100" alt="Căn bếp Homie đo đạc theo người dùng chính">
+<img src="/static/uploads/tc_cua-viet_02.jpg" class="figure-img img-fluid rounded w-100" alt="Khu bếp và bàn ăn Homie đo đạc theo người dùng chính">
 <figcaption class="figure-caption text-muted">Con số chuẩn chỉ là điểm khởi đầu — bếp thật phải đo theo người sẽ đứng ở đó mỗi ngày.</figcaption>
 </figure>
 
@@ -577,7 +577,7 @@ trạng" theo giờ như thế mới thật sự là nơi để sống, chứ kh
         dict(slug="5-hang-muc-nen-dau-tu",
              title="Tiền nên dồn vào chỗ khó sửa, tiết kiệm ở chỗ dễ thay — một cách chia ngân sách ít ai chỉ",
              category="kinh-nghiem",
-             cover="tc_kiem-anh_01.jpg",
+             cover="tc_sang_01.jpg",
              excerpt="Ngân sách làm nhà lúc nào cũng thiếu, nên ai cũng phải cắt chỗ này bù chỗ kia. Vấn đề là hầu hết người ta cắt nhầm chỗ: tiết kiệm ở những thứ sau này phải đục tường ra mới sửa được.",
              body="""
 <p>Không mấy ai làm nhà mà ngân sách dư dả. Đến một lúc, bảng dự toán vượt túi tiền, và bạn buộc phải
@@ -624,7 +624,7 @@ một lần để yên tâm nhiều năm.</p>
 </div>
 
 <figure class="figure my-4 w-100">
-<img src="/static/uploads/tc_kiem-anh_03.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie đầu tư đúng hạng mục khó sửa">
+<img src="/static/uploads/tc_sang_02.jpg" class="figure-img img-fluid rounded w-100" alt="Công trình thực tế Homie đầu tư đúng hạng mục khó sửa">
 <figcaption class="figure-caption text-muted">Dồn tiền vào phần khó sửa, tiết kiệm ở phần dễ thay — cách chia ngân sách bền hơn theo thời gian.</figcaption>
 </figure>
 
@@ -647,7 +647,7 @@ thấy, không khoe được, nhưng là thứ cả nhà hít thở mỗi ngày 
         dict(slug="thi-cong-tron-goi-va-boq",
              title="Hai chữ 'trọn gói' và cái bẫy phát sinh: hiểu cho đúng để không ức giữa chừng",
              category="kinh-nghiem",
-             cover="tc_chii-nga_01.jpg",
+             cover="tc_a-hieu-hai-lang_01.jpg",
              excerpt="'Trọn gói' nghe như đã gồm tất cả, nên khi giữa chừng bị báo thêm tiền, gia chủ thấy như bị lừa. Thật ra phần lớn phát sinh không đến từ nhà thầu gian, mà từ một hiểu lầm ngay từ ngày ký.",
              body="""
 <p>Ít có cảm giác nào khó chịu bằng chuyện đang làm nhà dở dang thì bị báo phát sinh. Tiền đã chuyển
@@ -687,7 +687,7 @@ phát sinh, đúng không? Vậy có việc gì anh dự là sẽ cần mà chư
 </div>
 
 <figure class="figure my-4 w-100">
-<img src="/static/uploads/tc_chii-nga_04.jpg" class="figure-img img-fluid rounded w-100" alt="Hợp đồng trọn gói minh bạch tại công trình Homie">
+<img src="/static/uploads/tc_a-hieu-hai-lang_02.jpg" class="figure-img img-fluid rounded w-100" alt="Hợp đồng trọn gói minh bạch tại công trình Homie">
 <figcaption class="figure-caption text-muted">BOQ ghi càng rõ từng dòng, phát sinh bất ngờ càng ít chỗ len vào.</figcaption>
 </figure>
 
@@ -738,7 +738,7 @@ def additional_articles():
         dict(slug="mui-tu-moi-co-doc-hai-khong",
              title="Mùi nồng trong tủ mới: khi nào là bình thường, khi nào là dấu hiệu cần lo",
              category="kien-thuc",
-             cover="tc_kiem-anh_01.jpg",
+             cover="tc_12-chi-trang_01.jpg",
              excerpt="Tủ mới về nhà, mở cửa ra là mùi hắc xộc lên, đóng cửa lại vẫn ngửi thấy sau nhiều tuần. Nhiều người tặc lưỡi 'đồ mới mà, ít bữa hết' — nhưng không phải mùi nào cũng tự hết, và không phải mùi nào cũng vô hại.",
              body="""
 <p>Mùi nồng khi mở một chiếc tủ mới là chuyện gần như ai cũng gặp, nhưng rất ít người phân biệt được
@@ -792,7 +792,7 @@ gỗ công nghiệp phủ melamine cao cấp, nên nhiều nhà chọn cách k�
 ngủ (nơi ẩm và cần an toàn nhất), gỗ công nghiệp đạt chuẩn E1 cho khu vực phòng khách/phòng làm việc.</p>
 
 <figure class="figure my-4 w-100">
-<img src="/static/uploads/tc_kiem-anh_04.jpg" class="figure-img img-fluid rounded w-100" alt="Tủ bếp nhựa rỗng không mùi tại công trình Homie">
+<img src="/static/uploads/tc_12-chi-trang_02.jpg" class="figure-img img-fluid rounded w-100" alt="Tủ nhựa rỗng không mùi tại công trình Homie">
 <figcaption class="figure-caption text-muted">Tủ bếp dùng nhựa rỗng — không keo formaldehyde, gần như không phát sinh mùi hắc sau khi đóng xong.</figcaption>
 </figure>
 """,
