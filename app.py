@@ -47,6 +47,7 @@ else:
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = UPLOAD_DIR
 app.config["MAX_CONTENT_LENGTH"] = 64 * 1024 * 1024  # 64MB / lần gửi (đủ cho nhiều ảnh cùng lúc)
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 7 * 24 * 3600  # cache ảnh/css tĩnh 7 ngày -> load lại nhanh hơn
 
 # Thông tin liên hệ Homie - bà chủ sửa ở đây hoặc qua biến môi trường
 SITE = {

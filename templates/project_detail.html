@@ -34,7 +34,7 @@
           <h2>{{ project.title }}</h2>
           {% if project.location %}<span>📍 {{ project.location }}</span>{% endif %}
         </div>
-        <img id="projMain" src="{{ url_for('static', filename='uploads/' ~ gallery[0]) }}" alt="{{ project.title }}">
+        <img id="projMain" src="{{ url_for('static', filename='uploads/' ~ gallery[0]) }}" alt="{{ project.title }}" loading="eager" fetchpriority="high">
         {% if gallery|length > 1 %}
         <button type="button" class="proj-nav prev" onclick="event.stopPropagation();projMove(-1)" aria-label="Ảnh trước">‹</button>
         <button type="button" class="proj-nav next" onclick="event.stopPropagation();projMove(1)" aria-label="Ảnh sau">›</button>
@@ -49,7 +49,7 @@
           <div class="proj-thumb-wrap-item"
                onclick="{{ 'projOpenLightbox()' if (loop.index0 == 3 and gallery|length > 4) else ('projGoto(' ~ loop.index0 ~ ')') }}">
             <img src="{{ url_for('static', filename='uploads/' ~ fn) }}" alt="Ảnh {{ loop.index }}"
-                 class="proj-thumb-item {{ 'active' if loop.first }}" data-idx="{{ loop.index0 }}">
+                 class="proj-thumb-item {{ 'active' if loop.first }}" data-idx="{{ loop.index0 }}" loading="lazy">
             {% if loop.index0 == 3 and gallery|length > 4 %}
             <span class="proj-thumb-more">+{{ gallery|length - 4 }} ảnh</span>
             {% endif %}
@@ -105,6 +105,32 @@
           <div class="proj-trust-ic">🎨</div><div class="proj-trust-txt">Làm theo đúng mẫu đã chọn</div>
         </div>
       </div>
+
+      <div class="proj-process">
+        <div class="proj-process-title">Quy trình thực hiện</div>
+        <div class="proj-process-steps">
+          <div class="proj-process-step">
+            <div class="proj-process-num">1</div>
+            <h4>Khảo sát &amp; tư vấn</h4>
+            <p>Đo đạc thực tế tận nơi, tư vấn phong cách &amp; vật liệu phù hợp nhu cầu, ngân sách.</p>
+          </div>
+          <div class="proj-process-step">
+            <div class="proj-process-num">2</div>
+            <h4>Thiết kế 3D</h4>
+            <p>Dựng phối cảnh 3D đúng không gian thật, chỉnh sửa theo góp ý tới khi khách ưng ý.</p>
+          </div>
+          <div class="proj-process-step">
+            <div class="proj-process-num">3</div>
+            <h4>Sản xuất &amp; thi công</h4>
+            <p>Gia công tại xưởng Homie, lắp đặt đúng bản vẽ đã duyệt, giám sát trực tiếp.</p>
+          </div>
+          <div class="proj-process-step">
+            <div class="proj-process-num">4</div>
+            <h4>Bàn giao &amp; bảo hành</h4>
+            <p>Nghiệm thu cùng khách, bàn giao hồ sơ bảo hành, hỗ trợ hậu mãi lâu dài.</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="proj-cta text-center mt-4">
@@ -125,6 +151,12 @@
   </div>
 </section>
 {% endif %}
+
+<div class="proj-sticky-cta">
+  <a href="tel:0902866717" class="btn btn-outline-primary">📞 Gọi ngay</a>
+  <a href="{{ url_for('contact') }}?mau={{ project.id }}&ten={{ project.title|urlencode }}" class="btn btn-primary">Để lại SĐT tư vấn</a>
+</div>
+<div class="proj-sticky-spacer"></div>
 
 {% if gallery %}
 <div id="projLightbox" class="proj-lightbox" onclick="projLightboxClick(event)">

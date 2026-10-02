@@ -214,6 +214,26 @@ body{color:var(--ink);background:#fff;}
   .proj-nav{width:38px;height:38px;font-size:1.3rem;}
 }
 
+/* Quy trình thực hiện */
+.proj-process{margin-top:22px;padding-top:22px;border-top:1px solid var(--soft);}
+.proj-process-title{font-weight:800;color:var(--wood-dark);font-size:1.05rem;margin-bottom:16px;}
+.proj-process-steps{display:flex;flex-wrap:wrap;gap:14px;}
+.proj-process-step{flex:1 1 200px;background:var(--cream);border:1px solid var(--soft);border-radius:12px;padding:16px;}
+.proj-process-num{width:28px;height:28px;border-radius:50%;background:var(--wood);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-bottom:10px;}
+.proj-process-step h4{font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.proj-process-step p{font-size:.78rem;color:#6b5c4a;margin:0;line-height:1.5;}
+
+/* CTA dính đáy màn hình trên mobile — để lại SĐT dễ hơn khi lướt */
+.proj-sticky-cta{display:none;}
+.proj-sticky-spacer{display:none;}
+@media (max-width:767px){
+  .proj-sticky-cta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;
+    background:#fff;box-shadow:0 -8px 24px -12px rgba(20,14,8,.25);padding:10px 14px;gap:10px;}
+  .proj-sticky-cta .btn{flex:1;}
+  .proj-sticky-spacer{display:block;height:64px;}
+}
+
 /* Thumbnail wrapper + "xem thêm ảnh" */
 .proj-thumb-wrap-item{position:relative;flex:0 0 auto;width:92px;height:68px;cursor:pointer;}
 .proj-thumb-wrap-item .proj-thumb-item{width:100%;height:100%;}
